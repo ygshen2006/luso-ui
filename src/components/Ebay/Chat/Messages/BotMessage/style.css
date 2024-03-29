@@ -1,0 +1,10 @@
+.chat-message .ai-icon {
+  margin-bottom: -20px;
+}
+
+.bot-message p {
+  /* background-color: #ddd; */
+  border-radius: 10px;
+  padding: 0px 10px 5px 50px;
+  max-width: 100%;
+}

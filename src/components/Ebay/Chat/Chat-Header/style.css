@@ -1,0 +1,15 @@
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #de5252;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-header .chat-menu {
+  color: grey;
+}
+
+.chat-header .chat-recipient {
+  margin-left: 10px;
+}

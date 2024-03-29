@@ -1,0 +1,10 @@
+.user-message div {
+  background-color: #0f79fb;
+  border-radius: 10px;
+  padding: 18px 10px;
+  margin-left: 40px;
+  max-width: 100%;
+  display: inline-block;
+  /* align-self: flex-start; */
+  color: #fff;
+}

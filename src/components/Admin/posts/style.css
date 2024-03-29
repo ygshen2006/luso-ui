@@ -1,0 +1,31 @@
+.list {
+  width: 80%;
+  margin: 30px auto 30px auto;
+}
+.first-column {
+  margin: 10px;
+}
+.article {
+  margin-bottom: 30px;
+}
+.summary {
+  margin-bottom: 20px;
+}
+.edit-bt {
+  cursor: pointer !important;
+  height: '10px' !important;
+  width: '10px' !important;
+}
+
+.header-top {
+  border-bottom: 1px solid;
+}
+.post-form {
+  margin: 30px auto 0px auto;
+}
+.cover {
+  margin-left: 10px;
+}
+.saveBtn {
+  margin: 20px 0px;
+}

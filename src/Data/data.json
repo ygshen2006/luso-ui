@@ -1,0 +1,143 @@
+{
+  "startchat": {
+    "chatId": "xxx",
+    "message": "Congratulations! We will recommend what your child will need based on their age and we will let you know when it could be a good time to sell any durable products.",
+    "question": "From the list below select which items you are searching for: ",
+    "answers": ["Clothes", "Bassinet", "Dipes", "bottles", "Pacifier", "Prams"]
+  },
+  "chat": [
+    {
+      "key": "Clothes",
+      "question": "Great! What color clothes do you prefer? ",
+      "answers": ["Neutral", "Pink", "Blue", "No preference"]
+    },
+    {
+      "key": "Bassinet",
+      "question": "Noted, which type of bassinet do you prefer? ",
+      "answers": ["Wicker", "Neutral tones", "Side-cot", "No preference"]
+    },
+    {
+      "key": "Prams",
+      "question": "Got it! Which type of pram suits your life stlye best?",
+      "answers": [
+        "Lightweight",
+        "Running pram",
+        "Heavy duty",
+        "Other",
+        "No preference"
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "cover-page": "",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "cover-page": "",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2023-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    },
+    {
+      "id": "Clothes",
+      "title": "Great! What color clothes do you prefer? ",
+      "created-time": "2022-02-01",
+      "content": ""
+    }
+  ]
+}
