@@ -29,14 +29,21 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ignore-path .eslintignore --ext js,jsx --report-unused-disable-directives",
     "lint:fix": "eslint src --ignore-path .eslintignore --ext js,jsx --report-unused-disable-directives --fix",
-    "prettier": "npx prettier . --write"
+    "prettier": "npx prettier . --write",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
-      "pre-commit":  "echo \"[Husky] pre-commit\""
+      "pre-commit": "lint-staged"
     }
   },
- 
+  "lint-staged": {
+    "*.{js,jsx,md,json}": [
+      "npx prettier --write",
+      "git add"
+    ],
+    "*.{js,jsx}": "npm run lint"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
