@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 var UseLogin = (uri) => {
   const [data, setData] = useState();

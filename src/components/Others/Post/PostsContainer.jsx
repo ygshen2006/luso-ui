@@ -1,10 +1,10 @@
-import { FixedSizeList } from 'react-window';
-import PostView from './PostView';
-import { useEffect, useState } from 'react';
-import { get } from 'utils/api';
-import { AdminConstants } from 'utils/constants';
-import TopNav from '../Head/TopNav';
-import { Skeleton } from 'antd';
+import { FixedSizeList } from "react-window";
+import PostView from "./PostView";
+import { useEffect, useState } from "react";
+import { get } from "utils/api";
+import { AdminConstants } from "utils/constants";
+import TopNav from "../Head/TopNav";
+import { Skeleton } from "antd";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -14,13 +14,13 @@ const Posts = () => {
       setLoading(true);
       const result = await get(AdminConstants.POSTS_URI, [
         {
-          key: 'useMock',
-          value: 'true',
+          key: "useMock",
+          value: "true",
         },
       ]);
 
       result.sort((a, b) => {
-        return new Date(b['created-time']) - new Date(a['created-time']);
+        return new Date(b["created-time"]) - new Date(a["created-time"]);
       });
       setPosts(result);
       setLoading(false);
@@ -43,7 +43,7 @@ const Posts = () => {
         </div>
       ) : (
         <>
-          {' '}
+          {" "}
           <FixedSizeList
             height={window.innerHeight}
             width={window.innerWidth}

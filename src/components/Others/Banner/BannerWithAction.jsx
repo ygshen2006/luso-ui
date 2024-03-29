@@ -1,9 +1,9 @@
 const BannerWithAction = ({
   bgpic,
-  headText = '联系我们获取专业的行业解决方案',
-  subText = 'At LUSO Chemical Industry Get The Most Professional GuidenceWith The Most Talent Professors',
-  actionButtonText = '联系我们',
-  actionUrl = '/contacts',
+  headText = "联系我们获取专业的行业解决方案",
+  subText = "At LUSO Chemical Industry Get The Most Professional GuidenceWith The Most Talent Professors",
+  actionButtonText = "联系我们",
+  actionUrl = "/contacts",
 }) => {
   return (
     <section

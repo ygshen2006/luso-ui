@@ -1,86 +1,86 @@
-const Chat = lazy(() => import('../components/Ebay/Chat'));
-const ChatProvider = lazy(() => import('../Provider/ChatProvider'));
+const Chat = lazy(() => import("../components/Ebay/Chat"));
+const ChatProvider = lazy(() => import("../Provider/ChatProvider"));
 
-import Customers from 'components/Others/Customers/Index';
-import HomeComponent from '../components/Others/Home';
-import { lazy } from 'react';
-const AboutComponent = lazy(() => import('../components/Others/About/Index'));
-const EventsComponent = lazy(() => import('../components/Others/Events'));
-const NotFoundComponent = lazy(() => import('../components/Others/NotFound'));
+import Customers from "components/Others/Customers/Index";
+import HomeComponent from "../components/Others/Home";
+import { lazy } from "react";
+const AboutComponent = lazy(() => import("../components/Others/About/Index"));
+const EventsComponent = lazy(() => import("../components/Others/Events"));
+const NotFoundComponent = lazy(() => import("../components/Others/NotFound"));
 const ServicesComponent = lazy(
-  () => import('../components/Others/About/Services'),
+  () => import("../components/Others/About/Services"),
 );
 const PostComponent = lazy(
-  () => import('../components/Others/Post/PostContainer'),
+  () => import("../components/Others/Post/PostContainer"),
 );
 const PostsComponent = lazy(
-  () => import('../components/Others/Post/PostsContainer'),
+  () => import("../components/Others/Post/PostsContainer"),
 );
 const ContactsComponent = lazy(
-  () => import('../components/Others/Contacts/Index'),
+  () => import("../components/Others/Contacts/Index"),
 );
 
-const Products = lazy(() => import('../components/Others/Products/Index'));
+const Products = lazy(() => import("../components/Others/Products/Index"));
 
 export const publicRoutes = [
   {
-    path: '/',
+    path: "/",
     element: <HomeComponent />,
   },
   {
-    path: 'index',
+    path: "index",
     element: <HomeComponent />,
   },
   {
-    path: 'index.html',
+    path: "index.html",
     element: <HomeComponent />,
   },
   {
-    path: 'about',
+    path: "about",
     element: <AboutComponent />,
     children: [
       {
-        path: 'services',
+        path: "services",
         element: <ServicesComponent />,
       },
     ],
   },
   {
-    path: 'contacts',
+    path: "contacts",
     element: <ContactsComponent />,
   },
   {
-    path: 'products',
+    path: "products",
     element: <Products />,
   },
   {
-    path: 'customers',
+    path: "customers",
     element: <Customers />,
   },
   {
-    path: 'events',
+    path: "events",
     element: <EventsComponent />,
   },
   {
-    path: 'posts',
+    path: "posts",
     element: <PostsComponent />,
   },
   {
-    path: 'post/:id',
+    path: "post/:id",
     element: <PostComponent />,
   },
   {
-    path: 'chats',
+    path: "chats",
     element: <ChatProvider />,
     children: [
       {
-        path: '',
+        path: "",
         element: <Chat />,
       },
     ],
   },
   {
-    path: '*',
+    path: "*",
     element: <NotFoundComponent />,
   },
 ];

@@ -27,11 +27,11 @@
   function s(o, u) {
     if (!n[o]) {
       if (!t[o]) {
-        var a = typeof require == 'function' && require;
+        var a = typeof require == "function" && require;
         if (!u && a) return a(o, !0);
         if (i) return i(o, !0);
         var f = new Error("Cannot find module '" + o + "'");
-        throw ((f.code = 'MODULE_NOT_FOUND'), f);
+        throw ((f.code = "MODULE_NOT_FOUND"), f);
       }
       var l = (n[o] = { exports: {} });
       t[o][0].call(
@@ -50,7 +50,7 @@
     }
     return n[o].exports;
   }
-  var i = typeof require == 'function' && require;
+  var i = typeof require == "function" && require;
   for (var o = 0; o < r.length; o++) s(r[o]);
   return s;
 })(
@@ -64,12 +64,12 @@
         // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 
         try {
-          var ce = new window.CustomEvent('test');
+          var ce = new window.CustomEvent("test");
           ce.preventDefault();
           if (ce.defaultPrevented !== true) {
             // IE has problems with .preventDefault() on custom events
             // http://stackoverflow.com/questions/23349191
-            throw new Error('Could not prevent default');
+            throw new Error("Could not prevent default");
           }
         } catch (e) {
           var CustomEvent = function (event, params) {
@@ -80,7 +80,7 @@
               detail: undefined,
             };
 
-            evt = document.createEvent('CustomEvent');
+            evt = document.createEvent("CustomEvent");
             evt.initCustomEvent(
               event,
               params.bubbles,
@@ -91,7 +91,7 @@
             evt.preventDefault = function () {
               origPrevent.call(this);
               try {
-                Object.defineProperty(this, 'defaultPrevented', {
+                Object.defineProperty(this, "defaultPrevented", {
                   get: function () {
                     return true;
                   },
@@ -116,11 +116,11 @@
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
          */
 
-        'use strict';
+        "use strict";
 
         function assign(target, firstSource) {
           if (target === undefined || target === null) {
-            throw new TypeError('Cannot convert first argument to object');
+            throw new TypeError("Cannot convert first argument to object");
           }
 
           var to = Object(target);
@@ -148,7 +148,7 @@
 
         function polyfill() {
           if (!Object.assign) {
-            Object.defineProperty(Object, 'assign', {
+            Object.defineProperty(Object, "assign", {
               enumerable: false,
               configurable: true,
               writable: true,
@@ -166,13 +166,13 @@
     ],
     3: [
       function (require, module, exports) {
-        'use strict';
+        "use strict";
 
-        var ModalVideo = require('../index');
+        var ModalVideo = require("../index");
 
         var applyJQuery = function applyJQuery(jQuery) {
           jQuery.fn.modalVideo = function (settings) {
-            if (typeof settings === 'strings') {
+            if (typeof settings === "strings") {
             } else {
               new ModalVideo(this, settings);
             }
@@ -180,24 +180,24 @@
           };
         };
 
-        if (typeof define === 'function' && define.amd) {
-          define(['jquery'], applyJQuery);
+        if (typeof define === "function" && define.amd) {
+          define(["jquery"], applyJQuery);
         } else {
           var jq = window.jQuery ? window.jQuery : window.$;
-          if (typeof jq !== 'undefined') {
+          if (typeof jq !== "undefined") {
             applyJQuery(jq);
           }
         }
 
         module.exports = applyJQuery;
       },
-      { '../index': 5 },
+      { "../index": 5 },
     ],
     4: [
       function (require, module, exports) {
-        'use strict';
+        "use strict";
 
-        Object.defineProperty(exports, '__esModule', {
+        Object.defineProperty(exports, "__esModule", {
           value: true,
         });
 
@@ -207,7 +207,7 @@
               var descriptor = props[i];
               descriptor.enumerable = descriptor.enumerable || false;
               descriptor.configurable = true;
-              if ('value' in descriptor) descriptor.writable = true;
+              if ("value" in descriptor) descriptor.writable = true;
               Object.defineProperty(target, descriptor.key, descriptor);
             }
           }
@@ -218,20 +218,20 @@
           };
         })();
 
-        require('custom-event-polyfill');
+        require("custom-event-polyfill");
 
-        var _util = require('../lib/util');
+        var _util = require("../lib/util");
 
         function _classCallCheck(instance, Constructor) {
           if (!(instance instanceof Constructor)) {
-            throw new TypeError('Cannot call a class as a function');
+            throw new TypeError("Cannot call a class as a function");
           }
         }
 
-        var assign = require('es6-object-assign').assign;
+        var assign = require("es6-object-assign").assign;
 
         var defaults = {
-          channel: 'youtube',
+          channel: "youtube",
           facebook: {},
           youtube: {
             autoplay: 1,
@@ -254,11 +254,11 @@
             rel: 0,
             showinfo: 1,
             start: 0,
-            wmode: 'transparent',
-            theme: 'dark',
+            wmode: "transparent",
+            theme: "dark",
             nocookie: false,
           },
-          ratio: '16:9',
+          ratio: "16:9",
           vimeo: {
             api: false,
             autopause: true,
@@ -279,16 +279,16 @@
           allowFullScreen: true,
           animationSpeed: 300,
           classNames: {
-            modalVideo: 'modal-video',
-            modalVideoClose: 'modal-video-close',
-            modalVideoBody: 'modal-video-body',
-            modalVideoInner: 'modal-video-inner',
-            modalVideoIframeWrap: 'modal-video-movie-wrap',
-            modalVideoCloseBtn: 'modal-video-close-btn',
+            modalVideo: "modal-video",
+            modalVideoClose: "modal-video-close",
+            modalVideoBody: "modal-video-body",
+            modalVideoInner: "modal-video-inner",
+            modalVideoIframeWrap: "modal-video-movie-wrap",
+            modalVideoCloseBtn: "modal-video-close-btn",
           },
           aria: {
-            openMessage: 'You just openned the modal video',
-            dismissBtnMessage: 'Close the modal by clicking here',
+            openMessage: "You just openned the modal video",
+            dismissBtnMessage: "Close the modal by clicking here",
           },
         };
 
@@ -300,13 +300,13 @@
 
             var opt = assign({}, defaults, option);
             var selectors =
-              typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
-            var body = document.querySelector('body');
+              typeof ele === "string" ? document.querySelectorAll(ele) : ele;
+            var body = document.querySelector("body");
             var classNames = opt.classNames;
             var speed = opt.animationSpeed;
             [].forEach.call(selectors, function (selector) {
-              selector.addEventListener('click', function (event) {
-                if (selector.tagName === 'A') {
+              selector.addEventListener("click", function (event) {
+                if (selector.tagName === "A") {
                   event.preventDefault();
                 }
                 var videoId = selector.dataset.videoId;
@@ -318,28 +318,28 @@
                 var html = _this.getHtml(opt, videoUrl, id);
                 (0, _util.append)(body, html);
                 var modal = document.getElementById(id);
-                var btn = modal.querySelector('.js-modal-video-dismiss-btn');
+                var btn = modal.querySelector(".js-modal-video-dismiss-btn");
                 modal.focus();
-                modal.addEventListener('click', function () {
+                modal.addEventListener("click", function () {
                   (0, _util.addClass)(modal, classNames.modalVideoClose);
                   setTimeout(function () {
                     (0, _util.remove)(modal);
                     selector.focus();
                   }, speed);
                 });
-                modal.addEventListener('keydown', function (e) {
+                modal.addEventListener("keydown", function (e) {
                   if (e.which === 9) {
                     e.preventDefault();
                     if (document.activeElement === modal) {
                       btn.focus();
                     } else {
-                      modal.setAttribute('aria-label', '');
+                      modal.setAttribute("aria-label", "");
                       modal.focus();
                     }
                   }
                 });
-                btn.addEventListener('click', function () {
-                  (0, _util.triggerEvent)(modal, 'click');
+                btn.addEventListener("click", function () {
+                  (0, _util.triggerEvent)(modal, "click");
                 });
               });
             });
@@ -347,71 +347,71 @@
 
           _createClass(ModalVideo, [
             {
-              key: 'getPadding',
+              key: "getPadding",
               value: function getPadding(ratio) {
-                var arr = ratio.split(':');
+                var arr = ratio.split(":");
                 var width = Number(arr[0]);
                 var height = Number(arr[1]);
                 var padding = (height * 100) / width;
-                return padding + '%';
+                return padding + "%";
               },
             },
             {
-              key: 'getQueryString',
+              key: "getQueryString",
               value: function getQueryString(obj) {
-                var url = '';
+                var url = "";
                 Object.keys(obj).forEach(function (key) {
-                  url += key + '=' + obj[key] + '&';
+                  url += key + "=" + obj[key] + "&";
                 });
                 return url.substr(0, url.length - 1);
               },
             },
             {
-              key: 'getVideoUrl',
+              key: "getVideoUrl",
               value: function getVideoUrl(opt, channel, videoId) {
-                if (channel === 'youtube') {
+                if (channel === "youtube") {
                   return this.getYoutubeUrl(opt.youtube, videoId);
-                } else if (channel === 'vimeo') {
+                } else if (channel === "vimeo") {
                   return this.getVimeoUrl(opt.vimeo, videoId);
-                } else if (channel === 'facebook') {
+                } else if (channel === "facebook") {
                   return this.getFacebookUrl(opt.facebook, videoId);
                 }
-                return '';
+                return "";
               },
             },
             {
-              key: 'getVimeoUrl',
+              key: "getVimeoUrl",
               value: function getVimeoUrl(vimeo, videoId) {
                 var query = this.getQueryString(vimeo);
-                return '//player.vimeo.com/video/' + videoId + '?' + query;
+                return "//player.vimeo.com/video/" + videoId + "?" + query;
               },
             },
             {
-              key: 'getYoutubeUrl',
+              key: "getYoutubeUrl",
               value: function getYoutubeUrl(youtube, videoId) {
                 var query = this.getQueryString(youtube);
                 if (youtube.nocookie === true) {
                   return (
-                    '//www.youtube-nocookie.com/embed/' + videoId + '?' + query
+                    "//www.youtube-nocookie.com/embed/" + videoId + "?" + query
                   );
                 }
 
-                return '//www.youtube.com/embed/' + videoId + '?' + query;
+                return "//www.youtube.com/embed/" + videoId + "?" + query;
               },
             },
             {
-              key: 'getFacebookUrl',
+              key: "getFacebookUrl",
               value: function getFacebookUrl(facebook, videoId) {
                 return (
-                  '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' +
+                  "//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/" +
                   videoId +
-                  '&' +
+                  "&" +
                   this.getQueryString(facebook)
                 );
               },
             },
             {
-              key: 'getHtml',
+              key: "getHtml",
               value: function getHtml(opt, videoUrl, id) {
                 var padding = this.getPadding(opt.ratio);
                 var classNames = opt.classNames;
@@ -448,27 +448,27 @@
         })();
 
         exports.default = ModalVideo;
-        module.exports = exports['default'];
+        module.exports = exports["default"];
       },
-      { '../lib/util': 6, 'custom-event-polyfill': 1, 'es6-object-assign': 2 },
+      { "../lib/util": 6, "custom-event-polyfill": 1, "es6-object-assign": 2 },
     ],
     5: [
       function (require, module, exports) {
-        'use strict';
+        "use strict";
 
-        module.exports = require('./core/');
+        module.exports = require("./core");
       },
-      { './core/': 4 },
+      { "./core/": 4 },
     ],
     6: [
       function (require, module, exports) {
-        'use strict';
+        "use strict";
 
-        Object.defineProperty(exports, '__esModule', {
+        Object.defineProperty(exports, "__esModule", {
           value: true,
         });
         var append = (exports.append = function append(element, string) {
-          var div = document.createElement('div');
+          var div = document.createElement("div");
           div.innerHTML = string;
           while (div.children.length > 0) {
             element.appendChild(div.children[0]);
@@ -494,7 +494,7 @@
           if (element.classList) {
             element.classList.add(className);
           } else {
-            element.className += ' ' + className;
+            element.className += " " + className;
           }
         });
 
@@ -507,7 +507,7 @@
           if (window.CustomEvent) {
             event = new CustomEvent(eventName, { cancelable: true });
           } else {
-            event = document.createEvent('CustomEvent');
+            event = document.createEvent("CustomEvent");
             event.initCustomEvent(eventName, false, false, options);
           }
           el.dispatchEvent(event);

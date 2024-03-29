@@ -1,8 +1,8 @@
-import TopBanner from '../Banner/TopBanner';
-import TopNav from '../Head/TopNav';
-import contactImage from '../../../images/covers/6.png';
-import CustomersComponent from './Customers';
-import customers from '../../../Data/Customers';
+import TopBanner from "../Banner/TopBanner";
+import TopNav from "../Head/TopNav";
+import contactImage from "../../../images/covers/6.png";
+import CustomersComponent from "./Customers";
+import customers from "../../../Data/Customers";
 const Customers = () => {
   return (
     <>

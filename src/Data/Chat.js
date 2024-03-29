@@ -1,8 +1,8 @@
 const messages = [
   {
-    type: 'bot',
+    type: "bot",
     seq: 0,
-    message: '欢迎光临，请使用您的Github账号登录.',
+    message: "欢迎光临，请使用您的Github账号登录.",
   },
 ];
 

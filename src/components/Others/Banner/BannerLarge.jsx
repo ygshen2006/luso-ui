@@ -1,6 +1,6 @@
-import pic1 from '../../../images/home-2.jpg';
-import pic2 from '../../../images/home-1.jpg';
-import pic3 from '../../../images/home-3.png';
+import pic1 from "../../../images/home-2.jpg";
+import pic2 from "../../../images/home-1.jpg";
+import pic3 from "../../../images/home-3.png";
 
 var Banner = () => {
   return (

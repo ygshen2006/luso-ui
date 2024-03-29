@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { get } from 'utils/api';
-import { AdminConstants } from 'utils/constants';
+import { useEffect, useState } from "react";
+import { get } from "utils/api";
+import { AdminConstants } from "utils/constants";
 
 const usePostsHook = () => {
   const [posts, setPosts] = useState([]);
@@ -8,12 +8,12 @@ const usePostsHook = () => {
     const fetchPosts = async () => {
       const result = await get(AdminConstants.POSTS_URI, [
         {
-          key: 'useMock',
-          value: 'true',
+          key: "useMock",
+          value: "true",
         },
       ]);
       result.sort((a, b) => {
-        return new Date(b['created-time']) - new Date(a['created-time']);
+        return new Date(b["created-time"]) - new Date(a["created-time"]);
       });
       setPosts(result);
     };

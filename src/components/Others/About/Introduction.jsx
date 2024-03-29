@@ -20,7 +20,7 @@ const Introduction = ({ bgpic }) => {
                     <li className="mb-4">
                       <h5>成立十年</h5>
                       <p className="text-small text-muted">
-                        2010年，上海路素化学技术诞生于东方魅力之都上海。正在走向全球、拥抱国际业务。{' '}
+                        2010年，上海路素化学技术诞生于东方魅力之都上海。正在走向全球、拥抱国际业务。{" "}
                       </p>
                     </li>
                     <li className="mb-4">

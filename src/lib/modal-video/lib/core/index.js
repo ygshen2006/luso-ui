@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true,
 });
 
@@ -10,7 +10,7 @@ var _createClass = (function () {
       var descriptor = props[i];
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
-      if ('value' in descriptor) descriptor.writable = true;
+      if ("value" in descriptor) descriptor.writable = true;
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
@@ -21,20 +21,20 @@ var _createClass = (function () {
   };
 })();
 
-require('custom-event-polyfill');
+require("custom-event-polyfill");
 
-var _util = require('../lib/util');
+var _util = require("../lib/util");
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
+    throw new TypeError("Cannot call a class as a function");
   }
 }
 
-var assign = require('es6-object-assign').assign;
+var assign = require("es6-object-assign").assign;
 
 var defaults = {
-  channel: 'youtube',
+  channel: "youtube",
   facebook: {},
   youtube: {
     autoplay: 1,
@@ -57,11 +57,11 @@ var defaults = {
     rel: 0,
     showinfo: 1,
     start: 0,
-    wmode: 'transparent',
-    theme: 'dark',
+    wmode: "transparent",
+    theme: "dark",
     nocookie: false,
   },
-  ratio: '16:9',
+  ratio: "16:9",
   vimeo: {
     api: false,
     autopause: true,
@@ -82,16 +82,16 @@ var defaults = {
   allowFullScreen: true,
   animationSpeed: 300,
   classNames: {
-    modalVideo: 'modal-video',
-    modalVideoClose: 'modal-video-close',
-    modalVideoBody: 'modal-video-body',
-    modalVideoInner: 'modal-video-inner',
-    modalVideoIframeWrap: 'modal-video-movie-wrap',
-    modalVideoCloseBtn: 'modal-video-close-btn',
+    modalVideo: "modal-video",
+    modalVideoClose: "modal-video-close",
+    modalVideoBody: "modal-video-body",
+    modalVideoInner: "modal-video-inner",
+    modalVideoIframeWrap: "modal-video-movie-wrap",
+    modalVideoCloseBtn: "modal-video-close-btn",
   },
   aria: {
-    openMessage: 'You just openned the modal video',
-    dismissBtnMessage: 'Close the modal by clicking here',
+    openMessage: "You just openned the modal video",
+    dismissBtnMessage: "Close the modal by clicking here",
   },
 };
 
@@ -103,13 +103,13 @@ var ModalVideo = (function () {
 
     var opt = assign({}, defaults, option);
     var selectors =
-      typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
-    var body = document.querySelector('body');
+      typeof ele === "string" ? document.querySelectorAll(ele) : ele;
+    var body = document.querySelector("body");
     var classNames = opt.classNames;
     var speed = opt.animationSpeed;
     [].forEach.call(selectors, function (selector) {
-      selector.addEventListener('click', function (event) {
-        if (selector.tagName === 'A') {
+      selector.addEventListener("click", function (event) {
+        if (selector.tagName === "A") {
           event.preventDefault();
         }
         var videoId = selector.dataset.videoId;
@@ -120,28 +120,28 @@ var ModalVideo = (function () {
         var html = _this.getHtml(opt, videoUrl, id);
         (0, _util.append)(body, html);
         var modal = document.getElementById(id);
-        var btn = modal.querySelector('.js-modal-video-dismiss-btn');
+        var btn = modal.querySelector(".js-modal-video-dismiss-btn");
         modal.focus();
-        modal.addEventListener('click', function () {
+        modal.addEventListener("click", function () {
           (0, _util.addClass)(modal, classNames.modalVideoClose);
           setTimeout(function () {
             (0, _util.remove)(modal);
             selector.focus();
           }, speed);
         });
-        modal.addEventListener('keydown', function (e) {
+        modal.addEventListener("keydown", function (e) {
           if (e.which === 9) {
             e.preventDefault();
             if (document.activeElement === modal) {
               btn.focus();
             } else {
-              modal.setAttribute('aria-label', '');
+              modal.setAttribute("aria-label", "");
               modal.focus();
             }
           }
         });
-        btn.addEventListener('click', function () {
-          (0, _util.triggerEvent)(modal, 'click');
+        btn.addEventListener("click", function () {
+          (0, _util.triggerEvent)(modal, "click");
         });
       });
     });
@@ -149,69 +149,69 @@ var ModalVideo = (function () {
 
   _createClass(ModalVideo, [
     {
-      key: 'getPadding',
+      key: "getPadding",
       value: function getPadding(ratio) {
-        var arr = ratio.split(':');
+        var arr = ratio.split(":");
         var width = Number(arr[0]);
         var height = Number(arr[1]);
         var padding = (height * 100) / width;
-        return padding + '%';
+        return padding + "%";
       },
     },
     {
-      key: 'getQueryString',
+      key: "getQueryString",
       value: function getQueryString(obj) {
-        var url = '';
+        var url = "";
         Object.keys(obj).forEach(function (key) {
-          url += key + '=' + obj[key] + '&';
+          url += key + "=" + obj[key] + "&";
         });
         return url.substr(0, url.length - 1);
       },
     },
     {
-      key: 'getVideoUrl',
+      key: "getVideoUrl",
       value: function getVideoUrl(opt, channel, videoId) {
-        if (channel === 'youtube') {
+        if (channel === "youtube") {
           return this.getYoutubeUrl(opt.youtube, videoId);
-        } else if (channel === 'vimeo') {
+        } else if (channel === "vimeo") {
           return this.getVimeoUrl(opt.vimeo, videoId);
-        } else if (channel === 'facebook') {
+        } else if (channel === "facebook") {
           return this.getFacebookUrl(opt.facebook, videoId);
         }
-        return '';
+        return "";
       },
     },
     {
-      key: 'getVimeoUrl',
+      key: "getVimeoUrl",
       value: function getVimeoUrl(vimeo, videoId) {
         var query = this.getQueryString(vimeo);
-        return '//player.vimeo.com/video/' + videoId + '?' + query;
+        return "//player.vimeo.com/video/" + videoId + "?" + query;
       },
     },
     {
-      key: 'getYoutubeUrl',
+      key: "getYoutubeUrl",
       value: function getYoutubeUrl(youtube, videoId) {
         var query = this.getQueryString(youtube);
         if (youtube.nocookie === true) {
-          return '//www.youtube-nocookie.com/embed/' + videoId + '?' + query;
+          return "//www.youtube-nocookie.com/embed/" + videoId + "?" + query;
         }
 
-        return '//www.youtube.com/embed/' + videoId + '?' + query;
+        return "//www.youtube.com/embed/" + videoId + "?" + query;
       },
     },
     {
-      key: 'getFacebookUrl',
+      key: "getFacebookUrl",
       value: function getFacebookUrl(facebook, videoId) {
         return (
-          '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' +
+          "//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/" +
           videoId +
-          '&' +
+          "&" +
           this.getQueryString(facebook)
         );
       },
     },
     {
-      key: 'getHtml',
+      key: "getHtml",
       value: function getHtml(opt, videoUrl, id) {
         var padding = this.getPadding(opt.ratio);
         var classNames = opt.classNames;
@@ -248,4 +248,4 @@ var ModalVideo = (function () {
 })();
 
 exports.default = ModalVideo;
-module.exports = exports['default'];
+module.exports = exports["default"];

@@ -2,7 +2,7 @@ $(function () {
   // ================================================
   //  HERO SLIDER
   // ================================================
-  $('.hero-slider').owlCarousel({
+  $(".hero-slider").owlCarousel({
     items: 1,
     nav: true,
     dots: false,
@@ -12,11 +12,11 @@ $(function () {
   // ================================================
   //  TESTIMONIALS SLIDER
   // ================================================
-  $('.customers-slide').owlCarousel({
+  $(".customers-slide").owlCarousel({
     items: 3,
     nav: true,
     dots: true,
-    animateOut: 'fadeOut',
+    animateOut: "fadeOut",
     loop: true,
     responsive: {
       991: {

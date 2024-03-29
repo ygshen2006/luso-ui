@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import './style.css';
-import { EbaySvg } from '@ebay/ui-core-react/ebay-svg';
-import { EbayIcon } from '@ebay/ui-core-react/ebay-icon';
-import '@ebay/skin/icon';
+import { useEffect, useState } from "react";
+import "./style.css";
+import { EbaySvg } from "@ebay/ui-core-react/ebay-svg";
+import { EbayIcon } from "@ebay/ui-core-react/ebay-icon";
+import "@ebay/skin/icon";
 // import { DatePicker } from 'antd';
-import { useChats } from '../../../../../Provider/ChatProvider';
-import Welcome from './Welcome';
-import PureMessage from './PureMessage';
-import { get } from '../../../../../utils/api';
-import { ChatConstants, USE_MOCK } from '../../../../../utils/constants';
-import EsentialMessage from './EsentialMessage';
-import InquireMessage from './InqueryMessage';
-import ResultMessage from './ResultMessage';
-import LoginMessage from './LoginMessage';
+import { useChats } from "../../../../../Provider/ChatProvider";
+import Welcome from "./Welcome";
+import PureMessage from "./PureMessage";
+import { get } from "../../../../../utils/api";
+import { ChatConstants, USE_MOCK } from "../../../../../utils/constants";
+import EsentialMessage from "./EsentialMessage";
+import InquireMessage from "./InqueryMessage";
+import ResultMessage from "./ResultMessage";
+import LoginMessage from "./LoginMessage";
 // const { RangePicker } = DatePicker;
 
 const BotMessage = ({ message, keyName, seq, type, esentials }) => {
@@ -35,14 +35,14 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
     setContent({
       message,
       seq: 2,
-      type: 'user',
+      type: "user",
     });
 
     // send birthday to api
     var nextResponse = await get(`${ChatConstants.BIRTHDAY_URI}`, [
       {
         key: ChatConstants.BIRTHDAY_PARAM_KEY,
-        value: message.replace(/-/g, '/'),
+        value: message.replace(/-/g, "/"),
       },
       { key: USE_MOCK, value: useMock },
     ]);
@@ -51,7 +51,7 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
       message: nextResponse.message,
       chatId: nextResponse.chatId,
       seq: 3,
-      type: 'bot',
+      type: "bot",
     });
 
     setTimeout(() => {
@@ -59,7 +59,7 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
         message: nextResponse.question,
         chatId: nextResponse.chatId,
         seq: 4,
-        type: 'bot',
+        type: "bot",
         selected: [],
         esentials: nextResponse.data.answers,
       });
@@ -71,9 +71,9 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
     const hasNext = data.some((item) => item.seq === 5);
     if (!hasNext) {
       setContent({
-        message: 'Do you want to add more options?',
+        message: "Do you want to add more options?",
         seq: 5,
-        type: 'bot',
+        type: "bot",
       });
     }
 
@@ -93,8 +93,8 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
 
     // send api call to get the next question
     var nextResponse = await get(`${ChatConstants.DRILL_URL}`, [
-      { key: ChatConstants.DRILL_PARAM_KEY, value: essentialNames.join(',') },
-      { key: 'chatId', value: step.chatId },
+      { key: ChatConstants.DRILL_PARAM_KEY, value: essentialNames.join(",") },
+      { key: "chatId", value: step.chatId },
       { key: ChatConstants.USE_MOCK, value: useMock },
     ]);
 
@@ -103,7 +103,7 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
         message: item.question,
         seq: 6,
         keyName: item.key,
-        type: 'bot',
+        type: "bot",
         esentials: item.answers,
         selected: [],
       };
@@ -117,9 +117,9 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
     if (!hasNext) {
       setContent({
         message:
-          'Are there any other types of products you’re interested in today?',
+          "Are there any other types of products you’re interested in today?",
         seq: 7,
-        type: 'bot',
+        type: "bot",
       });
     }
 
@@ -158,7 +158,7 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
         </div>
         </div>`,
       seq: 8,
-      type: 'bot',
+      type: "bot",
     });
   };
 
@@ -166,7 +166,7 @@ const BotMessage = ({ message, keyName, seq, type, esentials }) => {
     setContent({
       message: `Hey ${userName}, Please enter the due/birth date of your little one to receive tailored buying & selling suggestions for pre-loved children's products.`,
       seq: 1,
-      type: 'bot',
+      type: "bot",
     });
   };
 

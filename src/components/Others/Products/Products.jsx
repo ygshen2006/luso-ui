@@ -1,13 +1,13 @@
-import p1 from '../../../images/p1.jpeg';
-import p2 from '../../../images/p2.jpeg';
-import p3 from '../../../images/p3.jpeg';
-import p4 from '../../../images/p4.jpeg';
-import p5 from '../../../images/p5.jpeg';
-import p6 from '../../../images/p6.jpeg';
-import p7 from '../../../images/p7.jpeg';
-import p8 from '../../../images/p8.jpeg';
-import { Avatar } from 'antd';
-import './style.css';
+import p1 from "../../../images/p1.jpeg";
+import p2 from "../../../images/p2.jpeg";
+import p3 from "../../../images/p3.jpeg";
+import p4 from "../../../images/p4.jpeg";
+import p5 from "../../../images/p5.jpeg";
+import p6 from "../../../images/p6.jpeg";
+import p7 from "../../../images/p7.jpeg";
+import p8 from "../../../images/p8.jpeg";
+import { Avatar } from "antd";
+import "./style.css";
 const ProductsComponent = () => {
   return (
     <>
@@ -24,7 +24,7 @@ const ProductsComponent = () => {
           <div className="row align-items-stretch">
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -38,7 +38,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -52,7 +52,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -67,7 +67,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -81,7 +81,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -96,7 +96,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -111,7 +111,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar
@@ -126,7 +126,7 @@ const ProductsComponent = () => {
             </div>
             <div
               className="col-lg-3 col-md-6 mb-4"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="px-4 py-5 border border-width-md border-dash h-100">
                 <Avatar

@@ -3,7 +3,7 @@
  * (c) 2010-2019 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
-var version = '1.6.0';
+var version = "1.6.0";
 
 /*
  * @namespace Util
@@ -136,7 +136,7 @@ function formatNum(num, digits) {
 // @function trim(str: String): String
 // Compatibility polyfill for [String.prototype.trim](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
 function trim(str) {
-  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, "");
 }
 
 // @function splitWords(str: String): String[]
@@ -148,7 +148,7 @@ function splitWords(str) {
 // @function setOptions(obj: Object, options: Object): Object
 // Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
 function setOptions(obj, options) {
-  if (!obj.hasOwnProperty('options')) {
+  if (!obj.hasOwnProperty("options")) {
     obj.options = obj.options ? create(obj.options) : {};
   }
   for (var i in options) {
@@ -167,13 +167,13 @@ function getParamString(obj, existingUrl, uppercase) {
   for (var i in obj) {
     params.push(
       encodeURIComponent(uppercase ? i.toUpperCase() : i) +
-        '=' +
+        "=" +
         encodeURIComponent(obj[i]),
     );
   }
   return (
-    (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') +
-    params.join('&')
+    (!existingUrl || existingUrl.indexOf("?") === -1 ? "?" : "&") +
+    params.join("&")
   );
 }
 
@@ -189,8 +189,8 @@ function template(str, data) {
     var value = data[key];
 
     if (value === undefined) {
-      throw new Error('No value provided for variable ' + str);
-    } else if (typeof value === 'function') {
+      throw new Error("No value provided for variable " + str);
+    } else if (typeof value === "function") {
       value = value(data);
     }
     return value;
@@ -202,7 +202,7 @@ function template(str, data) {
 var isArray =
   Array.isArray ||
   function (obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]';
+    return Object.prototype.toString.call(obj) === "[object Array]";
   };
 
 // @function indexOf(array: Array, el: Object): Number
@@ -221,12 +221,12 @@ function indexOf(array, el) {
 // Used as a hack to free memory from unused images on WebKit-powered
 // mobile devices (by setting image `src` to this string).
 var emptyImageUrl =
-  'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
 // inspired by http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 
 function getPrefixed(name) {
-  return window['webkit' + name] || window['moz' + name] || window['ms' + name];
+  return window["webkit" + name] || window["moz" + name] || window["ms" + name];
 }
 
 var lastTime = 0;
@@ -242,12 +242,12 @@ function timeoutDefer(fn) {
 
 var requestFn =
   window.requestAnimationFrame ||
-  getPrefixed('RequestAnimationFrame') ||
+  getPrefixed("RequestAnimationFrame") ||
   timeoutDefer;
 var cancelFn =
   window.cancelAnimationFrame ||
-  getPrefixed('CancelAnimationFrame') ||
-  getPrefixed('CancelRequestAnimationFrame') ||
+  getPrefixed("CancelAnimationFrame") ||
+  getPrefixed("CancelRequestAnimationFrame") ||
   function (id) {
     window.clearTimeout(id);
   };
@@ -332,7 +332,7 @@ Class.extend = function (props) {
 
   // inherit parent's statics
   for (var i in this) {
-    if (this.hasOwnProperty(i) && i !== 'prototype' && i !== '__super__') {
+    if (this.hasOwnProperty(i) && i !== "prototype" && i !== "__super__") {
       NewClass[i] = this[i];
     }
   }
@@ -401,7 +401,7 @@ Class.addInitHook = function (fn) {
   var args = Array.prototype.slice.call(arguments, 1);
 
   var init =
-    typeof fn === 'function'
+    typeof fn === "function"
       ? fn
       : function () {
           this[fn].apply(this, args);
@@ -413,7 +413,7 @@ Class.addInitHook = function (fn) {
 };
 
 function checkDeprecatedMixinEvents(includes) {
-  if (typeof L === 'undefined' || !L || !L.Mixin) {
+  if (typeof L === "undefined" || !L || !L.Mixin) {
     return;
   }
 
@@ -422,9 +422,9 @@ function checkDeprecatedMixinEvents(includes) {
   for (var i = 0; i < includes.length; i++) {
     if (includes[i] === L.Mixin.Events) {
       console.warn(
-        'Deprecated include of L.Mixin.Events: ' +
-          'this property will be removed in future releases, ' +
-          'please inherit from L.Evented instead.',
+        "Deprecated include of L.Mixin.Events: " +
+          "this property will be removed in future releases, " +
+          "please inherit from L.Evented instead.",
         new Error().stack,
       );
     }
@@ -466,7 +466,7 @@ var Events = {
    */
   on: function (types, fn, context) {
     // types can be a map of types/handlers
-    if (typeof types === 'object') {
+    if (typeof types === "object") {
       for (var type in types) {
         // we don't process space-separated events here for performance;
         // it's a hot path since Layer uses the on(obj) syntax
@@ -499,7 +499,7 @@ var Events = {
     if (!types) {
       // clear all listeners if called without arguments
       delete this._events;
-    } else if (typeof types === 'object') {
+    } else if (typeof types === "object") {
       for (var type in types) {
         this._off(type, types[type], fn);
       }
@@ -651,7 +651,7 @@ var Events = {
   // @method once(…): this
   // Behaves as [`on(…)`](#evented-on), except the listener will only get fired once and then removed.
   once: function (types, fn, context) {
-    if (typeof types === 'object') {
+    if (typeof types === "object") {
       for (var type in types) {
         this.once(type, types[type], fn);
       }
@@ -918,7 +918,7 @@ Point.prototype = {
   // @method toString(): String
   // Returns a string representation of the point for debugging purposes.
   toString: function () {
-    return 'Point(' + formatNum(this.x) + ', ' + formatNum(this.y) + ')';
+    return "Point(" + formatNum(this.x) + ", " + formatNum(this.y) + ")";
   },
 };
 
@@ -942,7 +942,7 @@ function toPoint(x, y, round) {
   if (x === undefined || x === null) {
     return x;
   }
-  if (typeof x === 'object' && 'x' in x && 'y' in x) {
+  if (typeof x === "object" && "x" in x && "y" in x) {
     return new Point(x.x, x.y);
   }
   return new Point(x, y, round);
@@ -1057,7 +1057,7 @@ Bounds.prototype = {
   contains: function (obj) {
     var min, max;
 
-    if (typeof obj[0] === 'number' || obj instanceof Point) {
+    if (typeof obj[0] === "number" || obj instanceof Point) {
       obj = toPoint(obj);
     } else {
       obj = toBounds(obj);
@@ -1293,7 +1293,7 @@ LatLngBounds.prototype = {
   // Returns `true` if the rectangle contains the given point.
   contains: function (obj) {
     // (LatLngBounds) or (LatLng) -> Boolean
-    if (typeof obj[0] === 'number' || obj instanceof LatLng || 'lat' in obj) {
+    if (typeof obj[0] === "number" || obj instanceof LatLng || "lat" in obj) {
       obj = toLatLng(obj);
     } else {
       obj = toLatLngBounds(obj);
@@ -1357,7 +1357,7 @@ LatLngBounds.prototype = {
       this.getSouth(),
       this.getEast(),
       this.getNorth(),
-    ].join(',');
+    ].join(",");
   },
 
   // @method equals(otherBounds: LatLngBounds, maxMargin?: Number): Boolean
@@ -1424,7 +1424,7 @@ function toLatLngBounds(a, b) {
 
 function LatLng(lat, lng, alt) {
   if (isNaN(lat) || isNaN(lng)) {
-    throw new Error('Invalid LatLng object: (' + lat + ', ' + lng + ')');
+    throw new Error("Invalid LatLng object: (" + lat + ", " + lng + ")");
   }
 
   // @property lat: Number
@@ -1464,11 +1464,11 @@ LatLng.prototype = {
   // Returns a string representation of the point (for debugging purposes).
   toString: function (precision) {
     return (
-      'LatLng(' +
+      "LatLng(" +
       formatNum(this.lat, precision) +
-      ', ' +
+      ", " +
       formatNum(this.lng, precision) +
-      ')'
+      ")"
     );
   },
 
@@ -1516,7 +1516,7 @@ function toLatLng(a, b, c) {
   if (a instanceof LatLng) {
     return a;
   }
-  if (isArray(a) && typeof a[0] !== 'object') {
+  if (isArray(a) && typeof a[0] !== "object") {
     if (a.length === 3) {
       return new LatLng(a[0], a[1], a[2]);
     }
@@ -1528,8 +1528,8 @@ function toLatLng(a, b, c) {
   if (a === undefined || a === null) {
     return a;
   }
-  if (typeof a === 'object' && 'lat' in a) {
-    return new LatLng(a.lat, 'lng' in a ? a.lng : a.lon, a.alt);
+  if (typeof a === "object" && "lat" in a) {
+    return new LatLng(a.lat, "lng" in a ? a.lng : a.lon, a.alt);
   }
   if (b === undefined) {
     return null;
@@ -1837,7 +1837,7 @@ function toTransformation(a, b, c, d) {
  */
 
 var EPSG3857 = extend({}, Earth, {
-  code: 'EPSG:3857',
+  code: "EPSG:3857",
   projection: SphericalMercator,
 
   transformation: (function () {
@@ -1847,7 +1847,7 @@ var EPSG3857 = extend({}, Earth, {
 });
 
 var EPSG900913 = extend({}, EPSG3857, {
-  code: 'EPSG:900913',
+  code: "EPSG:900913",
 });
 
 // @namespace SVG; @section
@@ -1858,14 +1858,14 @@ var EPSG900913 = extend({}, EPSG3857, {
 // corresponding to the class name passed. For example, using 'line' will return
 // an instance of [SVGLineElement](https://developer.mozilla.org/docs/Web/API/SVGLineElement).
 function svgCreate(name) {
-  return document.createElementNS('http://www.w3.org/2000/svg', name);
+  return document.createElementNS("http://www.w3.org/2000/svg", name);
 }
 
 // @function pointsToPath(rings: Point[], closed: Boolean): String
 // Generates a SVG path string for multiple rings, with each ring turning
 // into "M..L..L.." instructions
 function pointsToPath(rings, closed) {
-  var str = '',
+  var str = "",
     i,
     j,
     len,
@@ -1878,15 +1878,15 @@ function pointsToPath(rings, closed) {
 
     for (j = 0, len2 = points.length; j < len2; j++) {
       p = points[j];
-      str += (j ? 'L' : 'M') + p.x + ' ' + p.y;
+      str += (j ? "L" : "M") + p.x + " " + p.y;
     }
 
     // closes the ring for polygons; "x" is VML syntax
-    str += closed ? (svg ? 'z' : 'x') : '';
+    str += closed ? (svg ? "z" : "x") : "";
   }
 
   // SVG complains about empty path strings
-  return str || 'M0 0';
+  return str || "M0 0";
 }
 
 /*
@@ -1907,67 +1907,67 @@ function pointsToPath(rings, closed) {
 var style$1 = document.documentElement.style;
 
 // @property ie: Boolean; `true` for all Internet Explorer versions (not Edge).
-var ie = 'ActiveXObject' in window;
+var ie = "ActiveXObject" in window;
 
 // @property ielt9: Boolean; `true` for Internet Explorer versions less than 9.
 var ielt9 = ie && !document.addEventListener;
 
 // @property edge: Boolean; `true` for the Edge web browser.
-var edge = 'msLaunchUri' in navigator && !('documentMode' in document);
+var edge = "msLaunchUri" in navigator && !("documentMode" in document);
 
 // @property webkit: Boolean;
 // `true` for webkit-based browsers like Chrome and Safari (including mobile versions).
-var webkit = userAgentContains('webkit');
+var webkit = userAgentContains("webkit");
 
 // @property android: Boolean
 // `true` for any browser running on an Android platform.
-var android = userAgentContains('android');
+var android = userAgentContains("android");
 
 // @property android23: Boolean; `true` for browsers running on Android 2 or Android 3.
 var android23 =
-  userAgentContains('android 2') || userAgentContains('android 3');
+  userAgentContains("android 2") || userAgentContains("android 3");
 
 /* See https://stackoverflow.com/a/17961266 for details on detecting stock Android */
 var webkitVer = parseInt(/WebKit\/([0-9]+)|$/.exec(navigator.userAgent)[1], 10); // also matches AppleWebKit
 // @property androidStock: Boolean; `true` for the Android stock browser (i.e. not Chrome)
 var androidStock =
   android &&
-  userAgentContains('Google') &&
+  userAgentContains("Google") &&
   webkitVer < 537 &&
-  !('AudioNode' in window);
+  !("AudioNode" in window);
 
 // @property opera: Boolean; `true` for the Opera browser
 var opera = !!window.opera;
 
 // @property chrome: Boolean; `true` for the Chrome browser.
-var chrome = userAgentContains('chrome');
+var chrome = userAgentContains("chrome");
 
 // @property gecko: Boolean; `true` for gecko-based browsers like Firefox.
-var gecko = userAgentContains('gecko') && !webkit && !opera && !ie;
+var gecko = userAgentContains("gecko") && !webkit && !opera && !ie;
 
 // @property safari: Boolean; `true` for the Safari browser.
-var safari = !chrome && userAgentContains('safari');
+var safari = !chrome && userAgentContains("safari");
 
-var phantom = userAgentContains('phantom');
+var phantom = userAgentContains("phantom");
 
 // @property opera12: Boolean
 // `true` for the Opera browser supporting CSS transforms (version 12 or later).
-var opera12 = 'OTransition' in style$1;
+var opera12 = "OTransition" in style$1;
 
 // @property win: Boolean; `true` when the browser is running in a Windows platform
-var win = navigator.platform.indexOf('Win') === 0;
+var win = navigator.platform.indexOf("Win") === 0;
 
 // @property ie3d: Boolean; `true` for all Internet Explorer versions supporting CSS transforms.
-var ie3d = ie && 'transition' in style$1;
+var ie3d = ie && "transition" in style$1;
 
 // @property webkit3d: Boolean; `true` for webkit-based browsers supporting CSS transforms.
 var webkit3d =
-  'WebKitCSSMatrix' in window &&
-  'm11' in new window.WebKitCSSMatrix() &&
+  "WebKitCSSMatrix" in window &&
+  "m11" in new window.WebKitCSSMatrix() &&
   !android23;
 
 // @property gecko3d: Boolean; `true` for gecko-based browsers supporting CSS transforms.
-var gecko3d = 'MozPerspective' in style$1;
+var gecko3d = "MozPerspective" in style$1;
 
 // @property any3d: Boolean
 // `true` for all browsers supporting CSS transforms.
@@ -1975,7 +1975,7 @@ var any3d =
   !window.L_DISABLE_3D && (ie3d || webkit3d || gecko3d) && !opera12 && !phantom;
 
 // @property mobile: Boolean; `true` for all browsers running in a mobile device.
-var mobile = typeof orientation !== 'undefined' || userAgentContains('mobile');
+var mobile = typeof orientation !== "undefined" || userAgentContains("mobile");
 
 // @property mobileWebkit: Boolean; `true` for all webkit-based browsers in a mobile device.
 var mobileWebkit = mobile && webkit;
@@ -2000,7 +2000,7 @@ var pointer = !webkit && !!(window.PointerEvent || msPointer);
 var touch =
   !window.L_NO_TOUCH &&
   (pointer ||
-    'ontouchstart' in window ||
+    "ontouchstart" in window ||
     (window.DocumentTouch && document instanceof window.DocumentTouch));
 
 // @property mobileOpera: Boolean; `true` for the Opera browser in a mobile device.
@@ -2021,13 +2021,13 @@ var retina =
 var passiveEvents = function () {
   var supportsPassiveOption = false;
   try {
-    var opts = Object.defineProperty({}, 'passive', {
+    var opts = Object.defineProperty({}, "passive", {
       get: function () {
         supportsPassiveOption = true;
       },
     });
-    window.addEventListener('testPassiveEventSupport', falseFn, opts);
-    window.removeEventListener('testPassiveEventSupport', falseFn, opts);
+    window.addEventListener("testPassiveEventSupport", falseFn, opts);
+    window.removeEventListener("testPassiveEventSupport", falseFn, opts);
   } catch (e) {
     // Errors can safely be ignored since this is only a browser support test.
   }
@@ -2037,12 +2037,12 @@ var passiveEvents = function () {
 // @property canvas: Boolean
 // `true` when the browser supports [`<canvas>`](https://developer.mozilla.org/docs/Web/API/Canvas_API).
 var canvas = (function () {
-  return !!document.createElement('canvas').getContext;
+  return !!document.createElement("canvas").getContext;
 })();
 
 // @property svg: Boolean
 // `true` when the browser supports [SVG](https://developer.mozilla.org/docs/Web/SVG).
-var svg = !!(document.createElementNS && svgCreate('svg').createSVGRect);
+var svg = !!(document.createElementNS && svgCreate("svg").createSVGRect);
 
 // @property vml: Boolean
 // `true` if the browser supports [VML](https://en.wikipedia.org/wiki/Vector_Markup_Language).
@@ -2050,13 +2050,13 @@ var vml =
   !svg &&
   (function () {
     try {
-      var div = document.createElement('div');
+      var div = document.createElement("div");
       div.innerHTML = '<v:shape adj="1"/>';
 
       var shape = div.firstChild;
-      shape.style.behavior = 'url(#default#VML)';
+      shape.style.behavior = "url(#default#VML)";
 
-      return shape && typeof shape.adj === 'object';
+      return shape && typeof shape.adj === "object";
     } catch (e) {
       return false;
     }
@@ -2104,11 +2104,11 @@ var Browser = (Object.freeze || Object)({
  * Extends L.DomEvent to provide touch support for Internet Explorer and Windows-based devices.
  */
 
-var POINTER_DOWN = msPointer ? 'MSPointerDown' : 'pointerdown';
-var POINTER_MOVE = msPointer ? 'MSPointerMove' : 'pointermove';
-var POINTER_UP = msPointer ? 'MSPointerUp' : 'pointerup';
-var POINTER_CANCEL = msPointer ? 'MSPointerCancel' : 'pointercancel';
-var TAG_WHITE_LIST = ['INPUT', 'SELECT', 'OPTION'];
+var POINTER_DOWN = msPointer ? "MSPointerDown" : "pointerdown";
+var POINTER_MOVE = msPointer ? "MSPointerMove" : "pointermove";
+var POINTER_UP = msPointer ? "MSPointerUp" : "pointerup";
+var POINTER_CANCEL = msPointer ? "MSPointerCancel" : "pointercancel";
+var TAG_WHITE_LIST = ["INPUT", "SELECT", "OPTION"];
 
 var _pointers = {};
 var _pointerDocListener = false;
@@ -2120,11 +2120,11 @@ var _pointersCount = 0;
 // ref http://www.w3.org/TR/pointerevents/ https://www.w3.org/Bugs/Public/show_bug.cgi?id=22890
 
 function addPointerListener(obj, type, handler, id) {
-  if (type === 'touchstart') {
+  if (type === "touchstart") {
     _addPointerStart(obj, handler, id);
-  } else if (type === 'touchmove') {
+  } else if (type === "touchmove") {
     _addPointerMove(obj, handler, id);
-  } else if (type === 'touchend') {
+  } else if (type === "touchend") {
     _addPointerEnd(obj, handler, id);
   }
 
@@ -2132,13 +2132,13 @@ function addPointerListener(obj, type, handler, id) {
 }
 
 function removePointerListener(obj, type, id) {
-  var handler = obj['_leaflet_' + type + id];
+  var handler = obj["_leaflet_" + type + id];
 
-  if (type === 'touchstart') {
+  if (type === "touchstart") {
     obj.removeEventListener(POINTER_DOWN, handler, false);
-  } else if (type === 'touchmove') {
+  } else if (type === "touchmove") {
     obj.removeEventListener(POINTER_MOVE, handler, false);
-  } else if (type === 'touchend') {
+  } else if (type === "touchend") {
     obj.removeEventListener(POINTER_UP, handler, false);
     obj.removeEventListener(POINTER_CANCEL, handler, false);
   }
@@ -2149,7 +2149,7 @@ function removePointerListener(obj, type, id) {
 function _addPointerStart(obj, handler, id) {
   var onDown = bind(function (e) {
     if (
-      e.pointerType !== 'mouse' &&
+      e.pointerType !== "mouse" &&
       e.MSPOINTER_TYPE_MOUSE &&
       e.pointerType !== e.MSPOINTER_TYPE_MOUSE
     ) {
@@ -2166,7 +2166,7 @@ function _addPointerStart(obj, handler, id) {
     _handlePointer(e, handler);
   });
 
-  obj['_leaflet_touchstart' + id] = onDown;
+  obj["_leaflet_touchstart" + id] = onDown;
   obj.addEventListener(POINTER_DOWN, onDown, false);
 
   // need to keep track of what pointers and how many are active to provide e.touches emulation
@@ -2227,7 +2227,7 @@ function _addPointerMove(obj, handler, id) {
   var onMove = function (e) {
     // don't fire touch moves when mouse isn't down
     if (
-      (e.pointerType === e.MSPOINTER_TYPE_MOUSE || e.pointerType === 'mouse') &&
+      (e.pointerType === e.MSPOINTER_TYPE_MOUSE || e.pointerType === "mouse") &&
       e.buttons === 0
     ) {
       return;
@@ -2236,7 +2236,7 @@ function _addPointerMove(obj, handler, id) {
     _handlePointer(e, handler);
   };
 
-  obj['_leaflet_touchmove' + id] = onMove;
+  obj["_leaflet_touchmove" + id] = onMove;
   obj.addEventListener(POINTER_MOVE, onMove, false);
 }
 
@@ -2245,7 +2245,7 @@ function _addPointerEnd(obj, handler, id) {
     _handlePointer(e, handler);
   };
 
-  obj['_leaflet_touchend' + id] = onUp;
+  obj["_leaflet_touchend" + id] = onUp;
   obj.addEventListener(POINTER_UP, onUp, false);
   obj.addEventListener(POINTER_CANCEL, onUp, false);
 }
@@ -2255,12 +2255,12 @@ function _addPointerEnd(obj, handler, id) {
  */
 
 var _touchstart = msPointer
-  ? 'MSPointerDown'
+  ? "MSPointerDown"
   : pointer
-    ? 'pointerdown'
-    : 'touchstart';
-var _touchend = msPointer ? 'MSPointerUp' : pointer ? 'pointerup' : 'touchend';
-var _pre = '_leaflet_';
+    ? "pointerdown"
+    : "touchstart";
+var _touchend = msPointer ? "MSPointerUp" : pointer ? "pointerup" : "touchend";
+var _pre = "_leaflet_";
 
 // inspired by Zepto touch code by Thomas Fuchs
 function addDoubleTapListener(obj, handler, id) {
@@ -2273,7 +2273,7 @@ function addDoubleTapListener(obj, handler, id) {
     var count;
 
     if (pointer) {
-      if (!edge || e.pointerType === 'mouse') {
+      if (!edge || e.pointerType === "mouse") {
         return;
       }
       count = _pointersCount;
@@ -2296,7 +2296,7 @@ function addDoubleTapListener(obj, handler, id) {
   function onTouchEnd(e) {
     if (doubleTap && !touch$$1.cancelBubble) {
       if (pointer) {
-        if (!edge || e.pointerType === 'mouse') {
+        if (!edge || e.pointerType === "mouse") {
           return;
         }
         // work around .type being readonly with MSPointer* events
@@ -2310,7 +2310,7 @@ function addDoubleTapListener(obj, handler, id) {
         }
         touch$$1 = newTouch;
       }
-      touch$$1.type = 'dblclick';
+      touch$$1.type = "dblclick";
       touch$$1.button = 0;
       handler(touch$$1);
       last = null;
@@ -2319,7 +2319,7 @@ function addDoubleTapListener(obj, handler, id) {
 
   obj[_pre + _touchstart + id] = onTouchStart;
   obj[_pre + _touchend + id] = onTouchEnd;
-  obj[_pre + 'dblclick' + id] = handler;
+  obj[_pre + "dblclick" + id] = handler;
 
   obj.addEventListener(
     _touchstart,
@@ -2336,7 +2336,7 @@ function addDoubleTapListener(obj, handler, id) {
   // the browser doesn't fire touchend/pointerup events but does fire
   // native dblclicks. See #4127.
   // Edge 14 also fires native dblclicks, but only for pointerType mouse, see #5180.
-  obj.addEventListener('dblclick', handler, false);
+  obj.addEventListener("dblclick", handler, false);
 
   return this;
 }
@@ -2344,7 +2344,7 @@ function addDoubleTapListener(obj, handler, id) {
 function removeDoubleTapListener(obj, id) {
   var touchstart = obj[_pre + _touchstart + id],
     touchend = obj[_pre + _touchend + id],
-    dblclick = obj[_pre + 'dblclick' + id];
+    dblclick = obj[_pre + "dblclick" + id];
 
   obj.removeEventListener(
     _touchstart,
@@ -2357,7 +2357,7 @@ function removeDoubleTapListener(obj, id) {
     passiveEvents ? { passive: false } : false,
   );
   if (!edge) {
-    obj.removeEventListener('dblclick', dblclick, false);
+    obj.removeEventListener("dblclick", dblclick, false);
   }
 
   return this;
@@ -2377,11 +2377,11 @@ function removeDoubleTapListener(obj, id) {
 // @property TRANSFORM: String
 // Vendor-prefixed transform style name (e.g. `'webkitTransform'` for WebKit).
 var TRANSFORM = testProp([
-  'transform',
-  'webkitTransform',
-  'OTransform',
-  'MozTransform',
-  'msTransform',
+  "transform",
+  "webkitTransform",
+  "OTransform",
+  "MozTransform",
+  "msTransform",
 ]);
 
 // webkitTransition comes first because some browser versions that drop vendor prefix don't do
@@ -2390,25 +2390,25 @@ var TRANSFORM = testProp([
 // @property TRANSITION: String
 // Vendor-prefixed transition style name.
 var TRANSITION = testProp([
-  'webkitTransition',
-  'transition',
-  'OTransition',
-  'MozTransition',
-  'msTransition',
+  "webkitTransition",
+  "transition",
+  "OTransition",
+  "MozTransition",
+  "msTransition",
 ]);
 
 // @property TRANSITION_END: String
 // Vendor-prefixed transitionend event name.
 var TRANSITION_END =
-  TRANSITION === 'webkitTransition' || TRANSITION === 'OTransition'
-    ? TRANSITION + 'End'
-    : 'transitionend';
+  TRANSITION === "webkitTransition" || TRANSITION === "OTransition"
+    ? TRANSITION + "End"
+    : "transitionend";
 
 // @function get(id: String|HTMLElement): HTMLElement
 // Returns an element given its DOM id, or returns the element itself
 // if it was passed directly.
 function get(id) {
-  return typeof id === 'string' ? document.getElementById(id) : id;
+  return typeof id === "string" ? document.getElementById(id) : id;
 }
 
 // @function getStyle(el: HTMLElement, styleAttrib: String): String
@@ -2417,18 +2417,18 @@ function get(id) {
 function getStyle(el, style) {
   var value = el.style[style] || (el.currentStyle && el.currentStyle[style]);
 
-  if ((!value || value === 'auto') && document.defaultView) {
+  if ((!value || value === "auto") && document.defaultView) {
     var css = document.defaultView.getComputedStyle(el, null);
     value = css ? css[style] : null;
   }
-  return value === 'auto' ? null : value;
+  return value === "auto" ? null : value;
 }
 
 // @function create(tagName: String, className?: String, container?: HTMLElement): HTMLElement
 // Creates an HTML element with `tagName`, sets its class to `className`, and optionally appends it to `container` element.
 function create$1(tagName, className, container) {
   var el = document.createElement(tagName);
-  el.className = className || '';
+  el.className = className || "";
 
   if (container) {
     container.appendChild(el);
@@ -2480,7 +2480,7 @@ function hasClass(el, name) {
   var className = getClass(el);
   return (
     className.length > 0 &&
-    new RegExp('(^|\\s)' + name + '(\\s|$)').test(className)
+    new RegExp("(^|\\s)" + name + "(\\s|$)").test(className)
   );
 }
 
@@ -2494,7 +2494,7 @@ function addClass(el, name) {
     }
   } else if (!hasClass(el, name)) {
     var className = getClass(el);
-    setClass(el, (className ? className + ' ' : '') + name);
+    setClass(el, (className ? className + " " : "") + name);
   }
 }
 
@@ -2506,7 +2506,7 @@ function removeClass(el, name) {
   } else {
     setClass(
       el,
-      trim((' ' + getClass(el) + ' ').replace(' ' + name + ' ', ' ')),
+      trim((" " + getClass(el) + " ").replace(" " + name + " ", " ")),
     );
   }
 }
@@ -2539,16 +2539,16 @@ function getClass(el) {
 // Set the opacity of an element (including old IE support).
 // `opacity` must be a number from `0` to `1`.
 function setOpacity(el, value) {
-  if ('opacity' in el.style) {
+  if ("opacity" in el.style) {
     el.style.opacity = value;
-  } else if ('filter' in el.style) {
+  } else if ("filter" in el.style) {
     _setOpacityIE(el, value);
   }
 }
 
 function _setOpacityIE(el, value) {
   var filter = false,
-    filterName = 'DXImageTransform.Microsoft.Alpha';
+    filterName = "DXImageTransform.Microsoft.Alpha";
 
   // filters collection throws an error if we try to retrieve a filter that doesn't exist
   try {
@@ -2567,7 +2567,7 @@ function _setOpacityIE(el, value) {
     filter.Enabled = value !== 100;
     filter.Opacity = value;
   } else {
-    el.style.filter += ' progid:' + filterName + '(opacity=' + value + ')';
+    el.style.filter += " progid:" + filterName + "(opacity=" + value + ")";
   }
 }
 
@@ -2595,9 +2595,9 @@ function setTransform(el, offset, scale) {
 
   el.style[TRANSFORM] =
     (ie3d
-      ? 'translate(' + pos.x + 'px,' + pos.y + 'px)'
-      : 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)') +
-    (scale ? ' scale(' + scale + ')' : '');
+      ? "translate(" + pos.x + "px," + pos.y + "px)"
+      : "translate3d(" + pos.x + "px," + pos.y + "px,0)") +
+    (scale ? " scale(" + scale + ")" : "");
 }
 
 // @function setPosition(el: HTMLElement, position: Point)
@@ -2612,8 +2612,8 @@ function setPosition(el, point) {
   if (any3d) {
     setTransform(el, point);
   } else {
-    el.style.left = point.x + 'px';
-    el.style.top = point.y + 'px';
+    el.style.left = point.x + "px";
+    el.style.top = point.y + "px";
   }
 }
 
@@ -2637,27 +2637,27 @@ function getPosition(el) {
 var disableTextSelection;
 var enableTextSelection;
 var _userSelect;
-if ('onselectstart' in document) {
+if ("onselectstart" in document) {
   disableTextSelection = function () {
-    on(window, 'selectstart', preventDefault);
+    on(window, "selectstart", preventDefault);
   };
   enableTextSelection = function () {
-    off(window, 'selectstart', preventDefault);
+    off(window, "selectstart", preventDefault);
   };
 } else {
   var userSelectProperty = testProp([
-    'userSelect',
-    'WebkitUserSelect',
-    'OUserSelect',
-    'MozUserSelect',
-    'msUserSelect',
+    "userSelect",
+    "WebkitUserSelect",
+    "OUserSelect",
+    "MozUserSelect",
+    "msUserSelect",
   ]);
 
   disableTextSelection = function () {
     if (userSelectProperty) {
       var style = document.documentElement.style;
       _userSelect = style[userSelectProperty];
-      style[userSelectProperty] = 'none';
+      style[userSelectProperty] = "none";
     }
   };
   enableTextSelection = function () {
@@ -2672,13 +2672,13 @@ if ('onselectstart' in document) {
 // As [`L.DomUtil.disableTextSelection`](#domutil-disabletextselection), but
 // for `dragstart` DOM events, usually generated when the user drags an image.
 function disableImageDrag() {
-  on(window, 'dragstart', preventDefault);
+  on(window, "dragstart", preventDefault);
 }
 
 // @function enableImageDrag()
 // Cancels the effects of a previous [`L.DomUtil.disableImageDrag`](#domutil-disabletextselection).
 function enableImageDrag() {
-  off(window, 'dragstart', preventDefault);
+  off(window, "dragstart", preventDefault);
 }
 
 var _outlineElement;
@@ -2698,8 +2698,8 @@ function preventOutline(element) {
   restoreOutline();
   _outlineElement = element;
   _outlineStyle = element.style.outline;
-  element.style.outline = 'none';
-  on(window, 'keydown', restoreOutline);
+  element.style.outline = "none";
+  on(window, "keydown", restoreOutline);
 }
 
 // @function restoreOutline()
@@ -2711,7 +2711,7 @@ function restoreOutline() {
   _outlineElement.style.outline = _outlineStyle;
   _outlineElement = undefined;
   _outlineStyle = undefined;
-  off(window, 'keydown', restoreOutline);
+  off(window, "keydown", restoreOutline);
 }
 
 // @function getSizedParentNode(el: HTMLElement): HTMLElement
@@ -2788,7 +2788,7 @@ var DomUtil = (Object.freeze || Object)({
 // @function on(el: HTMLElement, eventMap: Object, context?: Object): this
 // Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
 function on(obj, types, fn, context) {
-  if (typeof types === 'object') {
+  if (typeof types === "object") {
     for (var type in types) {
       addOne(obj, type, types[type], fn);
     }
@@ -2803,7 +2803,7 @@ function on(obj, types, fn, context) {
   return this;
 }
 
-var eventsKey = '_leaflet_events';
+var eventsKey = "_leaflet_events";
 
 // @function off(el: HTMLElement, types: String, fn: Function, context?: Object): this
 // Removes a previously added listener function.
@@ -2814,7 +2814,7 @@ var eventsKey = '_leaflet_events';
 // @function off(el: HTMLElement, eventMap: Object, context?: Object): this
 // Removes a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
 function off(obj, types, fn, context) {
-  if (typeof types === 'object') {
+  if (typeof types === "object") {
     for (var type in types) {
       removeOne(obj, type, types[type], fn);
     }
@@ -2835,7 +2835,7 @@ function off(obj, types, fn, context) {
 }
 
 function addOne(obj, type, fn, context) {
-  var id = type + stamp(fn) + (context ? '_' + stamp(context) : '');
+  var id = type + stamp(fn) + (context ? "_" + stamp(context) : "");
 
   if (obj[eventsKey] && obj[eventsKey][id]) {
     return this;
@@ -2847,26 +2847,26 @@ function addOne(obj, type, fn, context) {
 
   var originalHandler = handler;
 
-  if (pointer && type.indexOf('touch') === 0) {
+  if (pointer && type.indexOf("touch") === 0) {
     // Needs DomEvent.Pointer.js
     addPointerListener(obj, type, handler, id);
   } else if (
     touch &&
-    type === 'dblclick' &&
+    type === "dblclick" &&
     addDoubleTapListener &&
     !(pointer && chrome)
   ) {
     // Chrome >55 does not need the synthetic dblclicks from addDoubleTapListener
     // See #5180
     addDoubleTapListener(obj, handler, id);
-  } else if ('addEventListener' in obj) {
-    if (type === 'mousewheel') {
+  } else if ("addEventListener" in obj) {
+    if (type === "mousewheel") {
       obj.addEventListener(
-        'onwheel' in obj ? 'wheel' : 'mousewheel',
+        "onwheel" in obj ? "wheel" : "mousewheel",
         handler,
         passiveEvents ? { passive: false } : false,
       );
-    } else if (type === 'mouseenter' || type === 'mouseleave') {
+    } else if (type === "mouseenter" || type === "mouseleave") {
       handler = function (e) {
         e = e || window.event;
         if (isExternalTarget(obj, e)) {
@@ -2874,20 +2874,20 @@ function addOne(obj, type, fn, context) {
         }
       };
       obj.addEventListener(
-        type === 'mouseenter' ? 'mouseover' : 'mouseout',
+        type === "mouseenter" ? "mouseover" : "mouseout",
         handler,
         false,
       );
     } else {
-      if (type === 'click' && android) {
+      if (type === "click" && android) {
         handler = function (e) {
           filterClick(e, originalHandler);
         };
       }
       obj.addEventListener(type, handler, false);
     }
-  } else if ('attachEvent' in obj) {
-    obj.attachEvent('on' + type, handler);
+  } else if ("attachEvent" in obj) {
+    obj.attachEvent("on" + type, handler);
   }
 
   obj[eventsKey] = obj[eventsKey] || {};
@@ -2895,42 +2895,42 @@ function addOne(obj, type, fn, context) {
 }
 
 function removeOne(obj, type, fn, context) {
-  var id = type + stamp(fn) + (context ? '_' + stamp(context) : ''),
+  var id = type + stamp(fn) + (context ? "_" + stamp(context) : ""),
     handler = obj[eventsKey] && obj[eventsKey][id];
 
   if (!handler) {
     return this;
   }
 
-  if (pointer && type.indexOf('touch') === 0) {
+  if (pointer && type.indexOf("touch") === 0) {
     removePointerListener(obj, type, id);
   } else if (
     touch &&
-    type === 'dblclick' &&
+    type === "dblclick" &&
     removeDoubleTapListener &&
     !(pointer && chrome)
   ) {
     removeDoubleTapListener(obj, id);
-  } else if ('removeEventListener' in obj) {
-    if (type === 'mousewheel') {
+  } else if ("removeEventListener" in obj) {
+    if (type === "mousewheel") {
       obj.removeEventListener(
-        'onwheel' in obj ? 'wheel' : 'mousewheel',
+        "onwheel" in obj ? "wheel" : "mousewheel",
         handler,
         passiveEvents ? { passive: false } : false,
       );
     } else {
       obj.removeEventListener(
-        type === 'mouseenter'
-          ? 'mouseover'
-          : type === 'mouseleave'
-            ? 'mouseout'
+        type === "mouseenter"
+          ? "mouseover"
+          : type === "mouseleave"
+            ? "mouseout"
             : type,
         handler,
         false,
       );
     }
-  } else if ('detachEvent' in obj) {
-    obj.detachEvent('on' + type, handler);
+  } else if ("detachEvent" in obj) {
+    obj.detachEvent("on" + type, handler);
   }
 
   obj[eventsKey][id] = null;
@@ -2960,7 +2960,7 @@ function stopPropagation(e) {
 // @function disableScrollPropagation(el: HTMLElement): this
 // Adds `stopPropagation` to the element's `'mousewheel'` events (plus browser variants).
 function disableScrollPropagation(el) {
-  addOne(el, 'mousewheel', stopPropagation);
+  addOne(el, "mousewheel", stopPropagation);
   return this;
 }
 
@@ -2968,8 +2968,8 @@ function disableScrollPropagation(el) {
 // Adds `stopPropagation` to the element's `'click'`, `'doubleclick'`,
 // `'mousedown'` and `'touchstart'` events (plus browser variants).
 function disableClickPropagation(el) {
-  on(el, 'mousedown touchstart dblclick', stopPropagation);
-  addOne(el, 'click', fakeStop);
+  on(el, "mousedown touchstart dblclick", stopPropagation);
+  addOne(el, "click", fakeStop);
   return this;
 }
 
@@ -3158,7 +3158,7 @@ var PosAnimation = Evented.extend({
 
     // @event start: Event
     // Fired when the animation starts
-    this.fire('start');
+    this.fire("start");
 
     this._animate();
   },
@@ -3201,7 +3201,7 @@ var PosAnimation = Evented.extend({
 
     // @event step: Event
     // Fired continuously during the animation.
-    this.fire('step');
+    this.fire("step");
   },
 
   _complete: function () {
@@ -3210,7 +3210,7 @@ var PosAnimation = Evented.extend({
     this._inProgress = false;
     // @event end: Event
     // Fired when the animation ends.
-    this.fire('end');
+    this.fire("end");
   },
 
   _easeOut: function (t) {
@@ -3473,7 +3473,7 @@ var Map = Evented.extend({
       zoom = this.getBoundsZoom(bounds, false, paddingTL.add(paddingBR));
 
     zoom =
-      typeof options.maxZoom === 'number'
+      typeof options.maxZoom === "number"
         ? Math.min(options.maxZoom, zoom)
         : zoom;
 
@@ -3505,7 +3505,7 @@ var Map = Evented.extend({
     bounds = toLatLngBounds(bounds);
 
     if (!bounds.isValid()) {
-      throw new Error('Bounds are not valid.');
+      throw new Error("Bounds are not valid.");
     }
 
     var target = this._getBoundsCenterZoom(bounds, options);
@@ -3539,7 +3539,7 @@ var Map = Evented.extend({
     options = options || {};
 
     if (!offset.x && !offset.y) {
-      return this.fire('moveend');
+      return this.fire("moveend");
     }
     // If we pan too far, Chrome gets issues with tiles
     // and makes them disappear or appear in the wrong place (slightly offset) #2602
@@ -3565,12 +3565,12 @@ var Map = Evented.extend({
 
     // don't fire movestart if animating inertia
     if (!options.noMoveStart) {
-      this.fire('movestart');
+      this.fire("movestart");
     }
 
     // animate pan unless animate: false specified
     if (options.animate !== false) {
-      addClass(this._mapPane, 'leaflet-pan-anim');
+      addClass(this._mapPane, "leaflet-pan-anim");
 
       var newPos = this._getMapPanePos().subtract(offset).round();
       this._panAnim.run(
@@ -3581,7 +3581,7 @@ var Map = Evented.extend({
       );
     } else {
       this._rawPanBy(offset);
-      this.fire('move').fire('moveend');
+      this.fire("move").fire("moveend");
     }
 
     return this;
@@ -3695,9 +3695,9 @@ var Map = Evented.extend({
 
     if (!bounds.isValid()) {
       this.options.maxBounds = null;
-      return this.off('moveend', this._panInsideMaxBounds);
+      return this.off("moveend", this._panInsideMaxBounds);
     } else if (this.options.maxBounds) {
-      this.off('moveend', this._panInsideMaxBounds);
+      this.off("moveend", this._panInsideMaxBounds);
     }
 
     this.options.maxBounds = bounds;
@@ -3706,7 +3706,7 @@ var Map = Evented.extend({
       this._panInsideMaxBounds();
     }
 
-    return this.on('moveend', this._panInsideMaxBounds);
+    return this.on("moveend", this._panInsideMaxBounds);
   },
 
   // @method setMinZoom(zoom: Number): this
@@ -3716,7 +3716,7 @@ var Map = Evented.extend({
     this.options.minZoom = zoom;
 
     if (this._loaded && oldZoom !== zoom) {
-      this.fire('zoomlevelschange');
+      this.fire("zoomlevelschange");
 
       if (this.getZoom() < this.options.minZoom) {
         return this.setZoom(zoom);
@@ -3733,7 +3733,7 @@ var Map = Evented.extend({
     this.options.maxZoom = zoom;
 
     if (this._loaded && oldZoom !== zoom) {
-      this.fire('zoomlevelschange');
+      this.fire("zoomlevelschange");
 
       if (this.getZoom() > this.options.maxZoom) {
         return this.setZoom(zoom);
@@ -3862,20 +3862,20 @@ var Map = Evented.extend({
         this._rawPanBy(offset);
       }
 
-      this.fire('move');
+      this.fire("move");
 
       if (options.debounceMoveend) {
         clearTimeout(this._sizeTimer);
-        this._sizeTimer = setTimeout(bind(this.fire, this, 'moveend'), 200);
+        this._sizeTimer = setTimeout(bind(this.fire, this, "moveend"), 200);
       } else {
-        this.fire('moveend');
+        this.fire("moveend");
       }
     }
 
     // @section Map state change events
     // @event resize: ResizeEvent
     // Fired when the map is resized.
-    return this.fire('resize', {
+    return this.fire("resize", {
       oldSize: oldSize,
       newSize: newSize,
     });
@@ -3887,7 +3887,7 @@ var Map = Evented.extend({
   stop: function () {
     this.setZoom(this._limitZoom(this._zoom));
     if (!this.options.zoomSnap) {
-      this.fire('viewreset');
+      this.fire("viewreset");
     }
     return this._stop();
   },
@@ -3914,10 +3914,10 @@ var Map = Evented.extend({
       options,
     );
 
-    if (!('geolocation' in navigator)) {
+    if (!("geolocation" in navigator)) {
       this._handleGeolocationError({
         code: 0,
-        message: 'Geolocation not supported.',
+        message: "Geolocation not supported.",
       });
       return this;
     }
@@ -3956,10 +3956,10 @@ var Map = Evented.extend({
       message =
         error.message ||
         (c === 1
-          ? 'permission denied'
+          ? "permission denied"
           : c === 2
-            ? 'position unavailable'
-            : 'timeout');
+            ? "position unavailable"
+            : "timeout");
 
     if (this._locateOptions.setView && !this._loaded) {
       this.fitWorld();
@@ -3968,9 +3968,9 @@ var Map = Evented.extend({
     // @section Location events
     // @event locationerror: ErrorEvent
     // Fired when geolocation (using the [`locate`](#map-locate) method) failed.
-    this.fire('locationerror', {
+    this.fire("locationerror", {
       code: c,
-      message: 'Geolocation error: ' + message + '.',
+      message: "Geolocation error: " + message + ".",
     });
   },
 
@@ -3996,7 +3996,7 @@ var Map = Evented.extend({
     };
 
     for (var i in pos.coords) {
-      if (typeof pos.coords[i] === 'number') {
+      if (typeof pos.coords[i] === "number") {
         data[i] = pos.coords[i];
       }
     }
@@ -4004,7 +4004,7 @@ var Map = Evented.extend({
     // @event locationfound: LocationEvent
     // Fired when geolocation (using the [`locate`](#map-locate) method)
     // went successfully.
-    this.fire('locationfound', data);
+    this.fire("locationfound", data);
   },
 
   // TODO Appropriate docs section?
@@ -4033,7 +4033,7 @@ var Map = Evented.extend({
     this._initEvents(true);
 
     if (this._containerId !== this._container._leaflet_id) {
-      throw new Error('Map container is being reused by another instance');
+      throw new Error("Map container is being reused by another instance");
     }
 
     try {
@@ -4069,7 +4069,7 @@ var Map = Evented.extend({
       // @section Map state change events
       // @event unload: Event
       // Fired when the map is destroyed with [remove](#map-remove) method.
-      this.fire('unload');
+      this.fire("unload");
     }
 
     var i;
@@ -4095,9 +4095,9 @@ var Map = Evented.extend({
   // as a child of the main map pane if not set.
   createPane: function (name, container) {
     var className =
-        'leaflet-pane' +
-        (name ? ' leaflet-' + name.replace('Pane', '') + '-pane' : ''),
-      pane = create$1('div', className, container || this._mapPane);
+        "leaflet-pane" +
+        (name ? " leaflet-" + name.replace("Pane", "") + "-pane" : ""),
+      pane = create$1("div", className, container || this._mapPane);
 
     if (name) {
       this._panes[name] = pane;
@@ -4236,7 +4236,7 @@ var Map = Evented.extend({
   // @method getPane(pane: String|HTMLElement): HTMLElement
   // Returns a [map pane](#map-pane), given its name or its HTML element (its identity).
   getPane: function (pane) {
-    return typeof pane === 'string' ? this._panes[pane] : pane;
+    return typeof pane === "string" ? this._panes[pane] : pane;
   },
 
   // @method getPanes(): Object
@@ -4396,12 +4396,12 @@ var Map = Evented.extend({
     var container = (this._container = get(id));
 
     if (!container) {
-      throw new Error('Map container not found.');
+      throw new Error("Map container not found.");
     } else if (container._leaflet_id) {
-      throw new Error('Map container is already initialized.');
+      throw new Error("Map container is already initialized.");
     }
 
-    on(container, 'scroll', this._onScroll, this);
+    on(container, "scroll", this._onScroll, this);
     this._containerId = stamp(container);
   },
 
@@ -4412,22 +4412,22 @@ var Map = Evented.extend({
 
     addClass(
       container,
-      'leaflet-container' +
-        (touch ? ' leaflet-touch' : '') +
-        (retina ? ' leaflet-retina' : '') +
-        (ielt9 ? ' leaflet-oldie' : '') +
-        (safari ? ' leaflet-safari' : '') +
-        (this._fadeAnimated ? ' leaflet-fade-anim' : ''),
+      "leaflet-container" +
+        (touch ? " leaflet-touch" : "") +
+        (retina ? " leaflet-retina" : "") +
+        (ielt9 ? " leaflet-oldie" : "") +
+        (safari ? " leaflet-safari" : "") +
+        (this._fadeAnimated ? " leaflet-fade-anim" : ""),
     );
 
-    var position = getStyle(container, 'position');
+    var position = getStyle(container, "position");
 
     if (
-      position !== 'absolute' &&
-      position !== 'relative' &&
-      position !== 'fixed'
+      position !== "absolute" &&
+      position !== "relative" &&
+      position !== "fixed"
     ) {
-      container.style.position = 'relative';
+      container.style.position = "relative";
     }
 
     this._initPanes();
@@ -4453,31 +4453,31 @@ var Map = Evented.extend({
     // @pane mapPane: HTMLElement = 'auto'
     // Pane that contains all other map panes
 
-    this._mapPane = this.createPane('mapPane', this._container);
+    this._mapPane = this.createPane("mapPane", this._container);
     setPosition(this._mapPane, new Point(0, 0));
 
     // @pane tilePane: HTMLElement = 200
     // Pane for `GridLayer`s and `TileLayer`s
-    this.createPane('tilePane');
+    this.createPane("tilePane");
     // @pane overlayPane: HTMLElement = 400
     // Pane for vectors (`Path`s, like `Polyline`s and `Polygon`s), `ImageOverlay`s and `VideoOverlay`s
-    this.createPane('shadowPane');
+    this.createPane("shadowPane");
     // @pane shadowPane: HTMLElement = 500
     // Pane for overlay shadows (e.g. `Marker` shadows)
-    this.createPane('overlayPane');
+    this.createPane("overlayPane");
     // @pane markerPane: HTMLElement = 600
     // Pane for `Icon`s of `Marker`s
-    this.createPane('markerPane');
+    this.createPane("markerPane");
     // @pane tooltipPane: HTMLElement = 650
     // Pane for `Tooltip`s.
-    this.createPane('tooltipPane');
+    this.createPane("tooltipPane");
     // @pane popupPane: HTMLElement = 700
     // Pane for `Popup`s.
-    this.createPane('popupPane');
+    this.createPane("popupPane");
 
     if (!this.options.markerZoomAnimation) {
-      addClass(panes.markerPane, 'leaflet-zoom-hide');
-      addClass(panes.shadowPane, 'leaflet-zoom-hide');
+      addClass(panes.markerPane, "leaflet-zoom-hide");
+      addClass(panes.shadowPane, "leaflet-zoom-hide");
     }
   },
 
@@ -4491,7 +4491,7 @@ var Map = Evented.extend({
     this._loaded = true;
     zoom = this._limitZoom(zoom);
 
-    this.fire('viewprereset');
+    this.fire("viewprereset");
 
     var zoomChanged = this._zoom !== zoom;
     this._moveStart(zoomChanged, false)
@@ -4501,13 +4501,13 @@ var Map = Evented.extend({
     // @event viewreset: Event
     // Fired when the map needs to redraw its content (this usually happens
     // on map zoom or load). Very useful for creating custom overlays.
-    this.fire('viewreset');
+    this.fire("viewreset");
 
     // @event load: Event
     // Fired when the map is initialized (when its center and zoom are set
     // for the first time).
     if (loading) {
-      this.fire('load');
+      this.fire("load");
     }
   },
 
@@ -4517,10 +4517,10 @@ var Map = Evented.extend({
     // @event movestart: Event
     // Fired when the view of the map starts changing (e.g. user starts dragging the map).
     if (zoomChanged) {
-      this.fire('zoomstart');
+      this.fire("zoomstart");
     }
     if (!noMoveStart) {
-      this.fire('movestart');
+      this.fire("movestart");
     }
     return this;
   },
@@ -4540,26 +4540,26 @@ var Map = Evented.extend({
     // and fly animations.
     if (zoomChanged || (data && data.pinch)) {
       // Always fire 'zoom' if pinching because #3530
-      this.fire('zoom', data);
+      this.fire("zoom", data);
     }
 
     // @event move: Event
     // Fired repeatedly during any movement of the map, including pan and
     // fly animations.
-    return this.fire('move', data);
+    return this.fire("move", data);
   },
 
   _moveEnd: function (zoomChanged) {
     // @event zoomend: Event
     // Fired when the map has changed, after any animations.
     if (zoomChanged) {
-      this.fire('zoomend');
+      this.fire("zoomend");
     }
 
     // @event moveend: Event
     // Fired when the center of the map stops changing (e.g. user stopped
     // dragging the map).
-    return this.fire('moveend');
+    return this.fire("moveend");
   },
 
   _stop: function () {
@@ -4586,7 +4586,7 @@ var Map = Evented.extend({
 
   _checkIfLoaded: function () {
     if (!this._loaded) {
-      throw new Error('Set map center and zoom first.');
+      throw new Error("Set map center and zoom first.");
     }
   },
 
@@ -4628,18 +4628,18 @@ var Map = Evented.extend({
     // Fired when the user releases a key from the keyboard while the map is focused.
     onOff(
       this._container,
-      'click dblclick mousedown mouseup ' +
-        'mouseover mouseout mousemove contextmenu keypress keydown keyup',
+      "click dblclick mousedown mouseup " +
+        "mouseover mouseout mousemove contextmenu keypress keydown keyup",
       this._handleDOMEvent,
       this,
     );
 
     if (this.options.trackResize) {
-      onOff(window, 'resize', this._onResize, this);
+      onOff(window, "resize", this._onResize, this);
     }
 
     if (any3d && this.options.transform3DLimit) {
-      (remove$$1 ? this.off : this.on).call(this, 'moveend', this._onMoveEnd);
+      (remove$$1 ? this.off : this.on).call(this, "moveend", this._onMoveEnd);
     }
   },
 
@@ -4670,7 +4670,7 @@ var Map = Evented.extend({
   _findEventTargets: function (e, type) {
     var targets = [],
       target,
-      isHover = type === 'mouseout' || type === 'mouseover',
+      isHover = type === "mouseout" || type === "mouseover",
       src = e.target || e.srcElement,
       dragging = false;
 
@@ -4678,7 +4678,7 @@ var Map = Evented.extend({
       target = this._targets[stamp(src)];
       if (
         target &&
-        (type === 'click' || type === 'preclick') &&
+        (type === "click" || type === "preclick") &&
         !e._simulated &&
         this._draggableMoved(target)
       ) {
@@ -4714,10 +4714,10 @@ var Map = Evented.extend({
     var type = e.type;
 
     if (
-      type === 'mousedown' ||
-      type === 'keypress' ||
-      type === 'keyup' ||
-      type === 'keydown'
+      type === "mousedown" ||
+      type === "keypress" ||
+      type === "keyup" ||
+      type === "keydown"
     ) {
       // prevents outline when clicking on keyboard-focusable element
       preventOutline(e.target || e.srcElement);
@@ -4726,17 +4726,17 @@ var Map = Evented.extend({
     this._fireDOMEvent(e, type);
   },
 
-  _mouseEvents: ['click', 'dblclick', 'mouseover', 'mouseout', 'contextmenu'],
+  _mouseEvents: ["click", "dblclick", "mouseover", "mouseout", "contextmenu"],
 
   _fireDOMEvent: function (e, type, targets) {
-    if (e.type === 'click') {
+    if (e.type === "click") {
       // Fire a synthetic 'preclick' event which propagates up (mainly for closing popups).
       // @event preclick: MouseEvent
       // Fired before mouse click on the map (sometimes useful when you
       // want something to happen on click before any existing click
       // handlers start running).
       var synth = extend({}, e);
-      synth.type = 'preclick';
+      synth.type = "preclick";
       this._fireDOMEvent(synth, synth.type, targets);
     }
 
@@ -4752,7 +4752,7 @@ var Map = Evented.extend({
     }
 
     var target = targets[0];
-    if (type === 'contextmenu' && target.listens(type, true)) {
+    if (type === "contextmenu" && target.listens(type, true)) {
       preventDefault(e);
     }
 
@@ -4760,7 +4760,7 @@ var Map = Evented.extend({
       originalEvent: e,
     };
 
-    if (e.type !== 'keypress' && e.type !== 'keydown' && e.type !== 'keyup') {
+    if (e.type !== "keypress" && e.type !== "keydown" && e.type !== "keyup") {
       var isMarker =
         target.getLatLng && (!target._radius || target._radius <= 10);
       data.containerPoint = isMarker
@@ -4808,7 +4808,7 @@ var Map = Evented.extend({
     if (this._loaded) {
       callback.call(context || this, { target: this });
     } else {
-      this.on('load', callback, context);
+      this.on("load", callback, context);
     }
     return this;
   },
@@ -4937,12 +4937,12 @@ var Map = Evented.extend({
   },
 
   _onPanTransitionStep: function () {
-    this.fire('move');
+    this.fire("move");
   },
 
   _onPanTransitionEnd: function () {
-    removeClass(this._mapPane, 'leaflet-pan-anim');
-    this.fire('moveend');
+    removeClass(this._mapPane, "leaflet-pan-anim");
+    this.fire("moveend");
   },
 
   _tryAnimatedPan: function (center, options) {
@@ -4964,13 +4964,13 @@ var Map = Evented.extend({
 
   _createAnimProxy: function () {
     var proxy = (this._proxy = create$1(
-      'div',
-      'leaflet-proxy leaflet-zoom-animated',
+      "div",
+      "leaflet-proxy leaflet-zoom-animated",
     ));
     this._panes.mapPane.appendChild(proxy);
 
     this.on(
-      'zoomanim',
+      "zoomanim",
       function (e) {
         var prop = TRANSFORM,
           transform = this._proxy.style[prop];
@@ -4989,14 +4989,14 @@ var Map = Evented.extend({
       this,
     );
 
-    this.on('load moveend', this._animMoveEnd, this);
+    this.on("load moveend", this._animMoveEnd, this);
 
-    this._on('unload', this._destroyAnimProxy, this);
+    this._on("unload", this._destroyAnimProxy, this);
   },
 
   _destroyAnimProxy: function () {
     remove(this._proxy);
-    this.off('load moveend', this._animMoveEnd, this);
+    this.off("load moveend", this._animMoveEnd, this);
     delete this._proxy;
   },
 
@@ -5007,13 +5007,13 @@ var Map = Evented.extend({
   },
 
   _catchTransitionEnd: function (e) {
-    if (this._animatingZoom && e.propertyName.indexOf('transform') >= 0) {
+    if (this._animatingZoom && e.propertyName.indexOf("transform") >= 0) {
       this._onZoomTransitionEnd();
     }
   },
 
   _nothingToAnimate: function () {
-    return !this._container.getElementsByClassName('leaflet-zoom-animated')
+    return !this._container.getElementsByClassName("leaflet-zoom-animated")
       .length;
   },
 
@@ -5062,13 +5062,13 @@ var Map = Evented.extend({
       this._animateToCenter = center;
       this._animateToZoom = zoom;
 
-      addClass(this._mapPane, 'leaflet-zoom-anim');
+      addClass(this._mapPane, "leaflet-zoom-anim");
     }
 
     // @section Other Events
     // @event zoomanim: ZoomAnimEvent
     // Fired at least once per zoom animation. For continuous zoom, like pinch zooming, fired once per frame during zoom.
-    this.fire('zoomanim', {
+    this.fire("zoomanim", {
       center: center,
       zoom: zoom,
       noUpdate: noUpdate,
@@ -5084,7 +5084,7 @@ var Map = Evented.extend({
     }
 
     if (this._mapPane) {
-      removeClass(this._mapPane, 'leaflet-zoom-anim');
+      removeClass(this._mapPane, "leaflet-zoom-anim");
     }
 
     this._animatingZoom = false;
@@ -5128,7 +5128,7 @@ var Control = Class.extend({
     // @option position: String = 'topright'
     // The position of the control (one of the map corners). Possible values are `'topleft'`,
     // `'topright'`, `'bottomleft'` or `'bottomright'`
-    position: 'topright',
+    position: "topright",
   },
 
   initialize: function (options) {
@@ -5179,15 +5179,15 @@ var Control = Class.extend({
       pos = this.getPosition(),
       corner = map._controlCorners[pos];
 
-    addClass(container, 'leaflet-control');
+    addClass(container, "leaflet-control");
 
-    if (pos.indexOf('bottom') !== -1) {
+    if (pos.indexOf("bottom") !== -1) {
       corner.insertBefore(container, corner.firstChild);
     } else {
       corner.appendChild(container);
     }
 
-    this._map.on('unload', this.remove, this);
+    this._map.on("unload", this.remove, this);
 
     return this;
   },
@@ -5205,7 +5205,7 @@ var Control = Class.extend({
       this.onRemove(this._map);
     }
 
-    this._map.off('unload', this.remove, this);
+    this._map.off("unload", this.remove, this);
     this._map = null;
 
     return this;
@@ -5255,23 +5255,23 @@ Map.include({
 
   _initControlPos: function () {
     var corners = (this._controlCorners = {}),
-      l = 'leaflet-',
+      l = "leaflet-",
       container = (this._controlContainer = create$1(
-        'div',
-        l + 'control-container',
+        "div",
+        l + "control-container",
         this._container,
       ));
 
     function createCorner(vSide, hSide) {
-      var className = l + vSide + ' ' + l + hSide;
+      var className = l + vSide + " " + l + hSide;
 
-      corners[vSide + hSide] = create$1('div', className, container);
+      corners[vSide + hSide] = create$1("div", className, container);
     }
 
-    createCorner('top', 'left');
-    createCorner('top', 'right');
-    createCorner('bottom', 'left');
-    createCorner('bottom', 'right');
+    createCorner("top", "left");
+    createCorner("top", "right");
+    createCorner("bottom", "left");
+    createCorner("bottom", "right");
   },
 
   _clearControlPos: function () {
@@ -5330,7 +5330,7 @@ var Layers = Control.extend({
     // @option collapsed: Boolean = true
     // If `true`, the control will be collapsed into an icon and expanded on mouse hover or touch.
     collapsed: true,
-    position: 'topright',
+    position: "topright",
 
     // @option autoZIndex: Boolean = true
     // If `true`, the control will assign zIndexes in increasing order to all of its layers so that the order is preserved when switching them on/off.
@@ -5378,10 +5378,10 @@ var Layers = Control.extend({
     this._update();
 
     this._map = map;
-    map.on('zoomend', this._checkDisabledLayers, this);
+    map.on("zoomend", this._checkDisabledLayers, this);
 
     for (var i = 0; i < this._layers.length; i++) {
-      this._layers[i].layer.on('add remove', this._onLayerChange, this);
+      this._layers[i].layer.on("add remove", this._onLayerChange, this);
     }
 
     return this._container;
@@ -5394,10 +5394,10 @@ var Layers = Control.extend({
   },
 
   onRemove: function () {
-    this._map.off('zoomend', this._checkDisabledLayers, this);
+    this._map.off("zoomend", this._checkDisabledLayers, this);
 
     for (var i = 0; i < this._layers.length; i++) {
-      this._layers[i].layer.off('add remove', this._onLayerChange, this);
+      this._layers[i].layer.off("add remove", this._onLayerChange, this);
     }
   },
 
@@ -5418,7 +5418,7 @@ var Layers = Control.extend({
   // @method removeLayer(layer: Layer): this
   // Remove the given layer from the control.
   removeLayer: function (layer) {
-    layer.off('add remove', this._onLayerChange, this);
+    layer.off("add remove", this._onLayerChange, this);
 
     var obj = this._getLayer(stamp(layer));
     if (obj) {
@@ -5430,15 +5430,15 @@ var Layers = Control.extend({
   // @method expand(): this
   // Expand the control container if collapsed.
   expand: function () {
-    addClass(this._container, 'leaflet-control-layers-expanded');
+    addClass(this._container, "leaflet-control-layers-expanded");
     this._section.style.height = null;
     var acceptableHeight =
       this._map.getSize().y - (this._container.offsetTop + 50);
     if (acceptableHeight < this._section.clientHeight) {
-      addClass(this._section, 'leaflet-control-layers-scrollbar');
-      this._section.style.height = acceptableHeight + 'px';
+      addClass(this._section, "leaflet-control-layers-scrollbar");
+      this._section.style.height = acceptableHeight + "px";
     } else {
-      removeClass(this._section, 'leaflet-control-layers-scrollbar');
+      removeClass(this._section, "leaflet-control-layers-scrollbar");
     }
     this._checkDisabledLayers();
     return this;
@@ -5447,25 +5447,25 @@ var Layers = Control.extend({
   // @method collapse(): this
   // Collapse the control container if expanded.
   collapse: function () {
-    removeClass(this._container, 'leaflet-control-layers-expanded');
+    removeClass(this._container, "leaflet-control-layers-expanded");
     return this;
   },
 
   _initLayout: function () {
-    var className = 'leaflet-control-layers',
-      container = (this._container = create$1('div', className)),
+    var className = "leaflet-control-layers",
+      container = (this._container = create$1("div", className)),
       collapsed = this.options.collapsed;
 
     // makes this work on IE touch devices by stopping it from firing a mouseout event when the touch is released
-    container.setAttribute('aria-haspopup', true);
+    container.setAttribute("aria-haspopup", true);
 
     disableClickPropagation(container);
     disableScrollPropagation(container);
 
-    var section = (this._section = create$1('section', className + '-list'));
+    var section = (this._section = create$1("section", className + "-list"));
 
     if (collapsed) {
-      this._map.on('click', this.collapse, this);
+      this._map.on("click", this.collapse, this);
 
       if (!android) {
         on(
@@ -5480,27 +5480,27 @@ var Layers = Control.extend({
     }
 
     var link = (this._layersLink = create$1(
-      'a',
-      className + '-toggle',
+      "a",
+      className + "-toggle",
       container,
     ));
-    link.href = '#';
-    link.title = 'Layers';
+    link.href = "#";
+    link.title = "Layers";
 
     if (touch) {
-      on(link, 'click', stop);
-      on(link, 'click', this.expand, this);
+      on(link, "click", stop);
+      on(link, "click", this.expand, this);
     } else {
-      on(link, 'focus', this.expand, this);
+      on(link, "focus", this.expand, this);
     }
 
     if (!collapsed) {
       this.expand();
     }
 
-    this._baseLayersList = create$1('div', className + '-base', section);
-    this._separator = create$1('div', className + '-separator', section);
-    this._overlaysList = create$1('div', className + '-overlays', section);
+    this._baseLayersList = create$1("div", className + "-base", section);
+    this._separator = create$1("div", className + "-separator", section);
+    this._overlaysList = create$1("div", className + "-overlays", section);
 
     container.appendChild(section);
   },
@@ -5515,7 +5515,7 @@ var Layers = Control.extend({
 
   _addLayer: function (layer, name, overlay) {
     if (this._map) {
-      layer.on('add remove', this._onLayerChange, this);
+      layer.on("add remove", this._onLayerChange, this);
     }
 
     this._layers.push({
@@ -5566,11 +5566,11 @@ var Layers = Control.extend({
     // Hide base layers section if there's only one layer.
     if (this.options.hideSingleBase) {
       baseLayersPresent = baseLayersPresent && baseLayersCount > 1;
-      this._baseLayersList.style.display = baseLayersPresent ? '' : 'none';
+      this._baseLayersList.style.display = baseLayersPresent ? "" : "none";
     }
 
     this._separator.style.display =
-      overlaysPresent && baseLayersPresent ? '' : 'none';
+      overlaysPresent && baseLayersPresent ? "" : "none";
 
     return this;
   },
@@ -5592,11 +5592,11 @@ var Layers = Control.extend({
     // Fired when an overlay is deselected through the [layer control](#control-layers).
     // @namespace Control.Layers
     var type = obj.overlay
-      ? e.type === 'add'
-        ? 'overlayadd'
-        : 'overlayremove'
-      : e.type === 'add'
-        ? 'baselayerchange'
+      ? e.type === "add"
+        ? "overlayadd"
+        : "overlayremove"
+      : e.type === "add"
+        ? "baselayerchange"
         : null;
 
     if (type) {
@@ -5610,28 +5610,28 @@ var Layers = Control.extend({
       '<input type="radio" class="leaflet-control-layers-selector" name="' +
       name +
       '"' +
-      (checked ? ' checked="checked"' : '') +
-      '/>';
+      (checked ? ' checked="checked"' : "") +
+      "/>";
 
-    var radioFragment = document.createElement('div');
+    var radioFragment = document.createElement("div");
     radioFragment.innerHTML = radioHtml;
 
     return radioFragment.firstChild;
   },
 
   _addItem: function (obj) {
-    var label = document.createElement('label'),
+    var label = document.createElement("label"),
       checked = this._map.hasLayer(obj.layer),
       input;
 
     if (obj.overlay) {
-      input = document.createElement('input');
-      input.type = 'checkbox';
-      input.className = 'leaflet-control-layers-selector';
+      input = document.createElement("input");
+      input.type = "checkbox";
+      input.className = "leaflet-control-layers-selector";
       input.defaultChecked = checked;
     } else {
       input = this._createRadioElement(
-        'leaflet-base-layers_' + stamp(this),
+        "leaflet-base-layers_" + stamp(this),
         checked,
       );
     }
@@ -5639,14 +5639,14 @@ var Layers = Control.extend({
     this._layerControlInputs.push(input);
     input.layerId = stamp(obj.layer);
 
-    on(input, 'click', this._onInputClick, this);
+    on(input, "click", this._onInputClick, this);
 
-    var name = document.createElement('span');
-    name.innerHTML = ' ' + obj.name;
+    var name = document.createElement("span");
+    name.innerHTML = " " + obj.name;
 
     // Helps from preventing layer control flicker when checkboxes are disabled
     // https://github.com/Leaflet/Leaflet/issues/2771
-    var holder = document.createElement('div');
+    var holder = document.createElement("div");
 
     label.appendChild(holder);
     holder.appendChild(input);
@@ -5747,53 +5747,53 @@ var Zoom = Control.extend({
   // @section
   // @aka Control.Zoom options
   options: {
-    position: 'topleft',
+    position: "topleft",
 
     // @option zoomInText: String = '+'
     // The text set on the 'zoom in' button.
-    zoomInText: '+',
+    zoomInText: "+",
 
     // @option zoomInTitle: String = 'Zoom in'
     // The title set on the 'zoom in' button.
-    zoomInTitle: 'Zoom in',
+    zoomInTitle: "Zoom in",
 
     // @option zoomOutText: String = '&#x2212;'
     // The text set on the 'zoom out' button.
-    zoomOutText: '&#x2212;',
+    zoomOutText: "&#x2212;",
 
     // @option zoomOutTitle: String = 'Zoom out'
     // The title set on the 'zoom out' button.
-    zoomOutTitle: 'Zoom out',
+    zoomOutTitle: "Zoom out",
   },
 
   onAdd: function (map) {
-    var zoomName = 'leaflet-control-zoom',
-      container = create$1('div', zoomName + ' leaflet-bar'),
+    var zoomName = "leaflet-control-zoom",
+      container = create$1("div", zoomName + " leaflet-bar"),
       options = this.options;
 
     this._zoomInButton = this._createButton(
       options.zoomInText,
       options.zoomInTitle,
-      zoomName + '-in',
+      zoomName + "-in",
       container,
       this._zoomIn,
     );
     this._zoomOutButton = this._createButton(
       options.zoomOutText,
       options.zoomOutTitle,
-      zoomName + '-out',
+      zoomName + "-out",
       container,
       this._zoomOut,
     );
 
     this._updateDisabled();
-    map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+    map.on("zoomend zoomlevelschange", this._updateDisabled, this);
 
     return container;
   },
 
   onRemove: function (map) {
-    map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+    map.off("zoomend zoomlevelschange", this._updateDisabled, this);
   },
 
   disable: function () {
@@ -5821,28 +5821,28 @@ var Zoom = Control.extend({
   },
 
   _createButton: function (html, title, className, container, fn) {
-    var link = create$1('a', className, container);
+    var link = create$1("a", className, container);
     link.innerHTML = html;
-    link.href = '#';
+    link.href = "#";
     link.title = title;
 
     /*
      * Will force screen readers like VoiceOver to read this as "Zoom in - button"
      */
-    link.setAttribute('role', 'button');
-    link.setAttribute('aria-label', title);
+    link.setAttribute("role", "button");
+    link.setAttribute("aria-label", title);
 
     disableClickPropagation(link);
-    on(link, 'click', stop);
-    on(link, 'click', fn, this);
-    on(link, 'click', this._refocusOnMap, this);
+    on(link, "click", stop);
+    on(link, "click", fn, this);
+    on(link, "click", this._refocusOnMap, this);
 
     return link;
   },
 
   _updateDisabled: function () {
     var map = this._map,
-      className = 'leaflet-disabled';
+      className = "leaflet-disabled";
 
     removeClass(this._zoomInButton, className);
     removeClass(this._zoomOutButton, className);
@@ -5900,7 +5900,7 @@ var Scale = Control.extend({
   // @section
   // @aka Control.Scale options
   options: {
-    position: 'bottomleft',
+    position: "bottomleft",
 
     // @option maxWidth: Number = 100
     // Maximum width of the control in pixels. The width is set dynamically to show round values (e.g. 100, 200, 500).
@@ -5919,13 +5919,13 @@ var Scale = Control.extend({
   },
 
   onAdd: function (map) {
-    var className = 'leaflet-control-scale',
-      container = create$1('div', className),
+    var className = "leaflet-control-scale",
+      container = create$1("div", className),
       options = this.options;
 
-    this._addScales(options, className + '-line', container);
+    this._addScales(options, className + "-line", container);
 
-    map.on(options.updateWhenIdle ? 'moveend' : 'move', this._update, this);
+    map.on(options.updateWhenIdle ? "moveend" : "move", this._update, this);
     map.whenReady(this._update, this);
 
     return container;
@@ -5933,7 +5933,7 @@ var Scale = Control.extend({
 
   onRemove: function (map) {
     map.off(
-      this.options.updateWhenIdle ? 'moveend' : 'move',
+      this.options.updateWhenIdle ? "moveend" : "move",
       this._update,
       this,
     );
@@ -5941,10 +5941,10 @@ var Scale = Control.extend({
 
   _addScales: function (options, className, container) {
     if (options.metric) {
-      this._mScale = create$1('div', className, container);
+      this._mScale = create$1("div", className, container);
     }
     if (options.imperial) {
-      this._iScale = create$1('div', className, container);
+      this._iScale = create$1("div", className, container);
     }
   },
 
@@ -5971,7 +5971,7 @@ var Scale = Control.extend({
 
   _updateMetric: function (maxMeters) {
     var meters = this._getRoundNum(maxMeters),
-      label = meters < 1000 ? meters + ' m' : meters / 1000 + ' km';
+      label = meters < 1000 ? meters + " m" : meters / 1000 + " km";
 
     this._updateScale(this._mScale, label, meters / maxMeters);
   },
@@ -5985,20 +5985,20 @@ var Scale = Control.extend({
     if (maxFeet > 5280) {
       maxMiles = maxFeet / 5280;
       miles = this._getRoundNum(maxMiles);
-      this._updateScale(this._iScale, miles + ' mi', miles / maxMiles);
+      this._updateScale(this._iScale, miles + " mi", miles / maxMiles);
     } else {
       feet = this._getRoundNum(maxFeet);
-      this._updateScale(this._iScale, feet + ' ft', feet / maxFeet);
+      this._updateScale(this._iScale, feet + " ft", feet / maxFeet);
     }
   },
 
   _updateScale: function (scale, text, ratio) {
-    scale.style.width = Math.round(this.options.maxWidth * ratio) + 'px';
+    scale.style.width = Math.round(this.options.maxWidth * ratio) + "px";
     scale.innerHTML = text;
   },
 
   _getRoundNum: function (num) {
-    var pow10 = Math.pow(10, (Math.floor(num) + '').length - 1),
+    var pow10 = Math.pow(10, (Math.floor(num) + "").length - 1),
       d = num / pow10;
 
     d = d >= 10 ? 10 : d >= 5 ? 5 : d >= 3 ? 3 : d >= 2 ? 2 : 1;
@@ -6025,7 +6025,7 @@ var Attribution = Control.extend({
   // @section
   // @aka Control.Attribution options
   options: {
-    position: 'bottomright',
+    position: "bottomright",
 
     // @option prefix: String = 'Leaflet'
     // The HTML text shown before the attributions. Pass `false` to disable.
@@ -6041,7 +6041,7 @@ var Attribution = Control.extend({
 
   onAdd: function (map) {
     map.attributionControl = this;
-    this._container = create$1('div', 'leaflet-control-attribution');
+    this._container = create$1("div", "leaflet-control-attribution");
     disableClickPropagation(this._container);
 
     // TODO ugly, refactor
@@ -6115,10 +6115,10 @@ var Attribution = Control.extend({
       prefixAndAttribs.push(this.options.prefix);
     }
     if (attribs.length) {
-      prefixAndAttribs.push(attribs.join(', '));
+      prefixAndAttribs.push(attribs.join(", "));
     }
 
-    this._container.innerHTML = prefixAndAttribs.join(' | ');
+    this._container.innerHTML = prefixAndAttribs.join(" | ");
   },
 });
 
@@ -6231,18 +6231,18 @@ var Mixin = { Events: Events };
  * ```
  */
 
-var START = touch ? 'touchstart mousedown' : 'mousedown';
+var START = touch ? "touchstart mousedown" : "mousedown";
 var END = {
-  mousedown: 'mouseup',
-  touchstart: 'touchend',
-  pointerdown: 'touchend',
-  MSPointerDown: 'touchend',
+  mousedown: "mouseup",
+  touchstart: "touchend",
+  pointerdown: "touchend",
+  MSPointerDown: "touchend",
 };
 var MOVE = {
-  mousedown: 'mousemove',
-  touchstart: 'touchmove',
-  pointerdown: 'touchmove',
-  MSPointerDown: 'touchmove',
+  mousedown: "mousemove",
+  touchstart: "touchmove",
+  pointerdown: "touchmove",
+  MSPointerDown: "touchmove",
 };
 
 var Draggable = Evented.extend({
@@ -6308,7 +6308,7 @@ var Draggable = Evented.extend({
 
     this._moved = false;
 
-    if (hasClass(this._element, 'leaflet-zoom-anim')) {
+    if (hasClass(this._element, "leaflet-zoom-anim")) {
       return;
     }
 
@@ -6334,7 +6334,7 @@ var Draggable = Evented.extend({
 
     // @event down: Event
     // Fired when a drag is about to start.
-    this.fire('down');
+    this.fire("down");
 
     var first = e.touches ? e.touches[0] : e,
       sizedParent = getSizedParentNode(this._element);
@@ -6386,12 +6386,12 @@ var Draggable = Evented.extend({
     if (!this._moved) {
       // @event dragstart: Event
       // Fired when a drag starts
-      this.fire('dragstart');
+      this.fire("dragstart");
 
       this._moved = true;
       this._startPos = getPosition(this._element).subtract(offset);
 
-      addClass(document.body, 'leaflet-dragging');
+      addClass(document.body, "leaflet-dragging");
 
       this._lastTarget = e.target || e.srcElement;
       // IE and Edge do not give the <use> element, so fetch it
@@ -6402,7 +6402,7 @@ var Draggable = Evented.extend({
       ) {
         this._lastTarget = this._lastTarget.correspondingUseElement;
       }
-      addClass(this._lastTarget, 'leaflet-drag-target');
+      addClass(this._lastTarget, "leaflet-drag-target");
     }
 
     this._newPos = this._startPos.add(offset);
@@ -6419,12 +6419,12 @@ var Draggable = Evented.extend({
     // @event predrag: Event
     // Fired continuously during dragging *before* each corresponding
     // update of the element's position.
-    this.fire('predrag', e);
+    this.fire("predrag", e);
     setPosition(this._element, this._newPos);
 
     // @event drag: Event
     // Fired continuously during dragging.
-    this.fire('drag', e);
+    this.fire("drag", e);
   },
 
   _onUp: function (e) {
@@ -6440,10 +6440,10 @@ var Draggable = Evented.extend({
   },
 
   finishDrag: function () {
-    removeClass(document.body, 'leaflet-dragging');
+    removeClass(document.body, "leaflet-dragging");
 
     if (this._lastTarget) {
-      removeClass(this._lastTarget, 'leaflet-drag-target');
+      removeClass(this._lastTarget, "leaflet-drag-target");
       this._lastTarget = null;
     }
 
@@ -6461,7 +6461,7 @@ var Draggable = Evented.extend({
 
       // @event dragend: DragEndEvent
       // Fired when the drag ends.
-      this.fire('dragend', {
+      this.fire("dragend", {
         distance: this._newPos.distanceTo(this._startPos),
       });
     }
@@ -6520,7 +6520,7 @@ function closestPointOnSegment(p, p1, p2) {
 function _simplifyDP(points, sqTolerance) {
   var len = points.length,
     ArrayConstructor =
-      typeof Uint8Array !== undefined + '' ? Uint8Array : Array,
+      typeof Uint8Array !== undefined + "" ? Uint8Array : Array,
     markers = new ArrayConstructor(len);
 
   markers[0] = markers[len - 1] = 1;
@@ -6716,13 +6716,13 @@ function _sqClosestPointOnSegment(p, p1, p2, sqDist) {
 function isFlat(latlngs) {
   return (
     !isArray(latlngs[0]) ||
-    (typeof latlngs[0][0] !== 'object' && typeof latlngs[0][0] !== 'undefined')
+    (typeof latlngs[0][0] !== "object" && typeof latlngs[0][0] !== "undefined")
   );
 }
 
 function _flat(latlngs) {
   console.warn(
-    'Deprecated use of _flat, please use L.LineUtil.isFlat instead.',
+    "Deprecated use of _flat, please use L.LineUtil.isFlat instead.",
   );
   return isFlat(latlngs);
 }
@@ -6913,7 +6913,7 @@ var index = (Object.freeze || Object)({
  * Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.
  */
 var EPSG3395 = extend({}, Earth, {
-  code: 'EPSG:3395',
+  code: "EPSG:3395",
   projection: Mercator,
 
   transformation: (function () {
@@ -6936,7 +6936,7 @@ var EPSG3395 = extend({}, Earth, {
  */
 
 var EPSG4326 = extend({}, Earth, {
-  code: 'EPSG:4326',
+  code: "EPSG:4326",
   projection: LonLat,
   transformation: toTransformation(1 / 180, 1, -1 / 180, 0.5),
 });
@@ -7009,7 +7009,7 @@ var Layer = Evented.extend({
   options: {
     // @option pane: String = 'overlayPane'
     // By default the layer will be added to the map's [overlay pane](#map-overlaypane). Overriding this option will cause the layer to be placed on another pane by default.
-    pane: 'overlayPane',
+    pane: "overlayPane",
 
     // @option attribution: String = null
     // String to be shown in the attribution control, e.g. "© OpenStreetMap contributors". It describes the layer data and is often a legal obligation towards copyright holders and tile providers.
@@ -7083,7 +7083,7 @@ var Layer = Evented.extend({
       var events = this.getEvents();
       map.on(events, this);
       this.once(
-        'remove',
+        "remove",
         function () {
           map.off(events, this);
         },
@@ -7097,8 +7097,8 @@ var Layer = Evented.extend({
       map.attributionControl.addAttribution(this.getAttribution());
     }
 
-    this.fire('add');
-    map.fire('layeradd', { layer: this });
+    this.fire("add");
+    map.fire("layeradd", { layer: this });
   },
 });
 
@@ -7139,7 +7139,7 @@ Map.include({
   // Adds the given layer to the map
   addLayer: function (layer) {
     if (!layer._layerAdd) {
-      throw new Error('The provided object is not a Layer.');
+      throw new Error("The provided object is not a Layer.");
     }
 
     var id = stamp(layer);
@@ -7179,8 +7179,8 @@ Map.include({
     delete this._layers[id];
 
     if (this._loaded) {
-      this.fire('layerremove', { layer: layer });
-      layer.fire('remove');
+      this.fire("layerremove", { layer: layer });
+      layer.fire("remove");
     }
 
     layer._map = layer._mapToAdd = null;
@@ -7259,7 +7259,7 @@ Map.include({
     // Fired when the number of zoomlevels on the map is changed due
     // to adding or removing a layer.
     if (oldZoomSpan !== this._getZoomSpan()) {
-      this.fire('zoomlevelschange');
+      this.fire("zoomlevelschange");
     }
 
     if (
@@ -7420,7 +7420,7 @@ var LayerGroup = Layer.extend({
   // @method setZIndex(zIndex: Number): this
   // Calls `setZIndex` on every layer contained in this group, passing the z-index.
   setZIndex: function (zIndex) {
-    return this.invoke('setZIndex', zIndex);
+    return this.invoke("setZIndex", zIndex);
   },
 
   // @method getLayerId(layer: Layer): Number
@@ -7470,7 +7470,7 @@ var FeatureGroup = LayerGroup.extend({
 
     // @event layeradd: LayerEvent
     // Fired when a layer is added to this `FeatureGroup`
-    return this.fire('layeradd', { layer: layer });
+    return this.fire("layeradd", { layer: layer });
   },
 
   removeLayer: function (layer) {
@@ -7487,25 +7487,25 @@ var FeatureGroup = LayerGroup.extend({
 
     // @event layerremove: LayerEvent
     // Fired when a layer is removed from this `FeatureGroup`
-    return this.fire('layerremove', { layer: layer });
+    return this.fire("layerremove", { layer: layer });
   },
 
   // @method setStyle(style: Path options): this
   // Sets the given path options to each layer of the group that has a `setStyle` method.
   setStyle: function (style) {
-    return this.invoke('setStyle', style);
+    return this.invoke("setStyle", style);
   },
 
   // @method bringToFront(): this
   // Brings the layer group to the top of all other layers
   bringToFront: function () {
-    return this.invoke('bringToFront');
+    return this.invoke("bringToFront");
   },
 
   // @method bringToBack(): this
   // Brings the layer group to the back of all other layers
   bringToBack: function () {
-    return this.invoke('bringToBack');
+    return this.invoke("bringToBack");
   },
 
   // @method getBounds(): LatLngBounds
@@ -7609,28 +7609,28 @@ var Icon = Class.extend({
   // Called internally when the icon has to be shown, returns a `<img>` HTML element
   // styled according to the options.
   createIcon: function (oldIcon) {
-    return this._createIcon('icon', oldIcon);
+    return this._createIcon("icon", oldIcon);
   },
 
   // @method createShadow(oldIcon?: HTMLElement): HTMLElement
   // As `createIcon`, but for the shadow beneath it.
   createShadow: function (oldIcon) {
-    return this._createIcon('shadow', oldIcon);
+    return this._createIcon("shadow", oldIcon);
   },
 
   _createIcon: function (name, oldIcon) {
     var src = this._getIconUrl(name);
 
     if (!src) {
-      if (name === 'icon') {
-        throw new Error('iconUrl not set in Icon options (see the docs).');
+      if (name === "icon") {
+        throw new Error("iconUrl not set in Icon options (see the docs).");
       }
       return null;
     }
 
     var img = this._createImg(
       src,
-      oldIcon && oldIcon.tagName === 'IMG' ? oldIcon : null,
+      oldIcon && oldIcon.tagName === "IMG" ? oldIcon : null,
     );
     this._setIconStyles(img, name);
 
@@ -7639,41 +7639,41 @@ var Icon = Class.extend({
 
   _setIconStyles: function (img, name) {
     var options = this.options;
-    var sizeOption = options[name + 'Size'];
+    var sizeOption = options[name + "Size"];
 
-    if (typeof sizeOption === 'number') {
+    if (typeof sizeOption === "number") {
       sizeOption = [sizeOption, sizeOption];
     }
 
     var size = toPoint(sizeOption),
       anchor = toPoint(
-        (name === 'shadow' && options.shadowAnchor) ||
+        (name === "shadow" && options.shadowAnchor) ||
           options.iconAnchor ||
           (size && size.divideBy(2, true)),
       );
 
-    img.className = 'leaflet-marker-' + name + ' ' + (options.className || '');
+    img.className = "leaflet-marker-" + name + " " + (options.className || "");
 
     if (anchor) {
-      img.style.marginLeft = -anchor.x + 'px';
-      img.style.marginTop = -anchor.y + 'px';
+      img.style.marginLeft = -anchor.x + "px";
+      img.style.marginTop = -anchor.y + "px";
     }
 
     if (size) {
-      img.style.width = size.x + 'px';
-      img.style.height = size.y + 'px';
+      img.style.width = size.x + "px";
+      img.style.height = size.y + "px";
     }
   },
 
   _createImg: function (src, el) {
-    el = el || document.createElement('img');
+    el = el || document.createElement("img");
     el.src = src;
     return el;
   },
 
   _getIconUrl: function (name) {
     return (
-      (retina && this.options[name + 'RetinaUrl']) || this.options[name + 'Url']
+      (retina && this.options[name + "RetinaUrl"]) || this.options[name + "Url"]
     );
   },
 });
@@ -7702,9 +7702,9 @@ function icon(options) {
 
 var IconDefault = Icon.extend({
   options: {
-    iconUrl: 'marker-icon.png',
-    iconRetinaUrl: 'marker-icon-2x.png',
-    shadowUrl: 'marker-shadow.png',
+    iconUrl: "marker-icon.png",
+    iconRetinaUrl: "marker-icon-2x.png",
+    shadowUrl: "marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -7729,18 +7729,18 @@ var IconDefault = Icon.extend({
   },
 
   _detectIconPath: function () {
-    var el = create$1('div', 'leaflet-default-icon-path', document.body);
+    var el = create$1("div", "leaflet-default-icon-path", document.body);
     var path =
-      getStyle(el, 'background-image') || getStyle(el, 'backgroundImage'); // IE8
+      getStyle(el, "background-image") || getStyle(el, "backgroundImage"); // IE8
 
     document.body.removeChild(el);
 
-    if (path === null || path.indexOf('url') !== 0) {
-      path = '';
+    if (path === null || path.indexOf("url") !== 0) {
+      path = "";
     } else {
       path = path
-        .replace(/^url\(["']?/, '')
-        .replace(/marker-icon\.png["']?\)$/, '');
+        .replace(/^url\(["']?/, "")
+        .replace(/marker-icon\.png["']?\)$/, "");
     }
 
     return path;
@@ -7788,7 +7788,7 @@ var MarkerDrag = Handler.extend({
       )
       .enable();
 
-    addClass(icon, 'leaflet-marker-draggable');
+    addClass(icon, "leaflet-marker-draggable");
   },
 
   removeHooks: function () {
@@ -7805,7 +7805,7 @@ var MarkerDrag = Handler.extend({
       .disable();
 
     if (this._marker._icon) {
-      removeClass(this._marker._icon, 'leaflet-marker-draggable');
+      removeClass(this._marker._icon, "leaflet-marker-draggable");
     }
   },
 
@@ -7862,7 +7862,7 @@ var MarkerDrag = Handler.extend({
     // Fired when the marker starts moving (because of dragging).
 
     this._oldLatLng = this._marker.getLatLng();
-    this._marker.closePopup().fire('movestart').fire('dragstart');
+    this._marker.closePopup().fire("movestart").fire("dragstart");
   },
 
   _onPreDrag: function (e) {
@@ -7889,7 +7889,7 @@ var MarkerDrag = Handler.extend({
 
     // @event drag: Event
     // Fired repeatedly while the user drags the marker.
-    marker.fire('move', e).fire('drag', e);
+    marker.fire("move", e).fire("drag", e);
   },
 
   _onDragEnd: function (e) {
@@ -7901,7 +7901,7 @@ var MarkerDrag = Handler.extend({
     // @event moveend: Event
     // Fired when the marker stops moving (because of dragging).
     delete this._oldLatLng;
-    this._marker.fire('moveend').fire('dragend', e);
+    this._marker.fire("moveend").fire("dragend", e);
   },
 });
 
@@ -7937,11 +7937,11 @@ var Marker = Layer.extend({
 
     // @option title: String = ''
     // Text for the browser tooltip that appear on marker hover (no tooltip by default).
-    title: '',
+    title: "",
 
     // @option alt: String = ''
     // Text for the `alt` attribute of the icon image (useful for accessibility).
-    alt: '',
+    alt: "",
 
     // @option zIndexOffset: Number = 0
     // By default, marker images zIndex is set automatically based on its latitude. Use this option if you want to put the marker on top of all others (or below), specifying a high value like `1000` (or high negative value, respectively).
@@ -7961,11 +7961,11 @@ var Marker = Layer.extend({
 
     // @option pane: String = 'markerPane'
     // `Map pane` where the markers icon will be added.
-    pane: 'markerPane',
+    pane: "markerPane",
 
     // @option pane: String = 'shadowPane'
     // `Map pane` where the markers shadow will be added.
-    shadowPane: 'shadowPane',
+    shadowPane: "shadowPane",
 
     // @option bubblingMouseEvents: Boolean = false
     // When `true`, a mouse event on this marker will trigger the same event on the map
@@ -8005,7 +8005,7 @@ var Marker = Layer.extend({
     this._zoomAnimated = this._zoomAnimated && map.options.markerZoomAnimation;
 
     if (this._zoomAnimated) {
-      map.on('zoomanim', this._animateZoom, this);
+      map.on("zoomanim", this._animateZoom, this);
     }
 
     this._initIcon();
@@ -8020,7 +8020,7 @@ var Marker = Layer.extend({
     delete this.dragging;
 
     if (this._zoomAnimated) {
-      map.off('zoomanim', this._animateZoom, this);
+      map.off("zoomanim", this._animateZoom, this);
     }
 
     this._removeIcon();
@@ -8049,7 +8049,7 @@ var Marker = Layer.extend({
 
     // @event move: Event
     // Fired when the marker is moved via [`setLatLng`](#marker-setlatlng) or by [dragging](#marker-dragging). Old and new coordinates are included in event arguments as `oldLatLng`, `latlng`.
-    return this.fire('move', { oldLatLng: oldLatLng, latlng: this._latlng });
+    return this.fire("move", { oldLatLng: oldLatLng, latlng: this._latlng });
   },
 
   // @method setZIndexOffset(offset: Number): this
@@ -8097,7 +8097,7 @@ var Marker = Layer.extend({
 
   _initIcon: function () {
     var options = this.options,
-      classToAdd = 'leaflet-zoom-' + (this._zoomAnimated ? 'animated' : 'hide');
+      classToAdd = "leaflet-zoom-" + (this._zoomAnimated ? "animated" : "hide");
 
     var icon = options.icon.createIcon(this._icon),
       addIcon = false;
@@ -8113,15 +8113,15 @@ var Marker = Layer.extend({
         icon.title = options.title;
       }
 
-      if (icon.tagName === 'IMG') {
-        icon.alt = options.alt || '';
+      if (icon.tagName === "IMG") {
+        icon.alt = options.alt || "";
       }
     }
 
     addClass(icon, classToAdd);
 
     if (options.keyboard) {
-      icon.tabIndex = '0';
+      icon.tabIndex = "0";
     }
 
     this._icon = icon;
@@ -8143,7 +8143,7 @@ var Marker = Layer.extend({
 
     if (newShadow) {
       addClass(newShadow, classToAdd);
-      newShadow.alt = '';
+      newShadow.alt = "";
     }
     this._shadow = newShadow;
 
@@ -8214,7 +8214,7 @@ var Marker = Layer.extend({
       return;
     }
 
-    addClass(this._icon, 'leaflet-interactive');
+    addClass(this._icon, "leaflet-interactive");
 
     this.addInteractiveTarget(this._icon);
 
@@ -8300,7 +8300,7 @@ var Path = Layer.extend({
 
     // @option color: String = '#3388ff'
     // Stroke color
-    color: '#3388ff',
+    color: "#3388ff",
 
     // @option weight: Number = 3
     // Stroke width in pixels
@@ -8312,11 +8312,11 @@ var Path = Layer.extend({
 
     // @option lineCap: String= 'round'
     // A string that defines [shape to be used at the end](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-linecap) of the stroke.
-    lineCap: 'round',
+    lineCap: "round",
 
     // @option lineJoin: String = 'round'
     // A string that defines [shape to be used at the corners](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-linejoin) of the stroke.
-    lineJoin: 'round',
+    lineJoin: "round",
 
     // @option dashArray: String = null
     // A string that defines the stroke [dash pattern](https://developer.mozilla.org/docs/Web/SVG/Attribute/stroke-dasharray). Doesn't work on `Canvas`-powered layers in [some old browsers](https://developer.mozilla.org/docs/Web/API/CanvasRenderingContext2D/setLineDash#Browser_compatibility).
@@ -8340,7 +8340,7 @@ var Path = Layer.extend({
 
     // @option fillRule: String = 'evenodd'
     // A string that defines [how the inside of a shape](https://developer.mozilla.org/docs/Web/SVG/Attribute/fill-rule) is determined.
-    fillRule: 'evenodd',
+    fillRule: "evenodd",
 
     // className: '',
 
@@ -8384,7 +8384,7 @@ var Path = Layer.extend({
     setOptions(this, style);
     if (this._renderer) {
       this._renderer._updateStyle(this);
-      if (this.options.stroke && style && style.hasOwnProperty('weight')) {
+      if (this.options.stroke && style && style.hasOwnProperty("weight")) {
         this._updateBounds();
       }
     }
@@ -8462,7 +8462,7 @@ var CircleMarker = Path.extend({
 
     // @event move: Event
     // Fired when the marker is moved via [`setLatLng`](#circlemarker-setlatlng). Old and new coordinates are included in event arguments as `oldLatLng`, `latlng`.
-    return this.fire('move', { oldLatLng: oldLatLng, latlng: this._latlng });
+    return this.fire("move", { oldLatLng: oldLatLng, latlng: this._latlng });
   },
 
   // @method getLatLng(): LatLng
@@ -8548,7 +8548,7 @@ function circleMarker(latlng, options) {
 
 var Circle = CircleMarker.extend({
   initialize: function (latlng, options, legacyOptions) {
-    if (typeof options === 'number') {
+    if (typeof options === "number") {
       // Backwards compatibility with 0.7.x factory (latlng, radius, options?)
       options = extend({}, legacyOptions, { radius: options });
     }
@@ -8556,7 +8556,7 @@ var Circle = CircleMarker.extend({
     this._latlng = toLatLng(latlng);
 
     if (isNaN(this.options.radius)) {
-      throw new Error('Circle radius cannot be NaN');
+      throw new Error("Circle radius cannot be NaN");
     }
 
     // @section
@@ -8752,7 +8752,7 @@ var Polyline = Path.extend({
   getCenter: function () {
     // throws error when not yet added to map as this center calculation requires projected coordinates
     if (!this._map) {
-      throw new Error('Must add layer to map before using getCenter()');
+      throw new Error("Must add layer to map before using getCenter()");
     }
 
     var i,
@@ -9052,7 +9052,7 @@ var Polygon = Polyline.extend({
   getCenter: function () {
     // throws error when not yet added to map as this center calculation requires projected coordinates
     if (!this._map) {
-      throw new Error('Must add layer to map before using getCenter()');
+      throw new Error("Must add layer to map before using getCenter()");
     }
 
     var i,
@@ -9346,7 +9346,7 @@ var GeoJSON = FeatureGroup.extend({
 
   _setLayerStyle: function (layer, style) {
     if (layer.setStyle) {
-      if (typeof style === 'function') {
+      if (typeof style === "function") {
         style = style(layer.feature);
       }
       layer.setStyle(style);
@@ -9362,7 +9362,7 @@ var GeoJSON = FeatureGroup.extend({
 // [`pointToLayer`](#geojson-pointtolayer) and/or [`coordsToLatLng`](#geojson-coordstolatlng)
 // functions if provided as options.
 function geometryToLayer(geojson, options) {
-  var geometry = geojson.type === 'Feature' ? geojson.geometry : geojson,
+  var geometry = geojson.type === "Feature" ? geojson.geometry : geojson,
     coords = geometry ? geometry.coordinates : null,
     layers = [],
     pointToLayer = options && options.pointToLayer,
@@ -9377,41 +9377,41 @@ function geometryToLayer(geojson, options) {
   }
 
   switch (geometry.type) {
-    case 'Point':
+    case "Point":
       latlng = _coordsToLatLng(coords);
       return _pointToLayer(pointToLayer, geojson, latlng, options);
 
-    case 'MultiPoint':
+    case "MultiPoint":
       for (i = 0, len = coords.length; i < len; i++) {
         latlng = _coordsToLatLng(coords[i]);
         layers.push(_pointToLayer(pointToLayer, geojson, latlng, options));
       }
       return new FeatureGroup(layers);
 
-    case 'LineString':
-    case 'MultiLineString':
+    case "LineString":
+    case "MultiLineString":
       latlngs = coordsToLatLngs(
         coords,
-        geometry.type === 'LineString' ? 0 : 1,
+        geometry.type === "LineString" ? 0 : 1,
         _coordsToLatLng,
       );
       return new Polyline(latlngs, options);
 
-    case 'Polygon':
-    case 'MultiPolygon':
+    case "Polygon":
+    case "MultiPolygon":
       latlngs = coordsToLatLngs(
         coords,
-        geometry.type === 'Polygon' ? 1 : 2,
+        geometry.type === "Polygon" ? 1 : 2,
         _coordsToLatLng,
       );
       return new Polygon(latlngs, options);
 
-    case 'GeometryCollection':
+    case "GeometryCollection":
       for (i = 0, len = geometry.geometries.length; i < len; i++) {
         var layer = geometryToLayer(
           {
             geometry: geometry.geometries[i],
-            type: 'Feature',
+            type: "Feature",
             properties: geojson.properties,
           },
           options,
@@ -9424,7 +9424,7 @@ function geometryToLayer(geojson, options) {
       return new FeatureGroup(layers);
 
     default:
-      throw new Error('Invalid GeoJSON object.');
+      throw new Error("Invalid GeoJSON object.");
   }
 }
 
@@ -9462,7 +9462,7 @@ function coordsToLatLngs(coords, levelsDeep, _coordsToLatLng) {
 // @function latLngToCoords(latlng: LatLng, precision?: Number): Array
 // Reverse of [`coordsToLatLng`](#geojson-coordstolatlng)
 function latLngToCoords(latlng, precision) {
-  precision = typeof precision === 'number' ? precision : 6;
+  precision = typeof precision === "number" ? precision : 6;
   return latlng.alt !== undefined
     ? [
         formatNum(latlng.lng, precision),
@@ -9502,12 +9502,12 @@ function getFeature(layer, newGeometry) {
 // @function asFeature(geojson: Object): Object
 // Normalize GeoJSON geometries/features into GeoJSON features.
 function asFeature(geojson) {
-  if (geojson.type === 'Feature' || geojson.type === 'FeatureCollection') {
+  if (geojson.type === "Feature" || geojson.type === "FeatureCollection") {
     return geojson;
   }
 
   return {
-    type: 'Feature',
+    type: "Feature",
     properties: {},
     geometry: geojson,
   };
@@ -9516,7 +9516,7 @@ function asFeature(geojson) {
 var PointToGeoJSON = {
   toGeoJSON: function (precision) {
     return getFeature(this, {
-      type: 'Point',
+      type: "Point",
       coordinates: latLngToCoords(this.getLatLng(), precision),
     });
   },
@@ -9555,7 +9555,7 @@ Polyline.include({
     );
 
     return getFeature(this, {
-      type: (multi ? 'Multi' : '') + 'LineString',
+      type: (multi ? "Multi" : "") + "LineString",
       coordinates: coords,
     });
   },
@@ -9583,7 +9583,7 @@ Polygon.include({
     }
 
     return getFeature(this, {
-      type: (multi ? 'Multi' : '') + 'Polygon',
+      type: (multi ? "Multi" : "") + "Polygon",
       coordinates: coords,
     });
   },
@@ -9599,7 +9599,7 @@ LayerGroup.include({
     });
 
     return getFeature(this, {
-      type: 'MultiPoint',
+      type: "MultiPoint",
       coordinates: coords,
     });
   },
@@ -9612,11 +9612,11 @@ LayerGroup.include({
     var type =
       this.feature && this.feature.geometry && this.feature.geometry.type;
 
-    if (type === 'MultiPoint') {
+    if (type === "MultiPoint") {
       return this.toMultiPoint(precision);
     }
 
-    var isGeometryCollection = type === 'GeometryCollection',
+    var isGeometryCollection = type === "GeometryCollection",
       jsons = [];
 
     this.eachLayer(function (layer) {
@@ -9627,7 +9627,7 @@ LayerGroup.include({
         } else {
           var feature = asFeature(json);
           // Squash nested feature collections
-          if (feature.type === 'FeatureCollection') {
+          if (feature.type === "FeatureCollection") {
             jsons.push.apply(jsons, feature.features);
           } else {
             jsons.push(feature);
@@ -9639,12 +9639,12 @@ LayerGroup.include({
     if (isGeometryCollection) {
       return getFeature(this, {
         geometries: jsons,
-        type: 'GeometryCollection',
+        type: "GeometryCollection",
       });
     }
 
     return {
-      type: 'FeatureCollection',
+      type: "FeatureCollection",
       features: jsons,
     };
   },
@@ -9688,7 +9688,7 @@ var ImageOverlay = Layer.extend({
 
     // @option alt: String = ''
     // Text for the `alt` attribute of the image (useful for accessibility).
-    alt: '',
+    alt: "",
 
     // @option interactive: Boolean = false
     // If `true`, the image overlay will emit [mouse events](#interactive-layer) when clicked or hovered.
@@ -9702,7 +9702,7 @@ var ImageOverlay = Layer.extend({
 
     // @option errorOverlayUrl: String = ''
     // URL to the overlay image to show in place of the overlay that failed to load.
-    errorOverlayUrl: '',
+    errorOverlayUrl: "",
 
     // @option zIndex: Number = 1
     // The explicit [zIndex](https://developer.mozilla.org/docs/Web/CSS/CSS_Positioning/Understanding_z_index) of the overlay layer.
@@ -9710,7 +9710,7 @@ var ImageOverlay = Layer.extend({
 
     // @option className: String = ''
     // A custom class name to assign to the image. Empty by default.
-    className: '',
+    className: "",
   },
 
   initialize: function (url, bounds, options) {
@@ -9731,7 +9731,7 @@ var ImageOverlay = Layer.extend({
     }
 
     if (this.options.interactive) {
-      addClass(this._image, 'leaflet-interactive');
+      addClass(this._image, "leaflet-interactive");
       this.addInteractiveTarget(this._image);
     }
 
@@ -9839,12 +9839,12 @@ var ImageOverlay = Layer.extend({
   },
 
   _initImage: function () {
-    var wasElementSupplied = this._url.tagName === 'IMG';
-    var img = (this._image = wasElementSupplied ? this._url : create$1('img'));
+    var wasElementSupplied = this._url.tagName === "IMG";
+    var img = (this._image = wasElementSupplied ? this._url : create$1("img"));
 
-    addClass(img, 'leaflet-image-layer');
+    addClass(img, "leaflet-image-layer");
     if (this._zoomAnimated) {
-      addClass(img, 'leaflet-zoom-animated');
+      addClass(img, "leaflet-zoom-animated");
     }
     if (this.options.className) {
       addClass(img, this.options.className);
@@ -9855,12 +9855,12 @@ var ImageOverlay = Layer.extend({
 
     // @event load: Event
     // Fired when the ImageOverlay layer has loaded its image
-    img.onload = bind(this.fire, this, 'load');
-    img.onerror = bind(this._overlayOnError, this, 'error');
+    img.onload = bind(this.fire, this, "load");
+    img.onerror = bind(this._overlayOnError, this, "error");
 
-    if (this.options.crossOrigin || this.options.crossOrigin === '') {
+    if (this.options.crossOrigin || this.options.crossOrigin === "") {
       img.crossOrigin =
-        this.options.crossOrigin === true ? '' : this.options.crossOrigin;
+        this.options.crossOrigin === true ? "" : this.options.crossOrigin;
     }
 
     if (this.options.zIndex) {
@@ -9897,8 +9897,8 @@ var ImageOverlay = Layer.extend({
 
     setPosition(image, bounds.min);
 
-    image.style.width = size.x + 'px';
-    image.style.height = size.y + 'px';
+    image.style.width = size.x + "px";
+    image.style.height = size.y + "px";
   },
 
   _updateOpacity: function () {
@@ -9918,7 +9918,7 @@ var ImageOverlay = Layer.extend({
   _overlayOnError: function () {
     // @event error: Event
     // Fired when the ImageOverlay layer fails to load its image
-    this.fire('error');
+    this.fire("error");
 
     var errorUrl = this.options.errorOverlayUrl;
     if (errorUrl && this._url !== errorUrl) {
@@ -9973,14 +9973,14 @@ var VideoOverlay = ImageOverlay.extend({
   },
 
   _initImage: function () {
-    var wasElementSupplied = this._url.tagName === 'VIDEO';
+    var wasElementSupplied = this._url.tagName === "VIDEO";
     var vid = (this._image = wasElementSupplied
       ? this._url
-      : create$1('video'));
+      : create$1("video"));
 
-    addClass(vid, 'leaflet-image-layer');
+    addClass(vid, "leaflet-image-layer");
     if (this._zoomAnimated) {
-      addClass(vid, 'leaflet-zoom-animated');
+      addClass(vid, "leaflet-zoom-animated");
     }
     if (this.options.className) {
       addClass(vid, this.options.className);
@@ -9991,10 +9991,10 @@ var VideoOverlay = ImageOverlay.extend({
 
     // @event load: Event
     // Fired when the video has finished loading the first frame
-    vid.onloadeddata = bind(this.fire, this, 'load');
+    vid.onloadeddata = bind(this.fire, this, "load");
 
     if (wasElementSupplied) {
-      var sourceElements = vid.getElementsByTagName('source');
+      var sourceElements = vid.getElementsByTagName("source");
       var sources = [];
       for (var j = 0; j < sourceElements.length; j++) {
         sources.push(sourceElements[j].src);
@@ -10010,14 +10010,14 @@ var VideoOverlay = ImageOverlay.extend({
 
     if (
       !this.options.keepAspectRatio &&
-      vid.style.hasOwnProperty('objectFit')
+      vid.style.hasOwnProperty("objectFit")
     ) {
-      vid.style['objectFit'] = 'fill';
+      vid.style["objectFit"] = "fill";
     }
     vid.autoplay = !!this.options.autoplay;
     vid.loop = !!this.options.loop;
     for (var i = 0; i < this._url.length; i++) {
-      var source = create$1('source');
+      var source = create$1("source");
       source.src = this._url[i];
       vid.appendChild(source);
     }
@@ -10061,9 +10061,9 @@ var SVGOverlay = ImageOverlay.extend({
   _initImage: function () {
     var el = (this._image = this._url);
 
-    addClass(el, 'leaflet-image-layer');
+    addClass(el, "leaflet-image-layer");
     if (this._zoomAnimated) {
-      addClass(el, 'leaflet-zoom-animated');
+      addClass(el, "leaflet-zoom-animated");
     }
     if (this.options.className) {
       addClass(el, this.options.className);
@@ -10105,11 +10105,11 @@ var DivOverlay = Layer.extend({
 
     // @option className: String = ''
     // A custom CSS class name to assign to the popup.
-    className: '',
+    className: "",
 
     // @option pane: String = 'popupPane'
     // `Map pane` where the popup will be added.
-    pane: 'popupPane',
+    pane: "popupPane",
   },
 
   initialize: function (options, source) {
@@ -10197,13 +10197,13 @@ var DivOverlay = Layer.extend({
       return;
     }
 
-    this._container.style.visibility = 'hidden';
+    this._container.style.visibility = "hidden";
 
     this._updateContent();
     this._updateLayout();
     this._updatePosition();
 
-    this._container.style.visibility = '';
+    this._container.style.visibility = "";
 
     this._adjustPan();
   },
@@ -10263,7 +10263,7 @@ var DivOverlay = Layer.extend({
       } else if (layer.getLatLng) {
         latlng = layer.getLatLng();
       } else {
-        throw new Error('Unable to get source layer LatLng.');
+        throw new Error("Unable to get source layer LatLng.");
       }
     }
 
@@ -10283,11 +10283,11 @@ var DivOverlay = Layer.extend({
 
     var node = this._contentNode;
     var content =
-      typeof this._content === 'function'
+      typeof this._content === "function"
         ? this._content(this._source || this)
         : this._content;
 
-    if (typeof content === 'string') {
+    if (typeof content === "string") {
       node.innerHTML = content;
     } else {
       while (node.hasChildNodes()) {
@@ -10295,7 +10295,7 @@ var DivOverlay = Layer.extend({
       }
       node.appendChild(content);
     }
-    this.fire('contentupdate');
+    this.fire("contentupdate");
   },
 
   _updatePosition: function () {
@@ -10318,8 +10318,8 @@ var DivOverlay = Layer.extend({
         -Math.round(this._containerWidth / 2) + offset.x);
 
     // bottom position the popup in case the height of the popup changes (images loading etc)
-    this._container.style.bottom = bottom + 'px';
-    this._container.style.left = left + 'px';
+    this._container.style.bottom = bottom + "px";
+    this._container.style.left = left + "px";
   },
 
   _getAnchor: function () {
@@ -10415,7 +10415,7 @@ var Popup = DivOverlay.extend({
 
     // @option className: String = ''
     // A custom CSS class name to assign to the popup.
-    className: '',
+    className: "",
   },
 
   // @namespace Popup
@@ -10433,18 +10433,18 @@ var Popup = DivOverlay.extend({
     // @section Popup events
     // @event popupopen: PopupEvent
     // Fired when a popup is opened in the map
-    map.fire('popupopen', { popup: this });
+    map.fire("popupopen", { popup: this });
 
     if (this._source) {
       // @namespace Layer
       // @section Popup events
       // @event popupopen: PopupEvent
       // Fired when a popup bound to this layer is opened
-      this._source.fire('popupopen', { popup: this }, true);
+      this._source.fire("popupopen", { popup: this }, true);
       // For non-path layers, we toggle the popup when clicking
       // again the layer, so prevent the map to reopen it.
       if (!(this._source instanceof Path)) {
-        this._source.on('preclick', stopPropagation);
+        this._source.on("preclick", stopPropagation);
       }
     }
   },
@@ -10456,16 +10456,16 @@ var Popup = DivOverlay.extend({
     // @section Popup events
     // @event popupclose: PopupEvent
     // Fired when a popup in the map is closed
-    map.fire('popupclose', { popup: this });
+    map.fire("popupclose", { popup: this });
 
     if (this._source) {
       // @namespace Layer
       // @section Popup events
       // @event popupclose: PopupEvent
       // Fired when a popup bound to this layer is closed
-      this._source.fire('popupclose', { popup: this }, true);
+      this._source.fire("popupclose", { popup: this }, true);
       if (!(this._source instanceof Path)) {
-        this._source.off('preclick', stopPropagation);
+        this._source.off("preclick", stopPropagation);
       }
     }
   },
@@ -10495,39 +10495,39 @@ var Popup = DivOverlay.extend({
   },
 
   _initLayout: function () {
-    var prefix = 'leaflet-popup',
+    var prefix = "leaflet-popup",
       container = (this._container = create$1(
-        'div',
+        "div",
         prefix +
-          ' ' +
-          (this.options.className || '') +
-          ' leaflet-zoom-animated',
+          " " +
+          (this.options.className || "") +
+          " leaflet-zoom-animated",
       ));
 
     var wrapper = (this._wrapper = create$1(
-      'div',
-      prefix + '-content-wrapper',
+      "div",
+      prefix + "-content-wrapper",
       container,
     ));
-    this._contentNode = create$1('div', prefix + '-content', wrapper);
+    this._contentNode = create$1("div", prefix + "-content", wrapper);
 
     disableClickPropagation(wrapper);
     disableScrollPropagation(this._contentNode);
-    on(wrapper, 'contextmenu', stopPropagation);
+    on(wrapper, "contextmenu", stopPropagation);
 
-    this._tipContainer = create$1('div', prefix + '-tip-container', container);
-    this._tip = create$1('div', prefix + '-tip', this._tipContainer);
+    this._tipContainer = create$1("div", prefix + "-tip-container", container);
+    this._tip = create$1("div", prefix + "-tip", this._tipContainer);
 
     if (this.options.closeButton) {
       var closeButton = (this._closeButton = create$1(
-        'a',
-        prefix + '-close-button',
+        "a",
+        prefix + "-close-button",
         container,
       ));
-      closeButton.href = '#close';
-      closeButton.innerHTML = '&#215;';
+      closeButton.href = "#close";
+      closeButton.innerHTML = "&#215;";
 
-      on(closeButton, 'click', this._onCloseButtonClick, this);
+      on(closeButton, "click", this._onCloseButtonClick, this);
     }
   },
 
@@ -10535,24 +10535,24 @@ var Popup = DivOverlay.extend({
     var container = this._contentNode,
       style = container.style;
 
-    style.width = '';
-    style.whiteSpace = 'nowrap';
+    style.width = "";
+    style.whiteSpace = "nowrap";
 
     var width = container.offsetWidth;
     width = Math.min(width, this.options.maxWidth);
     width = Math.max(width, this.options.minWidth);
 
-    style.width = width + 1 + 'px';
-    style.whiteSpace = '';
+    style.width = width + 1 + "px";
+    style.whiteSpace = "";
 
-    style.height = '';
+    style.height = "";
 
     var height = container.offsetHeight,
       maxHeight = this.options.maxHeight,
-      scrolledClass = 'leaflet-popup-scrolled';
+      scrolledClass = "leaflet-popup-scrolled";
 
     if (maxHeight && height > maxHeight) {
-      style.height = maxHeight + 'px';
+      style.height = maxHeight + "px";
       addClass(container, scrolledClass);
     } else {
       removeClass(container, scrolledClass);
@@ -10577,7 +10577,7 @@ var Popup = DivOverlay.extend({
 
     var map = this._map,
       marginBottom =
-        parseInt(getStyle(this._container, 'marginBottom'), 10) || 0,
+        parseInt(getStyle(this._container, "marginBottom"), 10) || 0,
       containerHeight = this._container.offsetHeight + marginBottom,
       containerWidth = this._containerWidth,
       layerPos = new Point(
@@ -10617,7 +10617,7 @@ var Popup = DivOverlay.extend({
     // @event autopanstart: Event
     // Fired when the map starts autopanning when opening a popup.
     if (dx || dy) {
-      map.fire('autopanstart').panBy([dx, dy]);
+      map.fire("autopanstart").panBy([dx, dy]);
     }
   },
 
@@ -10881,7 +10881,7 @@ var Tooltip = DivOverlay.extend({
   options: {
     // @option pane: String = 'tooltipPane'
     // `Map pane` where the tooltip will be added.
-    pane: 'tooltipPane',
+    pane: "tooltipPane",
 
     // @option offset: Point = Point(0, 0)
     // Optional offset of the tooltip position.
@@ -10892,7 +10892,7 @@ var Tooltip = DivOverlay.extend({
     // `top`, `bottom`, `center`, `auto`.
     // `auto` will dynamically switch between `right` and `left` according to the tooltip
     // position on the map.
-    direction: 'auto',
+    direction: "auto",
 
     // @option permanent: Boolean = false
     // Whether to open the tooltip permanently or only on mouseover.
@@ -10919,14 +10919,14 @@ var Tooltip = DivOverlay.extend({
     // @section Tooltip events
     // @event tooltipopen: TooltipEvent
     // Fired when a tooltip is opened in the map.
-    map.fire('tooltipopen', { tooltip: this });
+    map.fire("tooltipopen", { tooltip: this });
 
     if (this._source) {
       // @namespace Layer
       // @section Tooltip events
       // @event tooltipopen: TooltipEvent
       // Fired when a tooltip bound to this layer is opened.
-      this._source.fire('tooltipopen', { tooltip: this }, true);
+      this._source.fire("tooltipopen", { tooltip: this }, true);
     }
   },
 
@@ -10937,14 +10937,14 @@ var Tooltip = DivOverlay.extend({
     // @section Tooltip events
     // @event tooltipclose: TooltipEvent
     // Fired when a tooltip in the map is closed.
-    map.fire('tooltipclose', { tooltip: this });
+    map.fire("tooltipclose", { tooltip: this });
 
     if (this._source) {
       // @namespace Layer
       // @section Tooltip events
       // @event tooltipclose: TooltipEvent
       // Fired when a tooltip bound to this layer is closed.
-      this._source.fire('tooltipclose', { tooltip: this }, true);
+      this._source.fire("tooltipclose", { tooltip: this }, true);
     }
   },
 
@@ -10965,15 +10965,15 @@ var Tooltip = DivOverlay.extend({
   },
 
   _initLayout: function () {
-    var prefix = 'leaflet-tooltip',
+    var prefix = "leaflet-tooltip",
       className =
         prefix +
-        ' ' +
-        (this.options.className || '') +
-        ' leaflet-zoom-' +
-        (this._zoomAnimated ? 'animated' : 'hide');
+        " " +
+        (this.options.className || "") +
+        " leaflet-zoom-" +
+        (this._zoomAnimated ? "animated" : "hide");
 
-    this._contentNode = this._container = create$1('div', className);
+    this._contentNode = this._container = create$1("div", className);
   },
 
   _updateLayout: function () {},
@@ -10991,7 +10991,7 @@ var Tooltip = DivOverlay.extend({
       offset = toPoint(this.options.offset),
       anchor = this._getAnchor();
 
-    if (direction === 'top') {
+    if (direction === "top") {
       pos = pos.add(
         toPoint(
           -tooltipWidth / 2 + offset.x,
@@ -10999,9 +10999,9 @@ var Tooltip = DivOverlay.extend({
           true,
         ),
       );
-    } else if (direction === 'bottom') {
+    } else if (direction === "bottom") {
       pos = pos.subtract(toPoint(tooltipWidth / 2 - offset.x, -offset.y, true));
-    } else if (direction === 'center') {
+    } else if (direction === "center") {
       pos = pos.subtract(
         toPoint(
           tooltipWidth / 2 + offset.x,
@@ -11010,10 +11010,10 @@ var Tooltip = DivOverlay.extend({
         ),
       );
     } else if (
-      direction === 'right' ||
-      (direction === 'auto' && tooltipPoint.x < centerPoint.x)
+      direction === "right" ||
+      (direction === "auto" && tooltipPoint.x < centerPoint.x)
     ) {
-      direction = 'right';
+      direction = "right";
       pos = pos.add(
         toPoint(
           offset.x + anchor.x,
@@ -11022,7 +11022,7 @@ var Tooltip = DivOverlay.extend({
         ),
       );
     } else {
-      direction = 'left';
+      direction = "left";
       pos = pos.subtract(
         toPoint(
           tooltipWidth + anchor.x - offset.x,
@@ -11032,11 +11032,11 @@ var Tooltip = DivOverlay.extend({
       );
     }
 
-    removeClass(container, 'leaflet-tooltip-right');
-    removeClass(container, 'leaflet-tooltip-left');
-    removeClass(container, 'leaflet-tooltip-top');
-    removeClass(container, 'leaflet-tooltip-bottom');
-    addClass(container, 'leaflet-tooltip-' + direction);
+    removeClass(container, "leaflet-tooltip-right");
+    removeClass(container, "leaflet-tooltip-left");
+    removeClass(container, "leaflet-tooltip-top");
+    removeClass(container, "leaflet-tooltip-bottom");
+    addClass(container, "leaflet-tooltip-" + direction);
     setPosition(container, pos);
   },
 
@@ -11168,7 +11168,7 @@ Layer.include({
     if (!remove$$1 && this._tooltipHandlersAdded) {
       return;
     }
-    var onOff = remove$$1 ? 'off' : 'on',
+    var onOff = remove$$1 ? "off" : "on",
       events = {
         remove: this.closeTooltip,
         move: this._moveTooltip,
@@ -11201,7 +11201,7 @@ Layer.include({
       // Tooltip container may not be defined if not permanent and never
       // opened.
       if (this._tooltip.options.interactive && this._tooltip._container) {
-        addClass(this._tooltip._container, 'leaflet-clickable');
+        addClass(this._tooltip._container, "leaflet-clickable");
         this.addInteractiveTarget(this._tooltip._container);
       }
     }
@@ -11215,7 +11215,7 @@ Layer.include({
     if (this._tooltip) {
       this._tooltip._close();
       if (this._tooltip.options.interactive && this._tooltip._container) {
-        removeClass(this._tooltip._container, 'leaflet-clickable');
+        removeClass(this._tooltip._container, "leaflet-clickable");
         this.removeInteractiveTarget(this._tooltip._container);
       }
     }
@@ -11318,28 +11318,28 @@ var DivIcon = Icon.extend({
     // Optional relative position of the background, in pixels
     bgPos: null,
 
-    className: 'leaflet-div-icon',
+    className: "leaflet-div-icon",
   },
 
   createIcon: function (oldIcon) {
     var div =
-        oldIcon && oldIcon.tagName === 'DIV'
+        oldIcon && oldIcon.tagName === "DIV"
           ? oldIcon
-          : document.createElement('div'),
+          : document.createElement("div"),
       options = this.options;
 
     if (options.html instanceof Element) {
       empty(div);
       div.appendChild(options.html);
     } else {
-      div.innerHTML = options.html !== false ? options.html : '';
+      div.innerHTML = options.html !== false ? options.html : "";
     }
 
     if (options.bgPos) {
       var bgPos = toPoint(options.bgPos);
-      div.style.backgroundPosition = -bgPos.x + 'px ' + -bgPos.y + 'px';
+      div.style.backgroundPosition = -bgPos.x + "px " + -bgPos.y + "px";
     }
-    this._setIconStyles(div, 'icon');
+    this._setIconStyles(div, "icon");
 
     return div;
   },
@@ -11487,11 +11487,11 @@ var GridLayer = Layer.extend({
 
     // @option pane: String = 'tilePane'
     // `Map pane` where the grid layer will be added.
-    pane: 'tilePane',
+    pane: "tilePane",
 
     // @option className: String = ''
     // A custom class name to assign to the tile layer. Empty by default.
-    className: '',
+    className: "",
 
     // @option keepBuffer: Number = 2
     // When panning the map, keep this many rows and columns of tiles before unloading them.
@@ -11618,7 +11618,7 @@ var GridLayer = Layer.extend({
   // Returns the `HTMLElement` corresponding to the given `coords`. If the `done` callback
   // is specified, it must be called when the tile has finished loading and drawing.
   createTile: function () {
-    return document.createElement('div');
+    return document.createElement("div");
   },
 
   // @section
@@ -11714,8 +11714,8 @@ var GridLayer = Layer.extend({
     }
 
     this._container = create$1(
-      'div',
-      'leaflet-layer ' + (this.options.className || ''),
+      "div",
+      "leaflet-layer " + (this.options.className || ""),
     );
     this._updateZIndex();
 
@@ -11753,8 +11753,8 @@ var GridLayer = Layer.extend({
       level = this._levels[zoom] = {};
 
       level.el = create$1(
-        'div',
-        'leaflet-tile-container leaflet-zoom-animated',
+        "div",
+        "leaflet-tile-container leaflet-zoom-animated",
         this._container,
       );
       level.el.style.zIndex = maxZoom;
@@ -12057,7 +12057,7 @@ var GridLayer = Layer.extend({
         isFinite(tileRange.max.y)
       )
     ) {
-      throw new Error('Attempted to load an infinite number of tiles');
+      throw new Error("Attempted to load an infinite number of tiles");
     }
 
     for (var key in this._tiles) {
@@ -12107,7 +12107,7 @@ var GridLayer = Layer.extend({
         this._loading = true;
         // @event loading: Event
         // Fired when the grid layer starts loading tiles.
-        this.fire('loading');
+        this.fire("loading");
       }
 
       // create DOM fragment to append tiles in one batch
@@ -12171,12 +12171,12 @@ var GridLayer = Layer.extend({
   },
   // converts tile coordinates to key for the tile cache
   _tileCoordsToKey: function (coords) {
-    return coords.x + ':' + coords.y + ':' + coords.z;
+    return coords.x + ":" + coords.y + ":" + coords.z;
   },
 
   // converts tile cache key to coordinates
   _keyToTileCoords: function (key) {
-    var k = key.split(':'),
+    var k = key.split(":"),
       coords = new Point(+k[0], +k[1]);
     coords.z = +k[2];
     return coords;
@@ -12194,18 +12194,18 @@ var GridLayer = Layer.extend({
 
     // @event tileunload: TileEvent
     // Fired when a tile is removed (e.g. when a tile goes off the screen).
-    this.fire('tileunload', {
+    this.fire("tileunload", {
       tile: tile.el,
       coords: this._keyToTileCoords(key),
     });
   },
 
   _initTile: function (tile) {
-    addClass(tile, 'leaflet-tile');
+    addClass(tile, "leaflet-tile");
 
     var tileSize = this.getTileSize();
-    tile.style.width = tileSize.x + 'px';
-    tile.style.height = tileSize.y + 'px';
+    tile.style.width = tileSize.x + "px";
+    tile.style.height = tileSize.y + "px";
 
     tile.onselectstart = falseFn;
     tile.onmousemove = falseFn;
@@ -12218,7 +12218,7 @@ var GridLayer = Layer.extend({
     // without this hack, tiles disappear after zoom on Chrome for Android
     // https://github.com/Leaflet/Leaflet/issues/2078
     if (android && !android23) {
-      tile.style.WebkitBackfaceVisibility = 'hidden';
+      tile.style.WebkitBackfaceVisibility = "hidden";
     }
   },
 
@@ -12252,7 +12252,7 @@ var GridLayer = Layer.extend({
     container.appendChild(tile);
     // @event tileloadstart: TileEvent
     // Fired when a tile is requested and starts loading.
-    this.fire('tileloadstart', {
+    this.fire("tileloadstart", {
       tile: tile,
       coords: coords,
     });
@@ -12262,7 +12262,7 @@ var GridLayer = Layer.extend({
     if (err) {
       // @event tileerror: TileErrorEvent
       // Fired when there is an error loading a tile.
-      this.fire('tileerror', {
+      this.fire("tileerror", {
         error: err,
         tile: tile,
         coords: coords,
@@ -12287,11 +12287,11 @@ var GridLayer = Layer.extend({
     }
 
     if (!err) {
-      addClass(tile.el, 'leaflet-tile-loaded');
+      addClass(tile.el, "leaflet-tile-loaded");
 
       // @event tileload: TileEvent
       // Fired when a tile loads.
-      this.fire('tileload', {
+      this.fire("tileload", {
         tile: tile.el,
         coords: coords,
       });
@@ -12301,7 +12301,7 @@ var GridLayer = Layer.extend({
       this._loading = false;
       // @event load: Event
       // Fired when the grid layer loaded all visible tiles.
-      this.fire('load');
+      this.fire("load");
 
       if (ielt9 || !this._map._fadeAnimated) {
         requestAnimFrame(this._pruneTiles, this);
@@ -12394,11 +12394,11 @@ var TileLayer = GridLayer.extend({
 
     // @option subdomains: String|String[] = 'abc'
     // Subdomains of the tile service. Can be passed in the form of one string (where each letter is a subdomain name) or an array of strings.
-    subdomains: 'abc',
+    subdomains: "abc",
 
     // @option errorTileUrl: String = ''
     // URL to the tile image to show in place of the tile that failed to load.
-    errorTileUrl: '',
+    errorTileUrl: "",
 
     // @option zoomOffset: Number = 0
     // The zoom number used in tile URLs will be offset with this value.
@@ -12443,13 +12443,13 @@ var TileLayer = GridLayer.extend({
       options.minZoom = Math.max(0, options.minZoom);
     }
 
-    if (typeof options.subdomains === 'string') {
-      options.subdomains = options.subdomains.split('');
+    if (typeof options.subdomains === "string") {
+      options.subdomains = options.subdomains.split("");
     }
 
     // for https://github.com/Leaflet/Leaflet/issues/137
     if (!android) {
-      this.on('tileunload', this._onTileRemove);
+      this.on("tileunload", this._onTileRemove);
     }
   },
 
@@ -12475,27 +12475,27 @@ var TileLayer = GridLayer.extend({
   // to return an `<img>` HTML element with the appropriate image URL given `coords`. The `done`
   // callback is called when the tile has been loaded.
   createTile: function (coords, done) {
-    var tile = document.createElement('img');
+    var tile = document.createElement("img");
 
-    on(tile, 'load', bind(this._tileOnLoad, this, done, tile));
-    on(tile, 'error', bind(this._tileOnError, this, done, tile));
+    on(tile, "load", bind(this._tileOnLoad, this, done, tile));
+    on(tile, "error", bind(this._tileOnError, this, done, tile));
 
-    if (this.options.crossOrigin || this.options.crossOrigin === '') {
+    if (this.options.crossOrigin || this.options.crossOrigin === "") {
       tile.crossOrigin =
-        this.options.crossOrigin === true ? '' : this.options.crossOrigin;
+        this.options.crossOrigin === true ? "" : this.options.crossOrigin;
     }
 
     /*
 		 Alt tag is set to empty string to keep screen readers from reading URL and for compliance reasons
 		 http://www.w3.org/TR/WCAG20-TECHS/H67
 		*/
-    tile.alt = '';
+    tile.alt = "";
 
     /*
 		 Set role="presentation" to force screen readers to ignore this
 		 https://www.w3.org/TR/wai-aria/roles#textalternativecomputation
 		*/
-    tile.setAttribute('role', 'presentation');
+    tile.setAttribute("role", "presentation");
 
     tile.src = this.getTileUrl(coords);
 
@@ -12510,7 +12510,7 @@ var TileLayer = GridLayer.extend({
   // Classes extending `TileLayer` can override this function to provide custom tile URL naming schemes.
   getTileUrl: function (coords) {
     var data = {
-      r: retina ? '@2x' : '',
+      r: retina ? "@2x" : "",
       s: this._getSubdomain(coords),
       x: coords.x,
       y: coords.y,
@@ -12519,9 +12519,9 @@ var TileLayer = GridLayer.extend({
     if (this._map && !this._map.options.crs.infinite) {
       var invertedY = this._globalTileRange.max.y - coords.y;
       if (this.options.tms) {
-        data['y'] = invertedY;
+        data["y"] = invertedY;
       }
-      data['-y'] = invertedY;
+      data["-y"] = invertedY;
     }
 
     return template(this._url, extend(data, this.options));
@@ -12538,7 +12538,7 @@ var TileLayer = GridLayer.extend({
 
   _tileOnError: function (done, tile, e) {
     var errorUrl = this.options.errorTileUrl;
-    if (errorUrl && tile.getAttribute('src') !== errorUrl) {
+    if (errorUrl && tile.getAttribute("src") !== errorUrl) {
       tile.src = errorUrl;
     }
     done(e, tile);
@@ -12596,14 +12596,14 @@ var TileLayer = GridLayer.extend({
     // unless we're on Android's stock browser,
     // see https://github.com/Leaflet/Leaflet/issues/137
     if (!androidStock) {
-      tile.el.setAttribute('src', emptyImageUrl);
+      tile.el.setAttribute("src", emptyImageUrl);
     }
 
     return GridLayer.prototype._removeTile.call(this, key);
   },
 
   _tileReady: function (coords, err, tile) {
-    if (!this._map || (tile && tile.getAttribute('src') === emptyImageUrl)) {
+    if (!this._map || (tile && tile.getAttribute("src") === emptyImageUrl)) {
       return;
     }
 
@@ -12643,20 +12643,20 @@ var TileLayerWMS = TileLayer.extend({
   // WMS server as extra parameters in each request URL. This can be useful for
   // [non-standard vendor WMS parameters](http://docs.geoserver.org/stable/en/user/services/wms/vendor.html).
   defaultWmsParams: {
-    service: 'WMS',
-    request: 'GetMap',
+    service: "WMS",
+    request: "GetMap",
 
     // @option layers: String = ''
     // **(required)** Comma-separated list of WMS layers to show.
-    layers: '',
+    layers: "",
 
     // @option styles: String = ''
     // Comma-separated list of WMS styles.
-    styles: '',
+    styles: "",
 
     // @option format: String = 'image/jpeg'
     // WMS image format (use `'image/png'` for layers with transparency).
-    format: 'image/jpeg',
+    format: "image/jpeg",
 
     // @option transparent: Boolean = false
     // If `true`, the WMS service will return images with transparency.
@@ -12664,7 +12664,7 @@ var TileLayerWMS = TileLayer.extend({
 
     // @option version: String = '1.1.1'
     // Version of the WMS service to use
-    version: '1.1.1',
+    version: "1.1.1",
   },
 
   options: {
@@ -12704,7 +12704,7 @@ var TileLayerWMS = TileLayer.extend({
     this._crs = this.options.crs || map.options.crs;
     this._wmsVersion = parseFloat(this.wmsParams.version);
 
-    var projectionKey = this._wmsVersion >= 1.3 ? 'crs' : 'srs';
+    var projectionKey = this._wmsVersion >= 1.3 ? "crs" : "srs";
     this.wmsParams[projectionKey] = this._crs.code;
 
     TileLayer.prototype.onAdd.call(this, map);
@@ -12720,12 +12720,12 @@ var TileLayerWMS = TileLayer.extend({
         this._wmsVersion >= 1.3 && this._crs === EPSG4326
           ? [min.y, min.x, max.y, max.x]
           : [min.x, min.y, max.x, max.y]
-      ).join(','),
+      ).join(","),
       url = TileLayer.prototype.getTileUrl.call(this, coords);
     return (
       url +
       getParamString(this.wmsParams, url, this.options.uppercase) +
-      (this.options.uppercase ? '&BBOX=' : '&bbox=') +
+      (this.options.uppercase ? "&BBOX=" : "&bbox=") +
       bbox
     );
   },
@@ -12797,17 +12797,17 @@ var Renderer = Layer.extend({
       this._initContainer(); // defined by renderer implementations
 
       if (this._zoomAnimated) {
-        addClass(this._container, 'leaflet-zoom-animated');
+        addClass(this._container, "leaflet-zoom-animated");
       }
     }
 
     this.getPane().appendChild(this._container);
     this._update();
-    this.on('update', this._updatePaths, this);
+    this.on("update", this._updatePaths, this);
   },
 
   onRemove: function () {
-    this.off('update', this._updatePaths, this);
+    this.off("update", this._updatePaths, this);
     this._destroyContainer();
   },
 
@@ -12940,18 +12940,18 @@ var Canvas = Renderer.extend({
   },
 
   _initContainer: function () {
-    var container = (this._container = document.createElement('canvas'));
+    var container = (this._container = document.createElement("canvas"));
 
-    on(container, 'mousemove', this._onMouseMove, this);
+    on(container, "mousemove", this._onMouseMove, this);
     on(
       container,
-      'click dblclick mousedown mouseup contextmenu',
+      "click dblclick mousedown mouseup contextmenu",
       this._onClick,
       this,
     );
-    on(container, 'mouseout', this._handleMouseOut, this);
+    on(container, "mouseout", this._handleMouseOut, this);
 
-    this._ctx = container.getContext('2d');
+    this._ctx = container.getContext("2d");
   },
 
   _destroyContainer: function () {
@@ -12993,8 +12993,8 @@ var Canvas = Renderer.extend({
     // set canvas size (also clearing it); use double size on retina
     container.width = m * size.x;
     container.height = m * size.y;
-    container.style.width = size.x + 'px';
-    container.style.height = size.y + 'px';
+    container.style.width = size.x + "px";
+    container.style.height = size.y + "px";
 
     if (retina) {
       this._ctx.scale(2, 2);
@@ -13004,7 +13004,7 @@ var Canvas = Renderer.extend({
     this._ctx.translate(-b.min.x, -b.min.y);
 
     // Tell paths to redraw themselves
-    this.fire('update');
+    this.fire("update");
   },
 
   _reset: function () {
@@ -13076,7 +13076,7 @@ var Canvas = Renderer.extend({
   },
 
   _updateDashArray: function (layer) {
-    if (typeof layer.options.dashArray === 'string') {
+    if (typeof layer.options.dashArray === "string") {
       var parts = layer.options.dashArray.split(/[, ]+/),
         dashArray = [],
         dashValue,
@@ -13187,7 +13187,7 @@ var Canvas = Renderer.extend({
     for (i = 0; i < len; i++) {
       for (j = 0, len2 = parts[i].length; j < len2; j++) {
         p = parts[i][j];
-        ctx[j ? 'lineTo' : 'moveTo'](p.x, p.y);
+        ctx[j ? "lineTo" : "moveTo"](p.x, p.y);
       }
       if (closed) {
         ctx.closePath();
@@ -13230,7 +13230,7 @@ var Canvas = Renderer.extend({
     if (options.fill) {
       ctx.globalAlpha = options.fillOpacity;
       ctx.fillStyle = options.fillColor || options.color;
-      ctx.fill(options.fillRule || 'evenodd');
+      ctx.fill(options.fillRule || "evenodd");
     }
 
     if (options.stroke && options.weight !== 0) {
@@ -13283,8 +13283,8 @@ var Canvas = Renderer.extend({
     var layer = this._hoveredLayer;
     if (layer) {
       // if we're leaving the layer, fire mouseout
-      removeClass(this._container, 'leaflet-interactive');
-      this._fireEvent([layer], e, 'mouseout');
+      removeClass(this._container, "leaflet-interactive");
+      this._fireEvent([layer], e, "mouseout");
       this._hoveredLayer = null;
       this._mouseHoverThrottled = false;
     }
@@ -13308,8 +13308,8 @@ var Canvas = Renderer.extend({
       this._handleMouseOut(e);
 
       if (candidateHoveredLayer) {
-        addClass(this._container, 'leaflet-interactive'); // change cursor
-        this._fireEvent([candidateHoveredLayer], e, 'mouseover');
+        addClass(this._container, "leaflet-interactive"); // change cursor
+        this._fireEvent([candidateHoveredLayer], e, "mouseover");
         this._hoveredLayer = candidateHoveredLayer;
       }
     }
@@ -13410,14 +13410,14 @@ function canvas$1(options) {
 
 var vmlCreate = (function () {
   try {
-    document.namespaces.add('lvml', 'urn:schemas-microsoft-com:vml');
+    document.namespaces.add("lvml", "urn:schemas-microsoft-com:vml");
     return function (name) {
-      return document.createElement('<lvml:' + name + ' class="lvml">');
+      return document.createElement("<lvml:" + name + ' class="lvml">');
     };
   } catch (e) {
     return function (name) {
       return document.createElement(
-        '<' + name + ' xmlns="urn:schemas-microsoft.com:vml" class="lvml">',
+        "<" + name + ' xmlns="urn:schemas-microsoft.com:vml" class="lvml">',
       );
     };
   }
@@ -13434,7 +13434,7 @@ var vmlCreate = (function () {
 // mixin to redefine some SVG methods to handle VML syntax which is similar but with some differences
 var vmlMixin = {
   _initContainer: function () {
-    this._container = create$1('div', 'leaflet-vml-container');
+    this._container = create$1("div", "leaflet-vml-container");
   },
 
   _update: function () {
@@ -13442,17 +13442,17 @@ var vmlMixin = {
       return;
     }
     Renderer.prototype._update.call(this);
-    this.fire('update');
+    this.fire("update");
   },
 
   _initPath: function (layer) {
-    var container = (layer._container = vmlCreate('shape'));
+    var container = (layer._container = vmlCreate("shape"));
 
-    addClass(container, 'leaflet-vml-shape ' + (this.options.className || ''));
+    addClass(container, "leaflet-vml-shape " + (this.options.className || ""));
 
-    container.coordsize = '1 1';
+    container.coordsize = "1 1";
 
-    layer._path = vmlCreate('path');
+    layer._path = vmlCreate("path");
     container.appendChild(layer._path);
 
     this._updateStyle(layer);
@@ -13486,21 +13486,21 @@ var vmlMixin = {
 
     if (options.stroke) {
       if (!stroke) {
-        stroke = layer._stroke = vmlCreate('stroke');
+        stroke = layer._stroke = vmlCreate("stroke");
       }
       container.appendChild(stroke);
-      stroke.weight = options.weight + 'px';
+      stroke.weight = options.weight + "px";
       stroke.color = options.color;
       stroke.opacity = options.opacity;
 
       if (options.dashArray) {
         stroke.dashStyle = isArray(options.dashArray)
-          ? options.dashArray.join(' ')
-          : options.dashArray.replace(/( *, *)/g, ' ');
+          ? options.dashArray.join(" ")
+          : options.dashArray.replace(/( *, *)/g, " ");
       } else {
-        stroke.dashStyle = '';
+        stroke.dashStyle = "";
       }
-      stroke.endcap = options.lineCap.replace('butt', 'flat');
+      stroke.endcap = options.lineCap.replace("butt", "flat");
       stroke.joinstyle = options.lineJoin;
     } else if (stroke) {
       container.removeChild(stroke);
@@ -13509,7 +13509,7 @@ var vmlMixin = {
 
     if (options.fill) {
       if (!fill) {
-        fill = layer._fill = vmlCreate('fill');
+        fill = layer._fill = vmlCreate("fill");
       }
       container.appendChild(fill);
       fill.color = options.fillColor || options.color;
@@ -13528,8 +13528,8 @@ var vmlMixin = {
     this._setPath(
       layer,
       layer._empty()
-        ? 'M0 0'
-        : 'AL ' + p.x + ',' + p.y + ' ' + r + ',' + r2 + ' 0,' + 65535 * 360,
+        ? "M0 0"
+        : "AL " + p.x + "," + p.y + " " + r + "," + r2 + " 0," + 65535 * 360,
     );
   },
 
@@ -13592,12 +13592,12 @@ var SVG = Renderer.extend({
   },
 
   _initContainer: function () {
-    this._container = create$2('svg');
+    this._container = create$2("svg");
 
     // makes it possible to click through svg root; we'll reset it back in individual paths
-    this._container.setAttribute('pointer-events', 'none');
+    this._container.setAttribute("pointer-events", "none");
 
-    this._rootGroup = create$2('g');
+    this._rootGroup = create$2("g");
     this._container.appendChild(this._rootGroup);
   },
 
@@ -13630,24 +13630,24 @@ var SVG = Renderer.extend({
     // set size of svg-container if changed
     if (!this._svgSize || !this._svgSize.equals(size)) {
       this._svgSize = size;
-      container.setAttribute('width', size.x);
-      container.setAttribute('height', size.y);
+      container.setAttribute("width", size.x);
+      container.setAttribute("height", size.y);
     }
 
     // movement: update container viewBox so that we don't have to change coordinates of individual layers
     setPosition(container, b.min);
     container.setAttribute(
-      'viewBox',
-      [b.min.x, b.min.y, size.x, size.y].join(' '),
+      "viewBox",
+      [b.min.x, b.min.y, size.x, size.y].join(" "),
     );
 
-    this.fire('update');
+    this.fire("update");
   },
 
   // methods below are called by vector layers implementations
 
   _initPath: function (layer) {
-    var path = (layer._path = create$2('path'));
+    var path = (layer._path = create$2("path"));
 
     // @namespace Path
     // @option className: String = null
@@ -13657,7 +13657,7 @@ var SVG = Renderer.extend({
     }
 
     if (layer.options.interactive) {
-      addClass(path, 'leaflet-interactive');
+      addClass(path, "leaflet-interactive");
     }
 
     this._updateStyle(layer);
@@ -13692,33 +13692,33 @@ var SVG = Renderer.extend({
     }
 
     if (options.stroke) {
-      path.setAttribute('stroke', options.color);
-      path.setAttribute('stroke-opacity', options.opacity);
-      path.setAttribute('stroke-width', options.weight);
-      path.setAttribute('stroke-linecap', options.lineCap);
-      path.setAttribute('stroke-linejoin', options.lineJoin);
+      path.setAttribute("stroke", options.color);
+      path.setAttribute("stroke-opacity", options.opacity);
+      path.setAttribute("stroke-width", options.weight);
+      path.setAttribute("stroke-linecap", options.lineCap);
+      path.setAttribute("stroke-linejoin", options.lineJoin);
 
       if (options.dashArray) {
-        path.setAttribute('stroke-dasharray', options.dashArray);
+        path.setAttribute("stroke-dasharray", options.dashArray);
       } else {
-        path.removeAttribute('stroke-dasharray');
+        path.removeAttribute("stroke-dasharray");
       }
 
       if (options.dashOffset) {
-        path.setAttribute('stroke-dashoffset', options.dashOffset);
+        path.setAttribute("stroke-dashoffset", options.dashOffset);
       } else {
-        path.removeAttribute('stroke-dashoffset');
+        path.removeAttribute("stroke-dashoffset");
       }
     } else {
-      path.setAttribute('stroke', 'none');
+      path.setAttribute("stroke", "none");
     }
 
     if (options.fill) {
-      path.setAttribute('fill', options.fillColor || options.color);
-      path.setAttribute('fill-opacity', options.fillOpacity);
-      path.setAttribute('fill-rule', options.fillRule || 'evenodd');
+      path.setAttribute("fill", options.fillColor || options.color);
+      path.setAttribute("fill-opacity", options.fillOpacity);
+      path.setAttribute("fill-rule", options.fillRule || "evenodd");
     } else {
-      path.setAttribute('fill', 'none');
+      path.setAttribute("fill", "none");
     }
   },
 
@@ -13730,27 +13730,27 @@ var SVG = Renderer.extend({
     var p = layer._point,
       r = Math.max(Math.round(layer._radius), 1),
       r2 = Math.max(Math.round(layer._radiusY), 1) || r,
-      arc = 'a' + r + ',' + r2 + ' 0 1,0 ';
+      arc = "a" + r + "," + r2 + " 0 1,0 ";
 
     // drawing a circle with two half-arcs
     var d = layer._empty()
-      ? 'M0 0'
-      : 'M' +
+      ? "M0 0"
+      : "M" +
         (p.x - r) +
-        ',' +
+        "," +
         p.y +
         arc +
         r * 2 +
-        ',0 ' +
+        ",0 " +
         arc +
         -r * 2 +
-        ',0 ';
+        ",0 ";
 
     this._setPath(layer, d);
   },
 
   _setPath: function (layer, path) {
-    layer._path.setAttribute('d', path);
+    layer._path.setAttribute("d", path);
   },
 
   // SVG does not have the concept of zIndex so we resort to changing the DOM order of elements
@@ -13800,7 +13800,7 @@ Map.include({
   },
 
   _getPaneRenderer: function (name) {
-    if (name === 'overlayPane' || name === undefined) {
+    if (name === "overlayPane" || name === undefined) {
       return false;
     }
 
@@ -13908,15 +13908,15 @@ var BoxZoom = Handler.extend({
     this._container = map._container;
     this._pane = map._panes.overlayPane;
     this._resetStateTimeout = 0;
-    map.on('unload', this._destroy, this);
+    map.on("unload", this._destroy, this);
   },
 
   addHooks: function () {
-    on(this._container, 'mousedown', this._onMouseDown, this);
+    on(this._container, "mousedown", this._onMouseDown, this);
   },
 
   removeHooks: function () {
-    off(this._container, 'mousedown', this._onMouseDown, this);
+    off(this._container, "mousedown", this._onMouseDown, this);
   },
 
   moved: function () {
@@ -13971,10 +13971,10 @@ var BoxZoom = Handler.extend({
     if (!this._moved) {
       this._moved = true;
 
-      this._box = create$1('div', 'leaflet-zoom-box', this._container);
-      addClass(this._container, 'leaflet-crosshair');
+      this._box = create$1("div", "leaflet-zoom-box", this._container);
+      addClass(this._container, "leaflet-crosshair");
 
-      this._map.fire('boxzoomstart');
+      this._map.fire("boxzoomstart");
     }
 
     this._point = this._map.mouseEventToContainerPoint(e);
@@ -13984,14 +13984,14 @@ var BoxZoom = Handler.extend({
 
     setPosition(this._box, bounds.min);
 
-    this._box.style.width = size.x + 'px';
-    this._box.style.height = size.y + 'px';
+    this._box.style.width = size.x + "px";
+    this._box.style.height = size.y + "px";
   },
 
   _finish: function () {
     if (this._moved) {
       remove(this._box);
-      removeClass(this._container, 'leaflet-crosshair');
+      removeClass(this._container, "leaflet-crosshair");
     }
 
     enableTextSelection();
@@ -14029,7 +14029,7 @@ var BoxZoom = Handler.extend({
       this._map.containerPointToLatLng(this._point),
     );
 
-    this._map.fitBounds(bounds).fire('boxzoomend', { boxZoomBounds: bounds });
+    this._map.fitBounds(bounds).fire("boxzoomend", { boxZoomBounds: bounds });
   },
 
   _onKeyDown: function (e) {
@@ -14042,7 +14042,7 @@ var BoxZoom = Handler.extend({
 // @section Handlers
 // @property boxZoom: Handler
 // Box (shift-drag with mouse) zoom handler.
-Map.addInitHook('addHandler', 'boxZoom', BoxZoom);
+Map.addInitHook("addHandler", "boxZoom", BoxZoom);
 
 /*
  * L.Handler.DoubleClickZoom is used to handle double-click zoom on the map, enabled by default.
@@ -14062,11 +14062,11 @@ Map.mergeOptions({
 
 var DoubleClickZoom = Handler.extend({
   addHooks: function () {
-    this._map.on('dblclick', this._onDoubleClick, this);
+    this._map.on("dblclick", this._onDoubleClick, this);
   },
 
   removeHooks: function () {
-    this._map.off('dblclick', this._onDoubleClick, this);
+    this._map.off("dblclick", this._onDoubleClick, this);
   },
 
   _onDoubleClick: function (e) {
@@ -14075,7 +14075,7 @@ var DoubleClickZoom = Handler.extend({
       delta = map.options.zoomDelta,
       zoom = e.originalEvent.shiftKey ? oldZoom - delta : oldZoom + delta;
 
-    if (map.options.doubleClickZoom === 'center') {
+    if (map.options.doubleClickZoom === "center") {
       map.setZoom(zoom);
     } else {
       map.setZoomAround(e.containerPoint, zoom);
@@ -14095,7 +14095,7 @@ var DoubleClickZoom = Handler.extend({
 //
 // @property doubleClickZoom: Handler
 // Double click zoom handler.
-Map.addInitHook('addHandler', 'doubleClickZoom', DoubleClickZoom);
+Map.addInitHook("addHandler", "doubleClickZoom", DoubleClickZoom);
 
 /*
  * L.Handler.MapDrag is used to make the map draggable (with panning inertia), enabled by default.
@@ -14159,23 +14159,23 @@ var Drag = Handler.extend({
         this,
       );
 
-      this._draggable.on('predrag', this._onPreDragLimit, this);
+      this._draggable.on("predrag", this._onPreDragLimit, this);
       if (map.options.worldCopyJump) {
-        this._draggable.on('predrag', this._onPreDragWrap, this);
-        map.on('zoomend', this._onZoomEnd, this);
+        this._draggable.on("predrag", this._onPreDragWrap, this);
+        map.on("zoomend", this._onZoomEnd, this);
 
         map.whenReady(this._onZoomEnd, this);
       }
     }
-    addClass(this._map._container, 'leaflet-grab leaflet-touch-drag');
+    addClass(this._map._container, "leaflet-grab leaflet-touch-drag");
     this._draggable.enable();
     this._positions = [];
     this._times = [];
   },
 
   removeHooks: function () {
-    removeClass(this._map._container, 'leaflet-grab');
-    removeClass(this._map._container, 'leaflet-touch-drag');
+    removeClass(this._map._container, "leaflet-grab");
+    removeClass(this._map._container, "leaflet-touch-drag");
     this._draggable.disable();
   },
 
@@ -14210,7 +14210,7 @@ var Drag = Handler.extend({
       this._offsetLimit = null;
     }
 
-    map.fire('movestart').fire('dragstart');
+    map.fire("movestart").fire("dragstart");
 
     if (map.options.inertia) {
       this._positions = [];
@@ -14230,7 +14230,7 @@ var Drag = Handler.extend({
       this._prunePositions(time);
     }
 
-    this._map.fire('move', e).fire('drag', e);
+    this._map.fire("move", e).fire("drag", e);
   },
 
   _prunePositions: function (time) {
@@ -14295,10 +14295,10 @@ var Drag = Handler.extend({
       options = map.options,
       noInertia = !options.inertia || this._times.length < 2;
 
-    map.fire('dragend', e);
+    map.fire("dragend", e);
 
     if (noInertia) {
-      map.fire('moveend');
+      map.fire("moveend");
     } else {
       this._prunePositions(+new Date());
 
@@ -14316,7 +14316,7 @@ var Drag = Handler.extend({
           .round();
 
       if (!offset.x && !offset.y) {
-        map.fire('moveend');
+        map.fire("moveend");
       } else {
         offset = map._limitOffset(offset, map.options.maxBounds);
 
@@ -14336,7 +14336,7 @@ var Drag = Handler.extend({
 // @section Handlers
 // @property dragging: Handler
 // Map dragging handler (by both mouse and touch).
-Map.addInitHook('addHandler', 'dragging', Drag);
+Map.addInitHook("addHandler", "dragging", Drag);
 
 /*
  * L.Map.Keyboard is handling keyboard interaction with the map, enabled by default.
@@ -14377,7 +14377,7 @@ var Keyboard = Handler.extend({
 
     // make the container focusable by tabbing
     if (container.tabIndex <= 0) {
-      container.tabIndex = '0';
+      container.tabIndex = "0";
     }
 
     on(
@@ -14438,12 +14438,12 @@ var Keyboard = Handler.extend({
 
   _onFocus: function () {
     this._focused = true;
-    this._map.fire('focus');
+    this._map.fire("focus");
   },
 
   _onBlur: function () {
     this._focused = false;
-    this._map.fire('blur');
+    this._map.fire("blur");
   },
 
   _setPanDelta: function (panDelta) {
@@ -14481,11 +14481,11 @@ var Keyboard = Handler.extend({
   },
 
   _addHooks: function () {
-    on(document, 'keydown', this._onKeyDown, this);
+    on(document, "keydown", this._onKeyDown, this);
   },
 
   _removeHooks: function () {
-    off(document, 'keydown', this._onKeyDown, this);
+    off(document, "keydown", this._onKeyDown, this);
   },
 
   _onKeyDown: function (e) {
@@ -14530,7 +14530,7 @@ var Keyboard = Handler.extend({
 // @section Handlers
 // @property keyboard: Handler
 // Keyboard navigation handler.
-Map.addInitHook('addHandler', 'keyboard', Keyboard);
+Map.addInitHook("addHandler", "keyboard", Keyboard);
 
 /*
  * L.Handler.ScrollWheelZoom is used by L.Map to enable mouse scroll wheel zoom on the map.
@@ -14559,13 +14559,13 @@ Map.mergeOptions({
 
 var ScrollWheelZoom = Handler.extend({
   addHooks: function () {
-    on(this._map._container, 'mousewheel', this._onWheelScroll, this);
+    on(this._map._container, "mousewheel", this._onWheelScroll, this);
 
     this._delta = 0;
   },
 
   removeHooks: function () {
-    off(this._map._container, 'mousewheel', this._onWheelScroll, this);
+    off(this._map._container, "mousewheel", this._onWheelScroll, this);
   },
 
   _onWheelScroll: function (e) {
@@ -14608,7 +14608,7 @@ var ScrollWheelZoom = Handler.extend({
       return;
     }
 
-    if (map.options.scrollWheelZoom === 'center') {
+    if (map.options.scrollWheelZoom === "center") {
       map.setZoom(zoom + delta);
     } else {
       map.setZoomAround(this._lastMousePos, zoom + delta);
@@ -14619,7 +14619,7 @@ var ScrollWheelZoom = Handler.extend({
 // @section Handlers
 // @property scrollWheelZoom: Handler
 // Scroll wheel zoom handler.
-Map.addInitHook('addHandler', 'scrollWheelZoom', ScrollWheelZoom);
+Map.addInitHook("addHandler", "scrollWheelZoom", ScrollWheelZoom);
 
 /*
  * L.Map.Tap is used to enable mobile hacks like quick taps and long hold.
@@ -14642,11 +14642,11 @@ Map.mergeOptions({
 
 var Tap = Handler.extend({
   addHooks: function () {
-    on(this._map._container, 'touchstart', this._onDown, this);
+    on(this._map._container, "touchstart", this._onDown, this);
   },
 
   removeHooks: function () {
-    off(this._map._container, 'touchstart', this._onDown, this);
+    off(this._map._container, "touchstart", this._onDown, this);
   },
 
   _onDown: function (e) {
@@ -14671,8 +14671,8 @@ var Tap = Handler.extend({
     this._startPos = this._newPos = new Point(first.clientX, first.clientY);
 
     // if touching a link, highlight it
-    if (el.tagName && el.tagName.toLowerCase() === 'a') {
-      addClass(el, 'leaflet-active');
+    if (el.tagName && el.tagName.toLowerCase() === "a") {
+      addClass(el, "leaflet-active");
     }
 
     // simulate long hold but setting a timeout
@@ -14681,13 +14681,13 @@ var Tap = Handler.extend({
         if (this._isTapValid()) {
           this._fireClick = false;
           this._onUp();
-          this._simulateEvent('contextmenu', first);
+          this._simulateEvent("contextmenu", first);
         }
       }, this),
       1000,
     );
 
-    this._simulateEvent('mousedown', first);
+    this._simulateEvent("mousedown", first);
 
     on(
       document,
@@ -14715,15 +14715,15 @@ var Tap = Handler.extend({
       var first = e.changedTouches[0],
         el = first.target;
 
-      if (el && el.tagName && el.tagName.toLowerCase() === 'a') {
-        removeClass(el, 'leaflet-active');
+      if (el && el.tagName && el.tagName.toLowerCase() === "a") {
+        removeClass(el, "leaflet-active");
       }
 
-      this._simulateEvent('mouseup', first);
+      this._simulateEvent("mouseup", first);
 
       // simulate click if the touch didn't move too much
       if (this._isTapValid()) {
-        this._simulateEvent('click', first);
+        this._simulateEvent("click", first);
       }
     }
   },
@@ -14737,11 +14737,11 @@ var Tap = Handler.extend({
   _onMove: function (e) {
     var first = e.touches[0];
     this._newPos = new Point(first.clientX, first.clientY);
-    this._simulateEvent('mousemove', first);
+    this._simulateEvent("mousemove", first);
   },
 
   _simulateEvent: function (type, e) {
-    var simulatedEvent = document.createEvent('MouseEvents');
+    var simulatedEvent = document.createEvent("MouseEvents");
 
     simulatedEvent._simulated = true;
     e.target._simulatedClick = true;
@@ -14772,7 +14772,7 @@ var Tap = Handler.extend({
 // @property tap: Handler
 // Mobile touch hacks (quick tap and touch hold) handler.
 if (touch && !pointer) {
-  Map.addInitHook('addHandler', 'tap', Tap);
+  Map.addInitHook("addHandler", "tap", Tap);
 }
 
 /*
@@ -14798,13 +14798,13 @@ Map.mergeOptions({
 
 var TouchZoom = Handler.extend({
   addHooks: function () {
-    addClass(this._map._container, 'leaflet-touch-zoom');
-    on(this._map._container, 'touchstart', this._onTouchStart, this);
+    addClass(this._map._container, "leaflet-touch-zoom");
+    on(this._map._container, "touchstart", this._onTouchStart, this);
   },
 
   removeHooks: function () {
-    removeClass(this._map._container, 'leaflet-touch-zoom');
-    off(this._map._container, 'touchstart', this._onTouchStart, this);
+    removeClass(this._map._container, "leaflet-touch-zoom");
+    off(this._map._container, "touchstart", this._onTouchStart, this);
   },
 
   _onTouchStart: function (e) {
@@ -14823,7 +14823,7 @@ var TouchZoom = Handler.extend({
 
     this._centerPoint = map.getSize()._divideBy(2);
     this._startLatLng = map.containerPointToLatLng(this._centerPoint);
-    if (map.options.touchZoom !== 'center') {
+    if (map.options.touchZoom !== "center") {
       this._pinchStartLatLng = map.containerPointToLatLng(
         p1.add(p2)._divideBy(2),
       );
@@ -14837,8 +14837,8 @@ var TouchZoom = Handler.extend({
 
     map._stop();
 
-    on(document, 'touchmove', this._onTouchMove, this);
-    on(document, 'touchend', this._onTouchEnd, this);
+    on(document, "touchmove", this._onTouchMove, this);
+    on(document, "touchend", this._onTouchEnd, this);
 
     preventDefault(e);
   },
@@ -14863,7 +14863,7 @@ var TouchZoom = Handler.extend({
       this._zoom = map._limitZoom(this._zoom);
     }
 
-    if (map.options.touchZoom === 'center') {
+    if (map.options.touchZoom === "center") {
       this._center = this._startLatLng;
       if (scale === 1) {
         return;
@@ -14905,8 +14905,8 @@ var TouchZoom = Handler.extend({
     this._zooming = false;
     cancelAnimFrame(this._animRequest);
 
-    off(document, 'touchmove', this._onTouchMove);
-    off(document, 'touchend', this._onTouchEnd);
+    off(document, "touchmove", this._onTouchMove);
+    off(document, "touchend", this._onTouchEnd);
 
     // Pinch updates GridLayers' levels only when zoomSnap is off, so zoomSnap becomes noUpdate.
     if (this._map.options.zoomAnimation) {
@@ -14925,7 +14925,7 @@ var TouchZoom = Handler.extend({
 // @section Handlers
 // @property touchZoom: Handler
 // Touch zoom handler.
-Map.addInitHook('addHandler', 'touchZoom', TouchZoom);
+Map.addInitHook("addHandler", "touchZoom", TouchZoom);
 
 Map.BoxZoom = BoxZoom;
 Map.DoubleClickZoom = DoubleClickZoom;

@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { get } from 'utils/api';
-import { AdminConstants } from 'utils/constants';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { get } from "utils/api";
+import { AdminConstants } from "utils/constants";
 
 const usePostEdit = () => {
   const [post, setPost] = useState({
-    id: '',
-    title: '',
-    'cover-image': '',
-    content: '',
+    id: "",
+    title: "",
+    "cover-image": "",
+    content: "",
   });
 
   const { id } = useParams();
@@ -18,11 +18,11 @@ const usePostEdit = () => {
       if (id) {
         const result = await get(AdminConstants.POST_URI, [
           {
-            key: 'useMock',
-            value: 'true',
+            key: "useMock",
+            value: "true",
           },
           {
-            key: 'id',
+            key: "id",
             value: id,
           },
         ]);

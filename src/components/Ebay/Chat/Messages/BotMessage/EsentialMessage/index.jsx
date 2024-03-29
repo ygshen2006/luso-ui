@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import './style.css';
+import { useState } from "react";
+import "./style.css";
 
-import { EbayButton } from '@ebay/ui-core-react/ebay-button';
+import { EbayButton } from "@ebay/ui-core-react/ebay-button";
 // import skin for ebay button
-import '@ebay/skin/button';
+import "@ebay/skin/button";
 // import { useChats } from '../../../../../../Provider/ChatProvider';
 const EsentialMessage = ({ message, keyName, esentials, readyFn }) => {
   const [buttons, setButtons] = useState(
     esentials.map(() => {
-      return { priority: 'tertiary' };
+      return { priority: "tertiary" };
     }),
   );
 
   const handleClick = (index) => {
     const newButtons = [...buttons];
     newButtons[index].priority =
-      newButtons[index].priority == 'primary' ? 'tertiary' : 'primary';
+      newButtons[index].priority == "primary" ? "tertiary" : "primary";
     setButtons(newButtons);
     readyFn(index, keyName);
   };
@@ -28,7 +28,7 @@ const EsentialMessage = ({ message, keyName, esentials, readyFn }) => {
             key={i}
             onClick={() => handleClick(i)}
             priority={buttons[i].priority}
-            style={{ margin: '3px' }}
+            style={{ margin: "3px" }}
           >
             {esential}
           </EbayButton>

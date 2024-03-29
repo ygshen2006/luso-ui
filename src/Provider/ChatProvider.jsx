@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import messages from '../Data/Chat';
+import { createContext, useContext, useState } from "react";
+import messages from "../Data/Chat";
 
 const ChatContext = createContext();
 export const useChats = () => useContext(ChatContext);
@@ -35,7 +35,7 @@ const ChatProvider = ({ children }) => {
     setChats([]);
   };
 
-  const [login, setLogin] = useState('');
+  const [login, setLogin] = useState("");
   const onLogin = (login) => {
     setLogin(login);
   };

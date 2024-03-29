@@ -1,8 +1,8 @@
-import './style.css';
-import { EbaySvg } from '@ebay/ui-core-react/ebay-svg';
-import { EbayIcon } from '@ebay/ui-core-react/ebay-icon';
-import '@ebay/skin/icon';
-import { useChats } from '../../../../Provider/ChatProvider';
+import "./style.css";
+import { EbaySvg } from "@ebay/ui-core-react/ebay-svg";
+import { EbayIcon } from "@ebay/ui-core-react/ebay-icon";
+import "@ebay/skin/icon";
+import { useChats } from "../../../../Provider/ChatProvider";
 
 const ChatMessaging = () => {
   const { data, onAddNewMessage, onAddNewMessages } = useChats();
@@ -10,16 +10,16 @@ const ChatMessaging = () => {
     onAddNewMessage({
       message,
       seq: data.length + 1,
-      type: 'user',
+      type: "user",
     });
 
     if (data.length == 1) {
       setTimeout(() => {
         onAddNewMessages([
           {
-            message: 'Greetings',
+            message: "Greetings",
             seq: 3,
-            type: 'bot',
+            type: "bot",
           },
         ]);
       }, 1000);
@@ -31,7 +31,7 @@ const ChatMessaging = () => {
   var handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       addNewNessage(e.target.value);
-      e.target.value = '';
+      e.target.value = "";
     }
   };
 

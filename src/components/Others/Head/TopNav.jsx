@@ -1,6 +1,6 @@
-import pic1 from '../../../images/logo.gif';
+import pic1 from "../../../images/logo.gif";
 
-const TopNav = ({ activeIndex = 'home' }) => {
+const TopNav = ({ activeIndex = "home" }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light py-3 bg-white shadow-sm">
       <div className="container">
@@ -8,8 +8,8 @@ const TopNav = ({ activeIndex = 'home' }) => {
           <div
             style={{
               background: `url(${pic1})`,
-              width: '150px',
-              height: '50px',
+              width: "150px",
+              height: "50px",
             }}
           ></div>
         </a>
@@ -29,9 +29,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'home'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "home"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/"
                 aria-current="page"
@@ -42,9 +42,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'post'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "post"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/posts"
               >
@@ -55,9 +55,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'about'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "about"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/about"
               >
@@ -67,9 +67,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'products'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "products"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/products"
               >
@@ -79,9 +79,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'customers'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "customers"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/customers"
               >
@@ -91,9 +91,9 @@ const TopNav = ({ activeIndex = 'home' }) => {
             <li className="nav-item mx-2">
               <a
                 className={
-                  activeIndex == 'contact'
-                    ? 'nav-link text-uppercase active'
-                    : 'nav-link text-uppercase'
+                  activeIndex == "contact"
+                    ? "nav-link text-uppercase active"
+                    : "nav-link text-uppercase"
                 }
                 href="/contacts"
               >

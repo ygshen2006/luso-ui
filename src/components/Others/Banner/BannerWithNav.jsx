@@ -1,4 +1,4 @@
-import pic1 from '../../../images/hero-banner-1.jpg';
+import pic1 from "../../../images/hero-banner-1.jpg";
 
 const BannerWithNav = () => {
   return (
@@ -13,7 +13,7 @@ const BannerWithNav = () => {
             <ol className="breadcrumb bg-none mb-0 p-0">
               <li className="breadcrumb-item pl-0">
                 <a href="index.html">
-                  {' '}
+                  {" "}
                   <i className="fa fa-home mr-2"></i>Home
                 </a>
               </li>

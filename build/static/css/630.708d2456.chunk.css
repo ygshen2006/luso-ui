@@ -1,2 +1,25 @@
-.cover{margin:0 auto;width:40%}.cover img{border-radius:5%;width:70%}.title{text-align:center}.content-body{margin:20px 0 20px 100px}.created-time{color:gray}.sk{height:400px;width:100%}.post-news{text-align:center}
+.cover {
+  margin: 0 auto;
+  width: 40%;
+}
+.cover img {
+  border-radius: 5%;
+  width: 70%;
+}
+.title {
+  text-align: center;
+}
+.content-body {
+  margin: 20px 0 20px 100px;
+}
+.created-time {
+  color: gray;
+}
+.sk {
+  height: 400px;
+  width: 100%;
+}
+.post-news {
+  text-align: center;
+}
 /*# sourceMappingURL=630.708d2456.chunk.css.map*/

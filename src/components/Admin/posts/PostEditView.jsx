@@ -1,18 +1,18 @@
-import { Form, Input, Upload, Modal } from 'antd';
-import { useEffect, useState } from 'react';
-import './style.css';
-import { Editor } from '@tinymce/tinymce-react';
-import { EbayButton } from '@ebay/ui-core-react/ebay-button';
-import { EbayAlertDialog } from '@ebay/ui-core-react/ebay-alert-dialog';
-import { EbayDialogHeader } from '@ebay/ui-core-react/ebay-dialog-base';
+import { Form, Input, Upload, Modal } from "antd";
+import { useEffect, useState } from "react";
+import "./style.css";
+import { Editor } from "@tinymce/tinymce-react";
+import { EbayButton } from "@ebay/ui-core-react/ebay-button";
+import { EbayAlertDialog } from "@ebay/ui-core-react/ebay-alert-dialog";
+import { EbayDialogHeader } from "@ebay/ui-core-react/ebay-dialog-base";
 
-import '@ebay/skin';
-import { useForm } from 'antd/es/form/Form';
+import "@ebay/skin";
+import { useForm } from "antd/es/form/Form";
 
 const PostEditView = ({
   id,
-  title = '',
-  content = '',
+  title = "",
+  content = "",
   onSavePost,
   onUploadImage,
 }) => {
@@ -22,7 +22,7 @@ const PostEditView = ({
       return;
     }
     setSaveDisabled(true);
-    var result = await onSavePost(id, postTitle, 'todo', editorValue);
+    var result = await onSavePost(id, postTitle, "todo", editorValue);
     if (result && result.id) {
       setSuccessDialogVisible(true);
       setSavedPost(result);
@@ -34,8 +34,8 @@ const PostEditView = ({
   };
   const [postTitle, setPostTitle] = useState(title);
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [, setCoverImageBase64] = useState('');
+  const [previewImage, setPreviewImage] = useState("");
+  const [, setCoverImageBase64] = useState("");
   const [editorValue, setEditorContent] = useState(content);
   const [fileList, setFileList] = useState([]);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
@@ -80,7 +80,7 @@ const PostEditView = ({
   useEffect(() => {
     if (id) {
       setPostTitle(title);
-      form.setFieldValue('title', title);
+      form.setFieldValue("title", title);
       setEditorContent(content);
     }
   }, [id]);
@@ -127,7 +127,7 @@ const PostEditView = ({
             rules={[
               {
                 required: true,
-                message: 'Please input your title!',
+                message: "Please input your title!",
               },
             ]}
           >
@@ -139,7 +139,7 @@ const PostEditView = ({
           </Form.Item>
         </div>
 
-        <div style={{ display: 'none' }}>
+        <div style={{ display: "none" }}>
           <Form.Item label="封面" name="cover">
             <div className="cover">
               <Upload
@@ -148,7 +148,7 @@ const PostEditView = ({
                 onPreview={handlePreview}
                 onChange={handleChange}
               >
-                {fileList.length < 1 && '+ 上传封面'}
+                {fileList.length < 1 && "+ 上传封面"}
               </Upload>
               <Modal
                 visible={previewVisible}
@@ -158,7 +158,7 @@ const PostEditView = ({
               >
                 <img
                   alt="Preview"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   src={previewImage}
                 />
               </Modal>
@@ -172,22 +172,22 @@ const PostEditView = ({
             apiKey="2jhvkjrvlnoj8ak334n2tzi6n3ltegj0pl128h3lhd0s4bpo"
             initialValue="<p>This is the initial content of the editor</p>"
             init={{
-              language: 'zh-Hans',
-              language_url: '../../../zh-Hans.js',
+              language: "zh-Hans",
+              language_url: "../../../zh-Hans.js",
               menubar: true,
               height: 500,
               images_upload_handler: onUploadImage,
               plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount',
-                'image',
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+                "image",
               ],
               toolbar:
-                'undo redo | formatselect | bold italic backcolor | \
+                "undo redo | formatselect | bold italic backcolor | \
             alignleft aligncenter alignright alignjustify | \
             bullist numlist outdent indent | removeformat | help | \
-            image',
+            image",
             }}
             onEditorChange={handleEditorChange}
           />

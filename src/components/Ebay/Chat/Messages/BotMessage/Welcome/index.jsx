@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import './style.css';
+import { useState } from "react";
+import "./style.css";
 
-import { DatePicker } from 'antd';
+import { DatePicker } from "antd";
 const Welcome = ({ message, addNewMessage }) => {
   const [selectedDate, setSelectedDate] = useState(null);
-  const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
+  const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    addNewMessage(date.format('DD-MM-YYYY'));
+    addNewMessage(date.format("DD-MM-YYYY"));
   };
   return (
     <div>

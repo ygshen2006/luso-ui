@@ -1,22 +1,22 @@
 // Webpack 规定大于配置
 // Mode is required
 // ./src/index.js is required
-const path = require('path');
+const path = require("path");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // source map 生成方式
-  devtool: 'inline-source-map',
-  mode: 'development',
-  entry: './src/index.js',
+  devtool: "inline-source-map",
+  mode: "development",
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, './build'),
-    filename: 'index_bundle.js',
+    path: path.resolve(__dirname, "./build"),
+    filename: "index_bundle.js",
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
     },
   },
   module: {
@@ -24,11 +24,11 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: {
-          loader: 'file-loader',
+          loader: "file-loader",
           options: {
-            name: '[name]-[hash].[ext]',
-            outputPath: 'img/',
-            publicPath: '/img/',
+            name: "[name]-[hash].[ext]",
+            outputPath: "img/",
+            publicPath: "/img/",
           },
         },
       },
@@ -36,13 +36,13 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader',
+          loader: "html-loader",
         },
       },
       // 规定：第三方样式css为后缀，不启用css模块化
@@ -51,35 +51,35 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
         ],
       },
       {
         test: /\.ttf|woff|woff2|eot|svg$/,
-        use: 'url-loader',
+        use: "url-loader",
       },
 
       {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               esModule: true,
               modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: "[path][name]__[local]--[hash:base64:5]",
               },
             },
           },
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
           },
         ],
         exclude: /\.module\.scss$/,
@@ -88,19 +88,19 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               esModule: true,
               modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: "[path][name]__[local]--[hash:base64:5]",
               },
             },
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
           },
         ],
         exclude: /\.module\.less$/,
@@ -109,26 +109,26 @@ module.exports = {
   },
   // Defined extensions and alias
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
     alias: {
-      '@': path.join(__dirname, './src'),
+      "@": path.join(__dirname, "./src"),
     },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      publicPath: '/',
-      filename: 'index.html',
+      template: "./public/index.html",
+      publicPath: "/",
+      filename: "index.html",
     }),
     new LozadPlugin(),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 3000,
     hot: true,

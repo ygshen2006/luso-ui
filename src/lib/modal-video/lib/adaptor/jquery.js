@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-var ModalVideo = require('../index');
+var ModalVideo = require("../index");
 
 var applyJQuery = function applyJQuery(jQuery) {
   jQuery.fn.modalVideo = function (settings) {
-    if (typeof settings === 'strings') {
+    if (typeof settings === "strings") {
     } else {
       new ModalVideo(this, settings);
     }
@@ -12,11 +12,11 @@ var applyJQuery = function applyJQuery(jQuery) {
   };
 };
 
-if (typeof define === 'function' && define.amd) {
-  define(['jquery'], applyJQuery);
+if (typeof define === "function" && define.amd) {
+  define(["jquery"], applyJQuery);
 } else {
   var jq = window.jQuery ? window.jQuery : window.$;
-  if (typeof jq !== 'undefined') {
+  if (typeof jq !== "undefined") {
     applyJQuery(jq);
   }
 }

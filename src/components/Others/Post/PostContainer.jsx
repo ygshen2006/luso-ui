@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { get } from 'utils/api';
-import { MainConstants } from 'utils/constants';
-import TopNav from '../Head/TopNav';
-import PostView from './PostView';
-import { Skeleton } from 'antd';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { get } from "utils/api";
+import { MainConstants } from "utils/constants";
+import TopNav from "../Head/TopNav";
+import PostView from "./PostView";
+import { Skeleton } from "antd";
 
 const PostContainer = () => {
   const { id } = useParams();
@@ -16,11 +16,11 @@ const PostContainer = () => {
       setLoading(true);
       var result = await get(MainConstants.POST_URL, [
         {
-          key: 'useMock',
-          value: 'true',
+          key: "useMock",
+          value: "true",
         },
         {
-          key: 'id',
+          key: "id",
           value: id,
         },
       ]);

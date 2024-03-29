@@ -1,7 +1,7 @@
-import TopNav from '../Head/TopNav';
-import productImage from '../../../images/covers/5.png';
-import TopBanner from '../Banner/TopBanner';
-import ProductsComponent from './Products';
+import TopNav from "../Head/TopNav";
+import productImage from "../../../images/covers/5.png";
+import TopBanner from "../Banner/TopBanner";
+import ProductsComponent from "./Products";
 
 const Products = () => {
   return (

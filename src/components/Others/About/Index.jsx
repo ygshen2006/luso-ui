@@ -1,8 +1,8 @@
-import TopBanner from '../Banner/TopBanner';
-import TopNav from '../Head/TopNav';
-import contactImage from '../../../images/covers/4.jpeg';
-import ServicesComponent from './Services';
-import Award from '../Award/Index';
+import TopBanner from "../Banner/TopBanner";
+import TopNav from "../Head/TopNav";
+import contactImage from "../../../images/covers/4.jpeg";
+import ServicesComponent from "./Services";
+import Award from "../Award/Index";
 
 const AboutComponent = () => {
   return (

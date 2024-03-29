@@ -1,4 +1,4 @@
-import UseLogin from '../../../Hooks/UseLogin';
+import UseLogin from "../../../Hooks/UseLogin";
 
 const GithubUser = ({ login }) => {
   if (!login) return null;
@@ -10,12 +10,12 @@ const GithubUser = ({ login }) => {
   // if data is not null then show the data
   if (data) {
     return (
-      <div style={{ marginRight: '50px' }}>
-        <p style={{ float: 'right' }}>
+      <div style={{ marginRight: "50px" }}>
+        <p style={{ float: "right" }}>
           <img
-            style={{ width: '30px', lineHeight: '30px', borderRadius: '50%' }}
-            alt={data ? data.login : ''}
-            src={data ? data.avatar_url : ''}
+            style={{ width: "30px", lineHeight: "30px", borderRadius: "50%" }}
+            alt={data ? data.login : ""}
+            src={data ? data.avatar_url : ""}
           />
         </p>
       </div>

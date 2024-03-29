@@ -1,8 +1,8 @@
 // import ContactResult from '../components/Contact/Result'
-import ChatProvider from '../../../Provider/ChatProvider';
-import ChatComponent from '../../Ebay/Chat';
+import ChatProvider from "../../../Provider/ChatProvider";
+import ChatComponent from "../../Ebay/Chat";
 // import BannerWithNav from '../Banner/BannerWithNav';
-import TopNav from '../Head/TopNav';
+import TopNav from "../Head/TopNav";
 const ContactsComponent = () => {
   return (
     <>
@@ -14,7 +14,7 @@ const ContactsComponent = () => {
         className="py-5 shadow-sm index-forward"
       >
         {/* <BannerWithNav /> */}
-        <div className="container" style={{ paddingTop: '0px' }}>
+        <div className="container" style={{ paddingTop: "0px" }}>
           <ChatProvider>
             <ChatComponent />
           </ChatProvider>

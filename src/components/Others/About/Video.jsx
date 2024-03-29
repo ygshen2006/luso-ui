@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import ModalVideo from 'react-modal-video';
+import { useState } from "react";
+import ModalVideo from "react-modal-video";
 
 const CompanyVideo = ({ pic }) => {
   const [isOpen, setOpen] = useState(false);

@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { REMOTE_URL, USE_MOCK, REMOTE_URL_MOCK } from './constants';
+import axios from "axios";
+import { REMOTE_URL, USE_MOCK, REMOTE_URL_MOCK } from "./constants";
 axios.defaults.withCredentials = true;
 export const get = async (Path, PARAMS) => {
   var API_URL = REMOTE_URL;
   var useMock = PARAMS.find(
-    (item) => item.key === USE_MOCK && item.value === 'true',
+    (item) => item.key === USE_MOCK && item.value === "true",
   );
   if (useMock) {
     API_URL = REMOTE_URL_MOCK;
@@ -13,8 +13,8 @@ export const get = async (Path, PARAMS) => {
   API_URL += `${Path}`;
 
   const headers = {
-    luso_token: 'c6c54ce4-dc21-4e87-bdab-482dc6f0c96b',
-    'Content-Type': 'application/json',
+    luso_token: "c6c54ce4-dc21-4e87-bdab-482dc6f0c96b",
+    "Content-Type": "application/json",
   };
   PARAMS.map((param, i) => {
     if (i == 0) {
@@ -30,7 +30,7 @@ export const get = async (Path, PARAMS) => {
 export const save = async (Path, PARAMS, body) => {
   var API_URL = REMOTE_URL;
   var useMock = PARAMS.find(
-    (item) => item.key === USE_MOCK && item.value === 'true',
+    (item) => item.key === USE_MOCK && item.value === "true",
   );
   if (useMock) {
     API_URL = REMOTE_URL_MOCK;
@@ -39,8 +39,8 @@ export const save = async (Path, PARAMS, body) => {
   API_URL += `${Path}`;
 
   const headers = {
-    luso_token: 'c6c54ce4-dc21-4e87-bdab-482dc6f0c96b',
-    'Content-Type': 'application/json',
+    luso_token: "c6c54ce4-dc21-4e87-bdab-482dc6f0c96b",
+    "Content-Type": "application/json",
   };
   PARAMS.map((param, i) => {
     if (i == 0) {

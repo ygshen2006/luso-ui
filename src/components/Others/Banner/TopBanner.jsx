@@ -1,4 +1,4 @@
-const TopBanner = ({ pic, homeText = '主页', currentPageText }) => {
+const TopBanner = ({ pic, homeText = "主页", currentPageText }) => {
   return (
     <section
       className="hero bg-cover bg-position py-4"

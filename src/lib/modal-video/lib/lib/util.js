@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true,
 });
 var append = (exports.append = function append(element, string) {
-  var div = document.createElement('div');
+  var div = document.createElement("div");
   div.innerHTML = string;
   while (div.children.length > 0) {
     element.appendChild(div.children[0]);
@@ -27,7 +27,7 @@ var addClass = (exports.addClass = function addClass(element, className) {
   if (element.classList) {
     element.classList.add(className);
   } else {
-    element.className += ' ' + className;
+    element.className += " " + className;
   }
 });
 
@@ -40,7 +40,7 @@ var triggerEvent = (exports.triggerEvent = function triggerEvent(
   if (window.CustomEvent) {
     event = new CustomEvent(eventName, { cancelable: true });
   } else {
-    event = document.createEvent('CustomEvent');
+    event = document.createEvent("CustomEvent");
     event.initCustomEvent(eventName, false, false, options);
   }
   el.dispatchEvent(event);

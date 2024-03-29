@@ -25,7 +25,7 @@ const CustomersComponent = ({ items }) => {
                       style={{ background: `url(${item.pic})` }}
                     /> */}
                     <img
-                      style={{ height: '180px' }}
+                      style={{ height: "180px" }}
                       className="img-fluid "
                       src={item.pic}
                       alt=""

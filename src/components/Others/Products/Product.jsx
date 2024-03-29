@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 
 const ProductComponent = () => {
   var params = useParams();

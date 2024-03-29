@@ -1,23 +1,23 @@
-import { lazy } from 'react';
+import { lazy } from "react";
 
 const AdminPostContainer = lazy(
-  () => import('../components/Admin/posts/PostsContainer'),
+  () => import("../components/Admin/posts/PostsContainer"),
 );
 const PostEditContainer = lazy(
-  () => import('../components/Admin/posts/PostEditContainer'),
+  () => import("../components/Admin/posts/PostEditContainer"),
 );
 
 export const adminRoutes = [
   {
-    path: 'admin',
+    path: "admin",
     element: null,
     children: [
       {
-        path: '/admin/posts',
+        path: "/admin/posts",
         element: <AdminPostContainer />,
       },
       {
-        path: '/admin/post/edit/:id?',
+        path: "/admin/post/edit/:id?",
         element: <PostEditContainer />,
       },
     ],

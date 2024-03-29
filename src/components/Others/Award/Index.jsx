@@ -1,6 +1,6 @@
-import { Modal } from 'antd';
-import pic1 from '../../../images/award1.png';
-import { useState } from 'react';
+import { Modal } from "antd";
+import pic1 from "../../../images/award1.png";
+import { useState } from "react";
 
 const Award = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +30,7 @@ const Award = () => {
             className="img-fluid"
             src={pic1}
             alt="点我查看"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           />
         </p>
       </Modal>
@@ -43,16 +43,16 @@ const Award = () => {
                 公司使命
               </p>
               <h2 className="mb-4">只为你做一桶好油</h2>
-              <p className="text-small text-muted" style={{ margin: '15px' }}>
+              <p className="text-small text-muted" style={{ margin: "15px" }}>
                 We Work With You To Address Your Most Critical Business
-                Priorities.{' '}
+                Priorities.{" "}
               </p>
-              <p className="text-small text-muted" style={{ margin: '15px' }}>
+              <p className="text-small text-muted" style={{ margin: "15px" }}>
                 LUSO Global Chemical Industry Your Most Valuable Accompany
               </p>
               <ul
                 className="list-check list-unstyled row px-3 mb-4"
-                style={{ marginTop: '30px' }}
+                style={{ marginTop: "30px" }}
               >
                 <li className="text-small text-muted col-lg-6 mb-2">
                   产品质量360°保证
@@ -78,7 +78,7 @@ const Award = () => {
                   onClick={() => showModal()}
                   src={pic1}
                   alt="点我查看"
-                  style={{ maxWidth: '120%', cursor: 'pointer' }}
+                  style={{ maxWidth: "120%", cursor: "pointer" }}
                 />
               </div>
             </div>

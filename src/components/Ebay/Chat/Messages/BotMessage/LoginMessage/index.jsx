@@ -1,5 +1,5 @@
-import SearchForm from '../../../../ChatLogin/SearchForm';
-import './style.css';
+import SearchForm from "../../../../ChatLogin/SearchForm";
+import "./style.css";
 
 const LoginMessage = ({ text, afterLogin }) => {
   return (

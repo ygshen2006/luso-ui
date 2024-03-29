@@ -1,2 +1,31 @@
-.list{margin:30px auto;width:80%}.first-column{margin:10px}.article{margin-bottom:30px}.summary{margin-bottom:20px}.edit-bt{cursor:pointer!important;height:"10px"!important;width:"10px"!important}.header-top{border-bottom:1px solid}.post-form{margin:30px auto 0}.cover{margin-left:10px}.saveBtn{margin:20px 0}
+.list {
+  margin: 30px auto;
+  width: 80%;
+}
+.first-column {
+  margin: 10px;
+}
+.article {
+  margin-bottom: 30px;
+}
+.summary {
+  margin-bottom: 20px;
+}
+.edit-bt {
+  cursor: pointer !important;
+  height: "10px" !important;
+  width: "10px" !important;
+}
+.header-top {
+  border-bottom: 1px solid;
+}
+.post-form {
+  margin: 30px auto 0;
+}
+.cover {
+  margin-left: 10px;
+}
+.saveBtn {
+  margin: 20px 0;
+}
 /*# sourceMappingURL=732.4feade84.chunk.css.map*/
