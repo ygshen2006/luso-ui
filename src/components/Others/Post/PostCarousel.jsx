@@ -37,11 +37,11 @@ const PostCarousel = () => {
         {posts.map((v, i) => {
           return (
             <div key={i}>
-              <h6 style={carouselStyle}>
+              <h5 style={carouselStyle}>
                 <a style={{ color: "white" }} href={`/post/${v.id}`}>
                   {v.title}
                 </a>
-              </h6>
+              </h5>
             </div>
           );
         })}
