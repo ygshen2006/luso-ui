@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.common.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "checkJs": true,
+    "jsx": "preserve",
+    "lib": ["DOM"]
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

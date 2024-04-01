@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import { EbayTextbox } from '@ebay/ui-core-react/ebay-textbox'
 import { EbaySvg } from "@ebay/ui-core-react/ebay-svg";
 import "@ebay/skin/icon";
