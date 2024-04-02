@@ -46,6 +46,7 @@
     "*.{js,jsx,md,json}": [
       "npx prettier --write",
       "git add"
+      
     ],
     "*.{js,jsx}": "npm run lint"
   },
