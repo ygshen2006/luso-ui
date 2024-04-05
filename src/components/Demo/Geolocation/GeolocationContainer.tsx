@@ -3,32 +3,34 @@ import { useEffect, useState } from "react";
 import Geolocation from "./Geolocation";
 
 const GeolocationContainer = () => {
-    const [latitude, setLatitude] = useState<number | null>(null);
-    const [longtitude, setLantitude] = useState<number | null>(null);
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longtitude, setLongtitude] = useState<number | null>(null);
 
-    const handleSuccess = ({ coords: { latitude, longitude } }: {
-        coords: {
-            latitude: number,
-            longitude: number
-        }
-    }) => {
-        setLatitude(latitude);
-        setLantitude(longitude);
+  const handleSuccess = ({
+    latitude,
+    longitude,
+  }: {
+    latitude: number;
+    longitude: number;
+  }) => {
+    setLatitude(latitude);
+    setLongtitude(longitude);
+  };
+  useEffect(() => {
+    const fetchGelocation = async () => {
+      const result = await fetch("http://localhost:5000/geolocation");
+      const data = await result.json();
+      handleSuccess(data);
     };
 
+    fetchGelocation();
+  }, [navigator]);
 
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(handleSuccess);
-        }
-    }, [navigator]);
-
-
-    return (
-        <>
-            <Geolocation latitude={latitude} longtitude={longtitude}/>
-        </>
-    );
+  return (
+    <>
+      <Geolocation latitude={latitude} longtitude={longtitude} />
+    </>
+  );
 };
 
 export default GeolocationContainer;

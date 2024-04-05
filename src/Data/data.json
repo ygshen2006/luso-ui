@@ -139,5 +139,9 @@
       "created-time": "2022-02-01",
       "content": ""
     }
-  ]
+  ],
+  "geolocation": {
+    "latitude": 12,
+    "longitude": 22
+  }
 }

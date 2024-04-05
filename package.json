@@ -12,6 +12,8 @@
     "@types/node": "^20.12.2",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-transition-group": "^4.4.10",
     "antd": "^5.11.5",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
@@ -20,9 +22,9 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-modal-video": "^2.0.1",
-    "react-router": "^6.21.0",
-    "react-router-dom": "^6.21.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "react-window": "^1.8.10",
     "typescript": "^5.4.3",
     "web-vitals": "^2.1.4"
@@ -32,8 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ignore-path .eslintignore --ext js,jsx --report-unused-disable-directives",
-    "lint:fix": "eslint src --ignore-path .eslintignore --ext js,jsx --report-unused-disable-directives --fix",
+    "lint": "eslint src --ignore-path .eslintignore --ext js,jsx,tsx --report-unused-disable-directives",
+    "lint:fix": "eslint src --ignore-path .eslintignore --ext js,jsx,tsx --report-unused-disable-directives --fix",
     "prettier": "npx prettier . --write",
     "prepare": "husky install"
   },
@@ -46,7 +48,6 @@
     "*.{js,jsx,md,json}": [
       "npx prettier --write",
       "git add"
-      
     ],
     "*.{js,jsx}": "npm run lint"
   },
@@ -63,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@gradio/client": "^0.15.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "19.0.4",
@@ -70,7 +72,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.3",
