@@ -4,6 +4,8 @@ const ChatProvider = lazy(() => import("../Provider/ChatProvider"));
 import Customers from "components/Others/Customers/Index";
 import HomeComponent from "../components/Others/Home";
 import { lazy } from "react";
+const Contracts = lazy(() => import("../components/Demo/RouteTest/Contracts"));
+
 const AboutComponent = lazy(() => import("../components/Others/About/Index"));
 const EventsComponent = lazy(() => import("../components/Others/Events"));
 const NotFoundComponent = lazy(() => import("../components/Others/NotFound"));
@@ -48,6 +50,14 @@ export const publicRoutes = [
   {
     path: "contacts",
     element: <ContactsComponent />,
+  },
+  {
+    path: "contracts",
+    element: <Contracts />
+  },
+  {
+    path: "contracts/:id",
+    element: <Contracts />
   },
   {
     path: "products",

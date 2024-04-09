@@ -12,7 +12,6 @@ import SvgTest from "./Form/SvgTest";
 import TaskComponent from "./Hooks/todo/TaskComponent";
 import ToDoMain from "./Hooks/todo/ToDoMainComponent";
 import ToDoMainComponent from "./Hooks/todo/ToDoMainComponent";
-import GradioTest from "./Gradio/Index";
 const DemoIndex: FC = () => {
   const users: UserProfileInterface[] = [
     {
@@ -52,7 +51,6 @@ const DemoIndex: FC = () => {
 
       <SvgTest height={200} width={200} />
       <ToDoMainComponent />
-      <GradioTest />
     </>
   );
 };
