@@ -118,7 +118,7 @@ const Footer = () => {
                     <div className="ml-3">
                       <p className="small text-muted mb-0">10/10, 2021 </p>
                       <h6 className="text-light font-weight-normal mb-0">
-                        路索化学内部生产大比拼启动
+                      路素化学内部生产大比拼启动
                       </h6>
                       <a
                         className="reset-anchor text-primary text-small"
@@ -136,8 +136,8 @@ const Footer = () => {
         <div className="bg-darker py-4">
           <div className="container text-center">
             <p className="mb-0 text-muted text-small">
-              © All rights reserved. 沪ICP备20002384号-1
-              <a>上海路索化学技术有限公司、路素（上海）新材料科技有限公司</a>.
+              © All rights reserved. 沪ICP备2024076982号-1
+              <a>路素（上海）新材料科技有限公司</a>.
             </p>
           </div>
         </div>

@@ -32,7 +32,7 @@ const Introduction = ({ bgpic }) => {
                     <li className="mb-4">
                       <h5>先进的品牌研发团队</h5>
                       <p className="text-small text-muted">
-                        研发骨干来自国内、国际多家知名企业。正在为路索化学的崛起前赴后继。
+                        研发骨干来自国内、国际多家知名企业。正在为化学的崛起前赴后继。
                       </p>
                     </li>
                     <li className="mb-4">
@@ -44,7 +44,7 @@ const Introduction = ({ bgpic }) => {
                     <li>
                       <h5>及时的客户关怀团队</h5>
                       <p className="text-small text-muted">
-                        路索化学专业售后支持团队，全天24小时为客户提供最为专业的技术支持。让您买的放心、用的舒心。
+                      路素化学专业售后支持团队，全天24小时为客户提供最为专业的技术支持。让您买的放心、用的舒心。
                       </p>
                     </li>
                   </ol>
